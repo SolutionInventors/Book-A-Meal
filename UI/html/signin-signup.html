@@ -1,0 +1,38 @@
+<!doctype html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Book A Meal</title>
+</head>
+<body>
+    <div class ="main ">
+        <div class="controls">
+
+            <form class ="signup"id ="signup-form" action="/signup" method="post">
+                <ul>
+                    <li> <h3>SIGN UP</h3></li>
+                    <li><input type="text" name="user" placeholder="Username" /></li>
+                    <li><input type="password" name="pass" placeholder="Password" /></li>
+                    <li><button>SIGN UP</button></li>
+                    <li><a href="#" onclick = "displayForm('login-form')" >Forgot Password</a></li>
+                </ul>
+            </form>
+            <form  class ="login" id="login-form" action="/login" method="post">
+                <ul>
+                    <li> <h3>LOG IN</h3></li>
+                    <li><input type="email" name="email" placeholder="Email Address" /></li>
+                    <li><input type="text" name="user" placeholder="Username" /></li>
+                    <li><input type="password" name="pass" placeholder="Password" /></li>
+                    <li><button>SIGN IN</button></li>
+                    <li>Already have an account<button onclick="displayForm('signup-form')"> Sign In</button></li>
+                </ul>
+            </form>
+
+        </div>
+
+        <div>
+            <p>BOOK A MEAL </p>
+        </div>
+    </div>
+</body>
+</html>
