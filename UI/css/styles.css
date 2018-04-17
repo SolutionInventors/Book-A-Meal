@@ -1,0 +1,135 @@
+/* reset browser styles */
+html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    vertical-align: baseline;
+}
+
+
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
+    display: block;
+}
+
+body {
+    line-height: 1.2;
+}
+
+ol {
+    padding-left: 1.4em;
+    list-style: decimal;
+}
+
+ul {
+    padding-left: 1.4em;
+    list-style: square;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+/* end reset browser styles */
+
+input:focus {
+    background-color: inherit;
+    border-width: 0;  
+}
+body {
+   background-color: rgb(161, 198, 213);
+    color: rgb(210, 215, 255);
+}
+
+.main {
+    margin-left: 10%;
+    margin-top: 10%;
+   
+}
+
+.forms {
+   background-color: green; 
+  
+   padding-left: 2px; 
+   height: 100%; 
+}
+
+.forms form {
+    float: left;
+    width: 70%;
+    padding-left: 10px;
+
+}
+
+button{
+    border-width: 0; 
+}
+input[type=text], input[type=email], input[type=password] {
+    height: 18px;
+    padding: 6px;
+    font-size: 16px;
+    width: 100%;
+    border: solid 0 rgb(90, 155, 181);
+    border-bottom-width: 2px; 
+    background-color: inherit; 
+    color:white; 
+    
+}
+
+button, input[type=button ] {
+    background-color: rgba(156, 198, 237, 0.75);
+    color: white;
+    border-radius: 5px;
+    font-size: 14px;
+    width: 120px; 
+    height: 30px; 
+    padding: 6px; 
+    text-align:center; 
+    text-decoration:none; 
+}
+
+a:hover, button:hover, input[type=button ]:hover {
+    background-color: inherit;
+    color: lightblue;
+    border: solid white 2px;
+    box-shadow: 3px 2px 3px rgba(156, 198, 237, 0.75); 
+}
+
+footer{
+    position: relative; 
+    top: 20%; 
+   
+}
+
+li{
+    list-style: none; 
+    padding: 3px; 
+    padding-left: 0;  
+   
+   margin-top: 4px; 
+   margin-bottom: 4px; 
+   width:100%; 
+}
+
+ul{
+    padding-left: 10%; 
+    width: 75%; 
+
+}
+form{
+    background-color: rgba(56, 101, 132, 0.89); 
+   border: solid 1px; 
+   border-radius: 10px; 
+   min-height: 200px; 
+   padding-top: 10px; 
+   padding-bottom: 10px; 
+}
+
+
+form h3{
+    text-align:center; 
+}
+

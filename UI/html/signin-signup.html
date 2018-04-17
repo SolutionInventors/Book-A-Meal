@@ -4,46 +4,48 @@
 <head>
     <title>Book A Meal</title>
     <script src="../js/singin-signup.js"></script>
+    <link href="../css/styles.css" rel="stylesheet" />
 </head>
 <body>
     <div class ="main ">
-        <div class="controls">
+        <div class="forms">
 
             <form id="signup-form" action="/signup" method="post">
                 <ul>
                     <li> <h3>SIGN UP</h3></li>
+                    <li><input type="email" name="email" placeholder="Email Address" /></li>
                     <li><input type="text" name="user" placeholder="Username" /></li>
                     <li><input type="password" name="pass" placeholder="Password" /></li>
-                    <li><button type="submit">SIGN UP</button></li>
-                    <li><a href="#" onclick="displayForm('login-form')">Log in</a></li>
 
+                    <li><button type="submit">SIGN UP</button></li>
+                    <li><a href="#" onclick="displayForm('login-form')">Login</a></li>
                 </ul>
             </form>
             <form id="login-form" action="/login" method="post">
                 <ul>
                     <li> <h3>SIGN IN</h3></li>
-                    <li><input type="email" name="email" placeholder="Email Address" /></li>
                     <li><input type="text" name="user" placeholder="Username" /></li>
                     <li><input type="password" name="pass" placeholder="Password" /></li>
 
                     <li><button type="submit">SIGN IN</button></li>
                     <li><a href="#" onclick="displayForm('reset-password-form')">Reset Password</a></li>
+                    <li><a href="#" onclick="displayForm('signup-form')">Create Account</a></li>
 
                 </ul>
             </form>
             <form id="reset-password-form" action="/reset-password" method="post">
                 <ul>
-                    <li> <h3>LOG IN</h3></li>
+                    <li> <h3>RESET PASSWORD</h3></li>
                     <li><input type="email" name="email" placeholder="Email Address" /></li>
+                    <li><button type="submit">RESET</button></li>
                     <li>Create new Account <a href="#" onclick="displayForm('signup-form')"> Here</a></li>
 
                 </ul>
             </form>
+            
         </div>
         
-        <div>
-            <p>BOOK A MEAL </p>
-        </div>
+        
     </div>
 </body>
 </html>
