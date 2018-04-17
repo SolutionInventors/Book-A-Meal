@@ -9,28 +9,37 @@
     <div class ="main ">
         <div class="controls">
 
-            <form class ="signup"id ="signup-form" action="/signup" method="post">
+            <form id="signup-form" action="/signup" method="post">
                 <ul>
                     <li> <h3>SIGN UP</h3></li>
                     <li><input type="text" name="user" placeholder="Username" /></li>
                     <li><input type="password" name="pass" placeholder="Password" /></li>
-                    <li><button>SIGN UP</button></li>
-                    <li><a href="#" onclick = "displayForm('login-form')" >Forgot Password</a></li>
+                    <li><button type="submit">SIGN UP</button></li>
+                    <li><a href="#" onclick="displayForm('reset-password-form')" />Forgot Password</a></li>
                 </ul>
             </form>
-            <form  class ="login" id="login-form" action="/login" method="post">
+            <form id="login-form" action="/login" method="post">
                 <ul>
-                    <li> <h3>LOG IN</h3></li>
+                    <li> <h3>SIGN IN</h3></li>
                     <li><input type="email" name="email" placeholder="Email Address" /></li>
                     <li><input type="text" name="user" placeholder="Username" /></li>
                     <li><input type="password" name="pass" placeholder="Password" /></li>
-                    <li><button>SIGN IN</button></li>
-                    <li>Already have an account<a href="#" onclick="displayForm('signup-form')"> Sign In</a></li>
+
+                    <li><button type="submit">SIGN IN</button></li>
+                    <li><a href="#" onclick="displayForm('login-form')">Reset Password</a></li>
+
                 </ul>
             </form>
+            <form id="reset-password-form" action="/reset-password" method="post">
+                <ul>
+                    <li> <h3>LOG IN</h3></li>
+                    <li><input type="email" name="email" placeholder="Email Address" /></li>
+                    <li>Create new Account <a href="#" onclick="displayForm('signup-form')"> Here</a></li>
 
+                </ul>
+            </form>
         </div>
-
+        
         <div>
             <p>BOOK A MEAL </p>
         </div>
