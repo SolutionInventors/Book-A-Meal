@@ -94,6 +94,10 @@ body {
    
 }
 
+.item-selected{
+    background-color: red; 
+    
+}
 ::-webkit-input-placeholder {
     color: rgb(133, 176, 213);
 }

@@ -2,7 +2,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <title></title>
-    <script src="../js/caterer-menu.js"></script>
+    <script src="../js/shared-functions.js"></script>
+    <script src="../js/caterer-page-functions.js"></script>
     <link href="../css/styles.css" rel="stylesheet" />
     <link href="../css/caterer-page.css" rel="stylesheet" />
 </head>
@@ -21,18 +22,9 @@
                         <button id="create-menu-button" type="submit">Create Menu</button>
                     </span>
                 </li>
-                <li onkeyup="updateAddStatus(event)">
-                    <div>
-                        <h3>CREATE A NEW MENU ITEM</h3>
-                        <input type="text" name="meal" placeholder="Enter Meal Name ...  " />
-                        <input type="text" name="amount" placeholder="Enter Amount ... " />
-                        <button id="add-button" type="submit">Add</button>
-
-                    </div>
-                    
-                </li>
+                
                 <li>
-                    <div  id="selected-item">
+                    <div id="selected-item">
                     </div>
                     <div>
                         Total Cost: <label id="total-amount">Price</label>
@@ -41,6 +33,16 @@
                 <li>
                     <label id="status">status</label>
                 </li>
+                <li onkeyup="updateAddStatus(event)">
+                    <div>
+                        <h3>CREATE A NEW MENU ITEM</h3>
+                        <input type="text" name="meal" placeholder="Enter Meal Name ...  " />
+                        <input type="text" name="amount" placeholder="Enter Amount ... " />
+                        <button id="add-button" type="submit">Add</button>
+
+                    </div>
+
+
             </ul>
         </form>
         

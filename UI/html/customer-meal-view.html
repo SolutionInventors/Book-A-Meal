@@ -2,50 +2,39 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <title></title>
+    <script src="../js/shared-functions.js"></script>
+    <script src="../js/customer-page-functions.js"></script>
     <link href="../css/styles.css" rel="stylesheet" />
 </head>
-<body>
+<body onload="initList(event)">
     <div class="main">
+        <h1>Order for a Meal!</h1>
+        <h3>Today's Menu Items</h3>
+        <ul  id="existing-meal-ul" class="available-meals" onclick="highlightItem(event)">
+            
+        </ul>
+        <ul class="add-controls" onclick="updateOrderList(event)">
+            <li><button id="add-to-list-button" disabled>&gt; &gt;</button></li>
+            <li><button id="remove-from-list-button" disabled>&lt; &lt;</button></li>
+        </ul>
+
+        <ul id="order-list" class="order-list" onclick="highlightItem(event)">
+            <li>Order List</li>
+            
+        </ul>
        
-        <ul class="meal-options" onclick="highlightItem(event)">
-            <li>Items not in Cart</li>
-            <li> <label>Rice <span>2000 </span></label><label for="rice-checkbox"></label> <input id="rice-checkbox" type="checkbox" name="selectedMeal" value="Rice" /></li>
-            <li><label>Beans <span>1500 </span></label><label for="rice-checkbox"></label> <input type="checkbox" name="selectedMeal" value="Beans" /></li>
-            <li><label>Potato <span>2488 </span></label><label for="rice-checkbox" ></label> <input type="checkbox" name="selectedMeal" value="Potato" /></li>
-            <li><label>Bread <span>13222 </span></label><label for="rice-checkbox"></label> <input type="checkbox" name="selectedMeal" value="Breads" /></li>
-
-        </ul>
-        <ul class="add-controls">
-            <li><button>&gt; &gt;</button></li>
-            <li><button>&lt; &lt;</button></li>
-        </ul>
-
-        <ul class="meal-options" onclick="highlightItem(event)">
-            <li>Items in Cart</li>
-            <li> <label>Rice</label><label></label> <input type="checkbox" name="selectedMeal" value="Rice" /></li>
-            <li><label>Beans</label><label></label> <input type="checkbox" name="selectedMeal" value="Beans" /></li>
-            <li><label>Potato</label><label></label> <input type="checkbox" name="selectedMeal" value="Potato" /></li>
-            <li><label>Bread</label><label></label> <input type="checkbox" name="selectedMeal" value="Breads" /></li>
-
-        </ul>
         <form action="#" method="post">
             <ul class="meal-details">
                 <li>
-                    <span class="button-group" onmouseover="updateRoute(event)"><button>Make Order</button></span>
-                </li>
-                <li>
-                    <input type="text" name="meal" placeholder="Meal Name" />
-                    <input type="number" name="amount" placeholder="Amount" />
+                    <div>
+                        Total Amount: <label id="total-amount">NGN 2000.32</label>
+                    </div>
 
                 </li>
                 <li>
-                    <div>
-                        Items Selected: <label id="selected-item">0</label>
-                    </div>
-                    <div>
-                        Total Amount: <label id="price">NGN 2000.32</label>
-                    </div>
+                    <span class="button-group" onmouseover="updateRoute(event)"><button id="order-button">Make Order</button></span>
                 </li>
+
                 <li>
                     <label id="status">status</label>
                 </li>
