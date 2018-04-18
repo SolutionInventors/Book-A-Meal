@@ -68,6 +68,11 @@ form a:hover, button:hover, input[type=button ]:hover {
     text-decoration:none; 
 }
 
+form a:hover, button:disabled, input[type=button ]:disabled {
+    background-color: lightgrey; 
+    color: darkgrey;
+}
+
 body {
     background-color: rgb(161, 198, 213);
     color: rgb(210, 215, 255);
@@ -87,4 +92,17 @@ body {
     border-radius: 10px;
     width: 70%;
    
+}
+
+::-webkit-input-placeholder {
+    color: rgb(133, 176, 213);
+}
+
+::-moz-placeholder {
+    color: rgb(133, 176, 213);
+}
+
+
+:placeholder-shown {
+    color: rgb(133, 176, 213);
 }

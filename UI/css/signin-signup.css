@@ -49,15 +49,3 @@ form h3 {
 	font-size: 130%; 
 }
 
-::-webkit-input-placeholder {
-	color: rgb(133, 176, 213);
-}
-
-::-moz-placeholder {
-	color: rgb(133, 176, 213);
-}
-
-
-:placeholder-shown {
-	color: rgb(133, 176, 213);
-}

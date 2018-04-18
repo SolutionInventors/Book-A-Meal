@@ -2,33 +2,40 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <title></title>
+    <script src="../js/caterer-menu.js"></script>
     <link href="../css/styles.css" rel="stylesheet" />
+    <link href="../css/caterer-page.css" rel="stylesheet" />
 </head>
-<body>
+<body  onload="initList(event)" >
     <div class="main">
         <h1>List of Meals</h1>
-        <ul class="meal-options" onclick="highlightItem(event)">
-            <li>Rice</li>
-            <li>Beans</li>
-            <li>Tomato</li>
-            <li>Bread</li>
+        <ul id="existing-meal-ul"class="meal-options" onchange="highlightItem(event)">
+           
         </ul>
-        <form action="/modify" method="post">
+        <form id ="crud-form" action="/modify" method="post">
             <ul class="meal-details">
                 <li>
-                    <span class="button-group" onmouseover="updateRoute(event)"><button type="submit">Add</button type="submit"><button type="submit"> Modify</button><button type="submit">Delete</button></span>
+                    <span class="button-group" onmouseover="updateRoute(event)">
+                        <button id="modify-button" type="submit"> Modify</button>
+                        <button id="delete-button" type="submit">Delete</button>
+                        <button id="create-menu-button" type="submit">Create Menu</button>
+                    </span>
                 </li>
-                <li>
-                    <input type="text" name="meal" placeholder="Meal Name" />
-                    <input type="number" name="amount" placeholder="Amount" />
-
-                </li>
-                <li>
+                <li onkeyup="updateAddStatus(event)">
                     <div>
-                        Meal: <label id="selected-item">Selected Meal</label>
+                        <h3>CREATE A NEW MENU ITEM</h3>
+                        <input type="text" name="meal" placeholder="Enter Meal Name ...  " />
+                        <input type="text" name="amount" placeholder="Enter Amount ... " />
+                        <button id="add-button" type="submit">Add</button>
+
+                    </div>
+                    
+                </li>
+                <li>
+                    <div  id="selected-item">
                     </div>
                     <div>
-                        Price: <label id="price">Price</label>
+                        Total Cost: <label id="total-amount">Price</label>
                     </div>
                 </li>
                 <li>
@@ -36,6 +43,7 @@
                 </li>
             </ul>
         </form>
+        
     </div>
 </body>
 </html>
