@@ -65,12 +65,17 @@ form a:hover, button:hover, input[type=button ]:hover {
     color: lightblue;
     border: solid white 2px;
     box-shadow: 3px 2px 3px rgba(156, 198, 237, 0.75);
+    text-decoration:none; 
 }
 
 body {
     background-color: rgb(161, 198, 213);
     color: rgb(210, 215, 255);
-    font-family: 'Tw Cen MT'; 
+    font-family: 'Tw Cen MT';
+    background-image: url(../images/chicken.jpg) ;
+    background-position: left top; 
+    background-repeat: no-repeat;
+    background-size: auto; 
 }
 
 
@@ -81,4 +86,5 @@ body {
     border: solid 1px;
     border-radius: 10px;
     width: 70%;
+   
 }

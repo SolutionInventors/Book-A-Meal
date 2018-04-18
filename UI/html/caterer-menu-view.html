@@ -1,0 +1,41 @@
+<!doctype html> 
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <link href="../css/styles.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="main">
+        <h1>List of Meals</h1>
+        <ul class="meal-options" onclick="highlightItem(event)">
+            <li>Rice</li>
+            <li>Beans</li>
+            <li>Tomato</li>
+            <li>Bread</li>
+        </ul>
+        <form action="/modify" method="post">
+            <ul class="meal-details">
+                <li>
+                    <span class="button-group" onmouseover="updateRoute(event)"><button type="submit">Add</button type="submit"><button type="submit"> Modify</button><button type="submit">Delete</button></span>
+                </li>
+                <li>
+                    <input type="text" name="meal" placeholder="Meal Name" />
+                    <input type="number" name="amount" placeholder="Amount" />
+
+                </li>
+                <li>
+                    <div>
+                        Meal: <label id="selected-item">Selected Meal</label>
+                    </div>
+                    <div>
+                        Price: <label id="price">Price</label>
+                    </div>
+                </li>
+                <li>
+                    <label id="status">status</label>
+                </li>
+            </ul>
+        </form>
+    </div>
+</body>
+</html>
