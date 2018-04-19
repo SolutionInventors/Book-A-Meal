@@ -13,7 +13,8 @@
         <h1>Hello</h1>
         <div class="forms" onsubmit="verifyInput(event)">
 
-            <form id="signup-form"  action="home.html" method="post" hidden>
+            <form id="signup-form"  action="home.html" method="get" hidden>
+                <input type="hidden" name="user" value="customer" />
                 <ul>
                     <li> <h3>SIGN UP</h3></li>
                     <li><input type="hidden" name="user" value="caterer" /></li>
@@ -25,10 +26,10 @@
                     <li><a href="#" onclick="displayForm('login-form')">Login</a></li>
                 </ul>
             </form>
-            <form id="login-form" action="home.html" method="post" >
+            <form id="login-form" action="home.html" method="get" >
+                <input type="hidden" name="user" value="caterer" />
                 <ul>
                     <li> <h3 >SIGN IN</h3></li>
-                    <li><input type="hidden" name="user" value="customer" /></li>
                     <li><input type="text" name="username" placeholder="Username" /></li>
                     <li><input  type="password" name="password" placeholder="Password" /></li>
 
@@ -38,7 +39,8 @@
 
                 </ul>
             </form>
-            <form  id="reset-password-form" action="home.html" method="post" hidden>
+            <form  id="reset-password-form" action="home.html" method="get" hidden>
+                <input type="hidden" name="user" value="customer" />
                 <ul>
                     <li> <h3>RESET PASSWORD</h3></li>
                     <li><input type="email" name="email" placeholder="Email Address" /></li>
