@@ -1,19 +1,17 @@
-<!doctype html>
+<!doctype>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <title>Book A Meal</title>
     <script src="../js/singin-signup.js"></script>
     <link href="../css/styles.css" rel="stylesheet" />
-    <link href="../css/signin-signup.css" rel="stylesheet" />
+    <link href="../css/styles.css" rel="stylesheet" />
 </head>
 <body>
-    <div class ="main ">
-
-        <h1>Hello</h1>
+    <div class="main ">
         <div class="forms" onsubmit="verifyInput(event)">
 
-            <form id="signup-form"  action="home.html" method="get" hidden>
+            <form id="signup-form" action="home.html" method="get" hidden>
                 <input type="hidden" name="user" value="customer" />
                 <ul>
                     <li> <h3>SIGN UP</h3></li>
@@ -26,20 +24,20 @@
                     <li><a href="#" onclick="displayForm('login-form')">Login</a></li>
                 </ul>
             </form>
-            <form id="login-form" action="home.html" method="get" >
+            <form id="login-form" action="home.html" method="get">
                 <input type="hidden" name="user" value="caterer" />
                 <ul>
-                    <li> <h3 >SIGN IN</h3></li>
+                    <li> <h3>SIGN IN</h3></li>
                     <li><input type="text" name="username" placeholder="Username" /></li>
-                    <li><input  type="password" name="password" placeholder="Password" /></li>
+                    <li><input type="password" name="password" placeholder="Password" /></li>
 
-                    <li><button type="submit" >SIGN IN</button></li>
+                    <li><button type="submit">SIGN IN</button></li>
                     <li><a href="#" onclick="displayForm('reset-password-form')">Reset Password</a></li>
                     <li><a href="#" onclick="displayForm('signup-form')">Create Account</a></li>
 
                 </ul>
             </form>
-            <form  id="reset-password-form" action="home.html" method="get" hidden>
+            <form id="reset-password-form" action="home.html" method="get" hidden>
                 <input type="hidden" name="user" value="customer" />
                 <ul>
                     <li> <h3>RESET PASSWORD</h3></li>
@@ -51,10 +49,11 @@
 
                 </ul>
             </form>
-            
+
         </div>
-        
-        
+
+
     </div>
 </body>
+
 </html>

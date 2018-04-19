@@ -7,13 +7,15 @@
     <link href="../css/styles.css" rel="stylesheet" />
     <link href="../css/caterer-page.css" rel="stylesheet" />
 </head>
-<body  onload="initList(event)" >
-    <div class="main">
-        <h1>List of Meals</h1>
-        <ul id="existing-meal-ul"class="meal-options" onchange="highlightItem(event)">
-           
-        </ul>
-        <form id ="crud-form" action="/modify" method="post">
+<body   onload="initList(event)">
+    <div class="main" onchange="highlightItem(event)">
+        <h1>MANAGE PROGRAM</h1>
+        <div class="meal-options">
+            <h3>List of Meals</h3>
+            <ul id="existing-meal-ul"></ul>
+        </div>
+
+        <form id="crud-form" action="/modify" method="post">
             <ul class="meal-details">
                 <li>
                     <span class="button-group" onmouseover="updateRoute(event)">
@@ -21,7 +23,21 @@
                         <button id="create-menu-button" type="submit">Create Today Menu</button>
                     </span>
                 </li>
-                
+
+
+                <li onkeyup="updateAddStatus(event)">
+                    <div>
+                        <h3>CREATE A NEW MENU ITEM/UPDATE</h3>
+                        <input type="text" name="meal" placeholder="Enter Meal Name ...  " />
+                        <input type="text" name="amount" placeholder="Enter Amount ... " />
+                        <div class="button-group">
+                            <button id="add-button" type="submit">Add</button>
+                            <button id="modify-button" type="submit"> Modify</button>
+                        </div>
+
+                    </div>
+
+                </li>
                 <li>
                     <div id="selected-item">
                     </div>
@@ -32,30 +48,17 @@
                 <li>
                     <label id="status">status</label>
                 </li>
-                <li onkeyup="updateAddStatus(event)">
-                    <div>
-                        <h3>CREATE A NEW MENU ITEM/UPDATE</h3>
-                        <input type="text" name="meal" placeholder="Enter Meal Name ...  " />
-                        <input type="text" name="amount" placeholder="Enter Amount ... " />
-                        <div class="button-group">
-                            <button id="add-button" type="submit">Add</button>
-                            <button id="modify-button" type="submit"> Modify</button>
-                        </div>
-                        
-                    </div>
-
-
             </ul>
         </form>
         INVITE A NEW CATERER
         <form id="new-caterer-form" action="#" method="post">
             <ul>
                 <li><input type="text" name="name" value="" /></li>
-                <li><button type= "submit">INVITE CATERER</button></li>
+                <li><button type="submit">INVITE CATERER</button></li>
 
             </ul>
         </form>
-        
+
     </div>
 </body>
 </html>

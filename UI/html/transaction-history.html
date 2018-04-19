@@ -1,63 +1,67 @@
-<!doctype html> 
+<!doctype>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <title></title>
+    <title>Book A Meal</title>
     <script src="../js/history-functions.js"></script>
+    <link href="../css/styles.css" rel="stylesheet" />
 </head>
 <body>
-    <div class="main">
-        <h1>Transaction Details</h1>
-        
-        <div id="history-details" class="history-details-group">
+     
+        <div class="main">
+            <h1>Transaction Details</h1>
 
-            <h3>Transaction History</h3>
-            <div>
-                <label>Select Date: </label><input type="date" onchange="handleDateChange(event)" />
-            </div>
-            <ul>
-                <li><h3 id="transaction-heading">Summary of transaction of Jan 2018</h3></li>
-                <li>
-                    <ul>
-                        <li>Number Of Orders: <span id="total-orders">30</span></li>
-                        <li>Revenue Generated: <span id="revenue">5000</span></li>
-                        <li>
-                            <span class="button-group">
-                                <button id="view-details-button"onclick="viewDetails(event,'History')">View  Details</button>
-                            </span>
+            <div id="history-details" class="history-details-group">
 
-                    </ul>
-                </li>
-            </ul>
-
-            <div id="details">
-                <ul id="history-list">
+                <h3>Transaction History</h3>
+                <div>
+                    <label>Select Date: </label><input type="date" onchange="handleDateChange(event)" />
+                </div>
+                <ul>
+                    <li><h3 id="transaction-heading">Summary of transaction of Jan 2018</h3></li>
                     <li>
-                        <h3>Fred Somto</h3>
                         <ul>
-                            <li>Rice 3000</li>
-                            <li>Beans 12000</li>
-                            <li>Total 15000</li>
-                        </ul>
-                    </li>
-                    <li>
-                        <h3>Fred Odili</h3>
-                        <ul>
-                            <li>Rice 3000</li>
-                            <li>Beans 12000</li>
-                            <li>Total 15000</li>
+                            <li>Number Of Orders: <span id="total-orders">30</span></li>
+                            <li>Revenue Generated: <span id="revenue">5000</span></li>
+                            <li>
+                                <span class="button-group">
+                                    <button id="view-details-button" onclick="viewDetails(event,'History')">View  Details</button>
+                                </span>
+
                         </ul>
                     </li>
                 </ul>
 
-            </div>
+                <div id="details">
+                    <ul id="history-list">
+                        <li>
+                            <h3>Fred Somto</h3>
+                            <ul>
+                                <li>Rice 3000</li>
+                                <li>Beans 12000</li>
+                                <li>Total 15000</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <h3>Fred Odili</h3>
+                            <ul>
+                                <li>Rice 3000</li>
+                                <li>Beans 12000</li>
+                                <li>Total 15000</li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                </div>
 
 
-            <div id="no-transaction" hidden>
-                No Transactions were made
+                <div id="no-transaction" hidden>
+                    No Transactions were made
+                </div>
             </div>
+
         </div>
     
-    </div>
 </body>
+
 </html>

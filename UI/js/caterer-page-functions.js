@@ -10,14 +10,14 @@ function updateRoute(event) {
 
 function highlightItem(event) {
     let total = 0; 
-    for (let checkbox of event.currentTarget.querySelectorAll('input[name=selectedMeal]')) {
-        checkbox.parentElement.className = "";
-    }
+  
     let checkboxes = event.currentTarget.querySelectorAll('input[name=selectedMeal]:checked');
-    
+    for (let checkbox of event.currentTarget.querySelectorAll('input[name=selectedMeal]')) {
+        checkbox.parentElement.parentElement.className = "";
+    }
 
     for (let checkbox of checkboxes) {
-        checkbox.parentElement.className = "item-selected";
+        checkbox.parentElement.parentElement.className = "item-selected";
         total += itemsMap.get(checkbox.value); 
     }
     

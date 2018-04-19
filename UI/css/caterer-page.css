@@ -1,0 +1,19 @@
+form{
+    float:right; 
+    width:50%; 
+}
+
+h1,h2, h3, h4 {
+    text-align: center;
+}
+
+.item-selected {
+    background-color: rgb(109, 118, 147);
+    border-radius: 15px 15px;
+    color:rgb(67, 219, 255)
+}
+
+.meal-options {
+
+
+}

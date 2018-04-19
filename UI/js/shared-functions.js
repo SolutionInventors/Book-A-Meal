@@ -22,6 +22,13 @@ function initList(){
         let li = document.createElement('li');
 
         let innerHTML = `<label>${name} <span>${amount} </span></label><label for="${name}-checkbox"></label> <input id="${name}-checkbox" type="checkbox" name="selectedMeal" value="${name}" />`;
+        innerHTML = `<label for="${name}-checkbox">${name} <span>${amount} </span></label>
+                <div class="checkbox">
+                    
+                    <input id="${name}-checkbox" type="checkbox" name="selectedMeal" value=${name} />
+                    <label for="${name}-checkbox"></label>
+                </div>`
+
         li.innerHTML = innerHTML;
         console.dir('ul = ' + ul);
         ul.append(li);

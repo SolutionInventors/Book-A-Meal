@@ -1,0 +1,56 @@
+.index {
+    background-color: rgba(80, 59, 51, 0.09);
+    border: solid 1px;
+    border-radius: 10px;
+    width: 100%;
+    min-height: 400px;
+    height: 100%;
+    padding: 10px;
+}
+
+.button-group {
+   float:right; 
+    height: 40px; 
+   
+   padding-left: 10px; 
+
+}
+.button-group .primary {
+    height:40px; 
+    font-size:20px; 
+}
+
+.button-group .secondary {
+    border-radius: 5px;
+    font-size: 14px;
+    min-width: 120px;
+    height: 30px;
+    padding: 10px;
+    text-align: center;
+    text-decoration: none;
+    font-family: 'Trebuchet MS';
+    color: rgb(243, 253, 255);
+    border: solid 0 rgb(204, 0, 0);
+    border-bottom-width: 3px;
+}
+
+.title {
+    position: absolute;
+    left: 30%;
+    top: 40%;
+    font-family: Pristina;
+    background-color: rgba(234, 21, 13, 0.40);
+    color: white;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.title h1{
+    font-size: 70px;
+    color:inherit; 
+
+}
+.title p {
+    font-size: 50px;
+   
+}
