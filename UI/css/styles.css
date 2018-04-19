@@ -110,3 +110,10 @@ body {
 :placeholder-shown {
     color: rgb(133, 176, 213);
 }
+
+.missing-input {
+    background-color: aliceblue;
+    border-color: red;
+    border-width: 10px;
+    color:yellow; 
+}

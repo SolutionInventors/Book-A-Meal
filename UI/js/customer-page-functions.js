@@ -72,5 +72,3 @@ function updateOrderList(event) {
         
     }
 }
-
-
