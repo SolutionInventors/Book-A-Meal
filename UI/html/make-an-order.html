@@ -11,34 +11,26 @@
 <body onload="initList(event)">
     <div class="main">
         <h1>Order for a Meal!</h1>
-        <div class="left-bar">
-            <h3>Today's Menu Items</h3>
-            <ul id="existing-meal-ul" class="available-meals" onclick="highlightItem(event)"></ul>
-        </div>
-        
-        <div class="right-bar">
-            <ul id="order-list" class="order-list" onclick="highlightItem(event)">
-                <li>Order List</li>
+        <div class=" second-group">
+            <div >
+                <h3>Today's Menu Items</h3>
+                <ul id="existing-meal-ul" class="available-meals" onclick="highlightItem(event)"></ul>
+            </div>
+            <div>
+                <em>
+                    Total Amount: <label id="total-amount">NGN 2000.32</label>
+                </em>
 
-            </ul>
+            </div>
         </div>
-        <ul class="order-controls" onclick="updateOrderList(event)">
-            <li><button id="add-to-list-button" disabled>&gt; &gt;</button></li>
-            <li><button id="remove-from-list-button" disabled>&lt; &lt;</button></li>
-        </ul>
 
-        
-       
-        <form action="#" method="post">
+        <form action="#" method="post" class="second-group">
             <ul class="meal-details">
+                
                 <li>
-                    <div>
-                        Total Amount: <label id="total-amount">NGN 2000.32</label>
-                    </div>
-
-                </li>
-                <li>
-                    <span class="button-group" onmouseover="updateRoute(event)"><button id="order-button">Make Order</button></span>
+                    <button id="order-button" onmouseover="updateRoute(event)">
+                        Make Order
+                    </button>
                 </li>
 
                 <li>
@@ -46,6 +38,7 @@
                 </li>
             </ul>
         </form>
+
     </div>
 </body>
 </html>

@@ -1,14 +1,7 @@
-.right-bar{
-    float:right; 
-    height: 120px; 
+.main {
+    position: absolute;
+    padding-bottom: 50px; 
 }
-
-.left-bar {
-    float: left;
-    height: 120px;
-}
-
-.order-controls{
-    height:120px; 
-    margin-top:48px; 
+.second-group{
+    text-align:center; 
 }

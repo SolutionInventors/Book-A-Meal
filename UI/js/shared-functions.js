@@ -14,7 +14,7 @@ function getExistionMealOptions(){
 }
 
 
-function initList(){
+function initList(event, addType = 'append'){
     console.log('Entered!');
     let ul = document.getElementById('existing-meal-ul');
     console.dir('ul = ' + ul);
@@ -31,7 +31,12 @@ function initList(){
 
         li.innerHTML = innerHTML;
         console.dir('ul = ' + ul);
-        ul.append(li);
+        if (addType == 'prepend') {
+            ul.prepend(li);
+        } else {
+            ul.append(li);
+        }
+       
     }
 
     let buttons = document.getElementsByTagName('button'); 
