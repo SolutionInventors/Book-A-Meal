@@ -9,27 +9,14 @@ function updateRoute(event) {
 }
 
 function highlightItem(event) {
-    let total = 0; 
-  
-    let checkboxes = event.currentTarget.querySelectorAll('input[name=selectedMeal]:checked');
-    for (let checkbox of event.currentTarget.querySelectorAll('input[name=selectedMeal]')) {
-        checkbox.parentElement.parentElement.className = "";
-    }
-
-    for (let checkbox of checkboxes) {
-        checkbox.parentElement.parentElement.className = "item-selected";
-        total += itemsMap.get(checkbox.value); 
-    }
-    
-    let selectedItems = checkboxes.length;
-    console.dir('selecetedItems= ' + selectedItems);
-   
-    if (selectedItems == 1){
+    let itemObj = getSelectedItems(event);
+    if (itemObj.selectedItems == 1) {
         document.getElementById('modify-button').disabled=false; 
         document.getElementById('delete-button').disabled = false;
         document.getElementById('create-menu-button').disabled = false;
 
-    } else if (selectedItems > 1){
+    } else if (itemObj.selectedItems > 1) {
+        
         document.getElementById('modify-button').disabled=true; 
     }else{
         document.getElementById('modify-button').disabled=true; 
@@ -38,21 +25,21 @@ function highlightItem(event) {
     }
 
     
-    document.getElementById('total-amount').textContent = total;
-    document.getElementById('selected-item').textContent = `Selected Items: ${selectedItems}`
+    document.getElementById('total-amount').textContent = itemObj.total;
+    document.getElementById('selected-item').textContent = `Selected Items: ${itemObj.selectedItems}`
 
     
 }
 
-function updateAddStatus(event) {
+function updateStatus(event, buttonId= 'add-button') {
    let textboxes =  event.currentTarget.querySelectorAll('input[type=text]'); 
 
    for (let box of textboxes) {
        if (box.value == "") {
-           document.getElementById('add-button').disabled = true; 
+           document.getElementById(buttonId).disabled = true; 
            return;
        }
 
    }
-   document.getElementById('add-button').disabled = false; 
+   document.getElementById(buttonId).disabled = false; 
 }

@@ -60,6 +60,7 @@ input[type=button ], .button-group .secondary {
     background-color: rgb(183, 72, 66);
     color: rgb(243, 253, 255);
     border: solid 0 rgb(204, 0, 0);
+    margin: 5px 0;
 }
 .button-group .secondary {
    background-color:inherit; 
@@ -114,10 +115,10 @@ h1, h2, h3, h4 {
     border: solid 1px;
     border-radius: 10px;
     width: 80%;
-    min-height: 80%;
+    min-height: auto;
     height: auto;
     padding: 10px;
-
+    padding-bottom:20px; 
 }
 
 a {
@@ -269,5 +270,15 @@ input[type="date"] {
     border: solid 2px rgba(124, 132, 165, 0.95);
     text-align: center;
     
+}
+
+.item-selected {
+    background-color: rgb(109, 118, 147);
+    border-radius: 15px 15px;
+    color: rgb(67, 219, 255)
+}
+
+.second-group .second-group{
+    border: 0; 
 }
 

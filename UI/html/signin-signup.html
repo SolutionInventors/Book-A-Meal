@@ -1,4 +1,4 @@
-<!doctype>
+<!doctype html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -26,24 +26,24 @@
                             <li><input type="password" name="password" placeholder="Password" /></li>
 
                             <li><button type="submit">SIGN UP</button></li>
-                            <li>Already have an account?<a href="#" onclick="displayForm('login-form')">Login</a></li>
+                            <li><a href="#" onclick="displayForm('login-form')">Login</a></li>
                         </ul>
                     </form>
                     <form id="login-form" action="home.html" method="get">
-                        <input type="hidden" name="user" value="caterer" />
+                        <input type="hidden" name="user" value="" />
                         <ul>
                             <li> <h3>SIGN IN</h3></li>
                             <li><input type="text" name="username" placeholder="Username" /></li>
                             <li><input type="password" name="password" placeholder="Password" /></li>
 
                             <li><button type="submit">SIGN IN</button></li>
-                            <li>Having troubles? We've got you covered.<a href="#" onclick="displayForm('reset-password-form')">Reset Password</a></li>
-                            <li>Start Enjoying our delicacies by<a href="#" onclick="displayForm('signup-form')">Creating an Account</a></li>
+                            <li><a href="#" onclick="displayForm('reset-password-form')">Reset Password</a></li>
+                            <li><a href="#" onclick="displayForm('signup-form')">Create an Account</a></li>
 
                         </ul>
                     </form>
                     <form id="reset-password-form" action="home.html" method="get" hidden>
-                        <input type="hidden" name="user" value="customer" />
+                        <input type="hidden" name="user" value="" />
                         <ul>
                             <li> <h3>RESET PASSWORD</h3></li>
                             <li><input type="email" name="email" placeholder="Email Address" /></li>

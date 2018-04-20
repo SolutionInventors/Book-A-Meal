@@ -20,13 +20,13 @@
                             <button id="create-menu-button" type="submit">Create Today Menu</button>
                         </span>
                     </li>
-                    <li>
-                        Selected Items: <em id="selected-item"></em>
+                    <li class="center-li">
+                        <em id="selected-item">Selected Items: 0</em>
 
                     </li>
-                    <li>
+                    <li class="center-li">
                         <em>
-                            Total Cost: <label id="total-amount">Price</label>
+                            Total Cost: <label id="total-amount">0</label>
                         </em>
                     </li>
 
@@ -37,7 +37,7 @@
         <div class="second-group">
             <form class="second-group" id="crud-form" action="/modify" method="post">
                 <h3>CREATE A NEW MENU ITEM/UPDATE</h3>
-                <ul onkeyup="updateAddStatus(event)">
+                <ul onkeyup="updateStatus(event)">
                     <li><input type="text" name="meal" placeholder="Enter Meal Name ...  " /></li>
                     <li> <input type="text" name="amount" placeholder="Enter Amount ... " /></li>
                     <li>
@@ -54,12 +54,12 @@
         
         
         <div class="second-group">
-            <form class="second-group" id="new-caterer-form" action="#" method="post">
+            <form onkeyup="updateStatus(event, 'invite-button')" class="second-group" id="new-caterer-form" action="#" method="post">
                 <h3> INVITE A NEW CATERER</h3>
                 <ul>
                     <li><input type="text" name="name" value="" /></li>
-                    <li><button type="submit">INVITE CATERER</button></li>
-                    <li> <a href="#">Jump to  Home</a></li>
+                    <li><button id="invite-button"type="submit">INVITE CATERER</button></li>
+                    <li> <a href="home.html?user=caterer">Jump to  Home</a></li>
                 </ul>
             </form>
         </div>

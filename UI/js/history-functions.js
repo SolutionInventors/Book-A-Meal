@@ -66,14 +66,7 @@ function displayHistory(ulId, date = new Date()) {
         historyItem.innerHTML = `<h3>Details of order made by ${transObj.customer} at ${getTimeHelper(date)}</h3 >`;
         let total = 0;
         ul.append(historyItem); 
-        `<ul>
-                <li><h3>Details of order made by Johnny Cage at 01:00 GMT</h3></li>
-                <li>Rice 3200</li>
-                <li>Beans 4000</li>
-                <li>Garri 1000</li>
-                <li>Nkwobi 800</li>
-                <li><em>Total:  9000</em></li>
-             </ul>`
+        
         transObj.itemsBought.forEach((item) => {
             let li = document.createElement('li');
             li.textContent = `${item.meal} ${item.cost}`;
@@ -84,7 +77,10 @@ function displayHistory(ulId, date = new Date()) {
         let li = document.createElement('li');
         li.innerHTML = `<em>Total:  ${total}<em>`;
         ul.append(li);
-        document.getElementById(ulId).append(ul); 
+        let finalDiv = document.createElement('div'); 
+        finalDiv.className = "history-details"; 
+        finalDiv.append(ul); 
+        document.getElementById(ulId).append(finalDiv); 
        dayTotal += total; 
     });
     document.getElementById('revenue').textContent = dayTotal;

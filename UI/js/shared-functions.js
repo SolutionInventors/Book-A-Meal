@@ -57,5 +57,22 @@ function getParameterByName(name, url) {
     return decodeURIComponent(results[2].replace(/\+/g, " "));
 }
 
-console.log(getParameterByName("name", "?name=John")); 
+function getSelectedItems(event) {
+    let total = 0;
+    for (let checkbox of event.currentTarget.querySelectorAll('input[name=selectedMeal]')) {
+        checkbox.parentElement.parentElement.className = "";
+    }
+    let checkboxes = event.currentTarget.querySelectorAll('input[name=selectedMeal]:checked');
 
+
+    for (let checkbox of checkboxes) {
+        checkbox.parentElement.parentElement.className = "item-selected";
+        total += itemsMap.get(checkbox.value);
+    }
+
+    let selectedItems = checkboxes.length;
+    console.dir('selecetedItems= ' + selectedItems);
+    
+    return { selectedItems, total };
+
+}

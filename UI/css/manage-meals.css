@@ -1,9 +1,5 @@
 
-.item-selected {
-    background-color: rgb(109, 118, 147);
-    border-radius: 15px 15px;
-    color:rgb(67, 219, 255)
-}
+
 
 .second-group .second-group{
     border: 0; 
@@ -11,4 +7,14 @@
 
 ul li{
     margin-bottom:10px; 
+}
+
+em {
+   
+    color: rgb(254, 104, 116);
+    font-size: 19px; 
+}
+
+center-li{
+   padding-left:30%; 
 }

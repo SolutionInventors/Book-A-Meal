@@ -4,8 +4,10 @@ window.addEventListener('load', () => {
     let action = getParameterByName('action'); 
     displayForm(`${action}-form`);
     currentUser = getParameterByName('user');
+    
     currentUser = currentUser ? currentUser : "customer"; 
-    let inputs = document.querySelectorAll(`input[user=${currentUser}]`);
+        
+    let inputs = document.querySelectorAll(`input[type=hidden]`);
     for (let input of inputs) {
         input.value = currentUser;
     }
@@ -26,6 +28,7 @@ function verifyInput(event) {
     if (verifyInputHelper(id)) {
         let elemCollection = event.target.elements;
         //add verification code here to check password
+        event.target.action = `home.html?user=${currentUser}`;
         return; 
     }
     event.preventDefault();
@@ -35,7 +38,8 @@ function verifyInput(event) {
 }
     
 
-    function verifyInputHelper(formId) {
+function verifyInputHelper(formId) {
+    console.log(formId); 
         let inputs = document.getElementById(formId).querySelectorAll('input');
         for (input of inputs) {
             if (input.value == "" && input.type != "hidden") {
