@@ -5,20 +5,18 @@
     <title>Book A Meal</title>
     <script src="../js/history-functions.js"></script>
     <link href="../css/styles.css" rel="stylesheet" />
+    <link href="../css/history.css" rel="stylesheet" />
 </head>
 <body>
      
-        <div class="main">
-            <h1>Transaction Details</h1>
+    <div class="main">
+        <h1>Transaction Details</h1>
+        <div class="second-group">
 
             <div id="history-details" class="history-details-group">
-
-                <h3>Transaction History</h3>
-                <div>
-                    <label>Select Date: </label><input type="date" onchange="handleDateChange(event)" />
-                </div>
                 <ul>
                     <li><h3 id="transaction-heading">Summary of transaction of Jan 2018</h3></li>
+                    <li><label>Select Date: </label><input type="date" onchange="handleDateChange(event)" /></li>
                     <li>
                         <ul>
                             <li>Number Of Orders: <span id="total-orders">30</span></li>
@@ -27,41 +25,50 @@
                                 <span class="button-group">
                                     <button id="view-details-button" onclick="viewDetails(event,'History')">View  Details</button>
                                 </span>
-
+                            </li>
+                            <li><a class="secondary"href="home.html">Back to Home </a></li>
                         </ul>
                     </li>
                 </ul>
 
-                <div id="details">
-                    <ul id="history-list">
-                        <li>
-                            <h3>Fred Somto</h3>
-                            <ul>
-                                <li>Rice 3000</li>
-                                <li>Beans 12000</li>
-                                <li>Total 15000</li>
-                            </ul>
-                        </li>
-                        <li>
-                            <h3>Fred Odili</h3>
-                            <ul>
-                                <li>Rice 3000</li>
-                                <li>Beans 12000</li>
-                                <li>Total 15000</li>
-                            </ul>
-                        </li>
-                    </ul>
-
-                </div>
-
-
-                <div id="no-transaction" hidden>
-                    No Transactions were made
-                </div>
+                
             </div>
 
+
         </div>
-    
+        <div class="second-group">
+            <div id="details" class="history-details">
+            
+                <ul>
+                 <li><h3>Details of order made by Johnny Cage at 01:00 GMT</h3></li>
+                <li>Rice 3200</li>
+                <li>Beans 4000</li>
+                <li>Garri 1000</li>
+                <li>Nkwobi 800</li>
+                <li><em>Total:  9000</em></li>
+             </ul>
+                
+            
+                <ul>
+                    <li>
+                        <h3>Details of order made by Jedu Kn at 01:00 GMT</h3>
+                    </li>
+                    <li>Cheese 3200</li>
+                    <li>Burger 4000</li>
+                    <li>Tiwo 1000</li>
+                    <li>Nkwobi 800</li>
+                    <li><em>Total:  9000</em></li>
+                </ul>
+               
+            </div>
+
+
+            <div id="no-transaction" hidden="">
+                No Transactions were made
+            </div>
+        </div>
+    </div>
+  
 </body>
 
 </html>

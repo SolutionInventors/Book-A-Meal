@@ -1,6 +1,6 @@
 
 window.addEventListener('load', () => {
     let user = getParameterByName('user');
-    user = user ? user : "customer"; 
-    document.getElementById(`${user}-actions`).hidden = "hidden";
+    let hideDiv = user == "caterer"? "customer": "caterer"; 
+    document.getElementById(`${hideDiv}-actions`).hidden = "hidden";
 }); 

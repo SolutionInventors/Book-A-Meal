@@ -60,13 +60,20 @@ function displayHistory(ulId, date = new Date()) {
     let dayTotal = 0; 
     transArr.forEach((transObj) => {
         let transDate = transObj.date;
-        console.dir(transDate);
-        console.dir(date);
-        console.log()
-        console.log('-------');
-
+       
         let ul = document.createElement('ul');
+        let historyItem = document.createElement('li');
+        historyItem.innerHTML = `<h3>Details of order made by ${transObj.customer} at ${getTimeHelper(date)}</h3 >`;
         let total = 0;
+        ul.append(historyItem); 
+        `<ul>
+                <li><h3>Details of order made by Johnny Cage at 01:00 GMT</h3></li>
+                <li>Rice 3200</li>
+                <li>Beans 4000</li>
+                <li>Garri 1000</li>
+                <li>Nkwobi 800</li>
+                <li><em>Total:  9000</em></li>
+             </ul>`
         transObj.itemsBought.forEach((item) => {
             let li = document.createElement('li');
             li.textContent = `${item.meal} ${item.cost}`;
@@ -75,14 +82,10 @@ function displayHistory(ulId, date = new Date()) {
         });
 
         let li = document.createElement('li');
-        li.textContent = `Total:  ${total}`;
+        li.innerHTML = `<em>Total:  ${total}<em>`;
         ul.append(li);
-        let historyItem = document.createElement('li');
-        historyItem.innerHTML = `<h3>Details of order made by ${transObj.customer} at ${getTimeHelper(date)}</h3 >`;
-        historyItem.append(ul);
-        document.getElementById(ulId).append(historyItem); 
-        console.log(ulId + ': Inserted!'); 
-        dayTotal += total; 
+        document.getElementById(ulId).append(ul); 
+       dayTotal += total; 
     });
     document.getElementById('revenue').textContent = dayTotal;
     document.getElementById('transaction-heading').textContent = `Summary of transactions for ${date.toDateString()}`;
