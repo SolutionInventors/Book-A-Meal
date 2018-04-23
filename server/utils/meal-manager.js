@@ -1,6 +1,6 @@
 let mealOptions = new Map(); 
 
-mealOptions.set('allMeal', []); 
+mealOptions.set('allMeals', []); 
 mealOptions.set('bookings', []); 
 mealOptions.set('todayMeal', []); 
 mealOptions.set('orders', []);
@@ -16,14 +16,16 @@ function getAllMeals(){
 function addMeal(mealName, amount){
     let meals = mealOptions.get('allMeals');
     let lastInsertedId = mealOptions.get('lastInsertedMealId');  
-    meals.push({
+    let newMealObj = {
         id: lastInsertedId + 1, 
         mealName, 
         amount, 
-    }); 
+    }; 
+    meals.push(newMealObj); 
     mealOptions.set('allMeals', meals);
     lastInsertedId++; 
     mealOptions.set('lastInsertedMealId', lastInsertedId);
+    return newMealObj; 
 }
 
 function getMeal(id){
@@ -32,31 +34,34 @@ function getMeal(id){
     return foundObj; 
 }
 
-function updateMeal(id, newMealObj){
+function updateMeal(id, mealName, amount){
     let meals = mealOptions.get('allMeals'); 
-    newMealObj.id = id; 
-    
+    let success = false; 
     mealOptions.map('allMeals', meals.map((mealObj)=>{
-        if(mealObj.id == id) return newMealObj; 
+        if(mealObj.id == id){ 
+            success = true; 
+            return {id, mealName, amount}
+        }; 
         return mealObj; 
     })); 
-    
+    return success; 
 }
 
 function removeMeal(id){
     let meals = mealOptions.get('allMeals'); 
     mealOptions.set('allMeals', meals.filter((item)=> item.id != id)); 
-
+    return true; 
 }
 
 function setTodayMeal(mealOptionArr){
     let today=  new Date(); 
 
+    
     mealOptions.set('todayMeal',{
         date: today.toDateString(), 
         mealOptionArr, 
     }); 
-
+    return true; 
 }
 function getTodayMeal(){
     let today = new Date(); 

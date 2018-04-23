@@ -1,4 +1,5 @@
 .vs
-developer/node_modules
-developer/.eslintrc
+server/node_modules
+server/.eslintrc
+.vscode
 
