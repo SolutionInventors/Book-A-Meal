@@ -91,7 +91,15 @@ function modifyOrder(id, newMealArr){
         }); 
         return true; 
     } 
-    return false; 
-
-   
+    return false;  
 }   
+module.exports ={
+    getAllMeals, 
+    addMeal, 
+    removeMeal, 
+    updateMeal, 
+    makeOrder, 
+    modifyOrder, 
+    getTodayMeal, 
+
+}
