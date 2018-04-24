@@ -19,7 +19,7 @@ describe('Meal Manager', function(){
         }); 
     }); 
 
-    let meals = [{}]; 
+    
     describe('Managing meal functions', function(){
         describe('addMeal()', function(){
             let obj = mealManager.addMeal("Rice", 3000)
@@ -37,9 +37,9 @@ describe('Meal Manager', function(){
             });
         }); 
        
-        describe("updateMeal",function(){
-            it(`updateMeal(${meals[0].id}, "Beans", 300)  should return true`, function(){
-                let result = mealManager.updateMeal(meals[0].id,"Beans", 300); 
+        describe("updateMeal()",function(){
+            it(`updateMeal(1, "Beans", 300)  should return true`, function(){
+                let result = mealManager.updateMeal(1,"Beans", 300); 
                 assert.isTrue(result);  
             });
         }); 
