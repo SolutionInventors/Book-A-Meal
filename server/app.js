@@ -1,7 +1,13 @@
 const express = require('express'); 
 const app = express(); 
 const mealManager = require('./utils/meal-manager'); 
+const bodyParser = require('body-parser'); 
+const jwt = require('jsonwebtoken'); 
 
+ app.use(bodyParser.urlencoded({
+     extended:true, 
+    }
+)); 
 
 app.listen(3333, 'localhost', (error)=>{
     if(error){s
@@ -11,20 +17,32 @@ app.listen(3333, 'localhost', (error)=>{
     }
 }); 
 
-app.get('/meals/', (req, resp)=> {
-    let meals = mealManager.getAllMeals(); 
-    resp.json(meals)
+app.post('/login', (req, resp)=> {
+
 }); 
 
-app.post('/meals/', (req, resp)=> {
+app.get('/meals/', (req, resp)=> {
+    let meals = mealManager.getAllMeals(); 
+    resp.status(200).json(meals)
+}); 
+
+app.post('/meals/',  (req, resp)=> {
     
-    console.log(req.body); 
-    if(req.body && req.body.mealName  && req.body.amount){
-        if(mealManager.addMeal(req.body.mealName, req.body.amount)){
-            resp.sendStatus(201); 
+    let mealName =  req.body.mealName;
+    let amount =  req.body.amount; 
+    if(req.body && mealName  && amount){
+        if(mealManager.getMealByName(mealName)){
+          
+            resp.status(409).send({
+                error: {message: "The meal option you want to create already exists"}
+            }); 
+
+        }else if(mealManager.addMeal(mealName, amount)){
+            resp.status(201).send({
+                message:"Successfully created", 
+            }); 
         }else{
-            resp.send('Failed'); 
-            
+            resp.send('Failed');   
         }
     }else{
         resp.sendStatus(400); 
@@ -35,15 +53,22 @@ app.post('/meals/', (req, resp)=> {
 
 app.put('/meals/:mealId', (req, resp)=> {
     let mealId = req.params.mealId; 
-    if(req.body && req.body.mealName  && req.body.amount){
-        if(mealManager.updateMeal(mealId, req.body.mealName, req.body.amount)){
-            resp.sendStatus(201); 
+    console.log(req.body); 
+
+    let mealName = req.query.mealName; 
+    let amount = req.query.amount; 
+    if(req.body &&  mealName && amount){
+        let newObj = mealManager.updateMeal(mealId, mealName, amount); 
+        if(newObj){
+            resp.status(201).send(newObj); 
         }else{
-            resp.send('Failed'); 
+            resp.status(400).send({
+                message: "Invalid mealId",
+            }); 
             
         }
     }else{
-        resp.sendStatus(400); 
+        resp.status(400); 
     }
 
 }); 
@@ -69,11 +94,11 @@ app.get('menu/', (req, resp) => {
 
 }); 
 
-app.post('orders/', (req, resp)=> {
+app.post('orders/',  (req, resp)=> {
 
 }); 
 
-app.put('/prders/:orderId', (req, resp)=> {
+app.put('/prders/:orderId',  (req, resp)=> {
 
 }); 
 app.get('/orders', (req, resp)=> {

@@ -3,7 +3,9 @@
   "version": "",
   "description": "This project is built to help caterers respond to orders made by customers online. \r It is built to solve the problems associated with making orders for a meal.",
   "dependencies": {
-    "express": "^4.16.3"
+    "body-parser": "^1.18.2",
+    "express": "^4.16.3",
+    "jsonwebtoken": "^8.2.1"
   },
   "scripts": {
     "test": "mocha || true"

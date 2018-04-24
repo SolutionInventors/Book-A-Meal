@@ -6,19 +6,17 @@ let appData = {
     lastInsertedMealId: 0, 
 }; 
 
-/*{
-    allMeals: new Map(id, {id, mealName:'Rice', amount:2000}), 
-    menu: new Map(dateCreated, [{mealName, amount}] ), 
-    orders: new Map(user, )
-} 
 
-appData['allMeals'].has(2); */
 function getAllMeals(){
-    let meals = appData.get('allMeals'); 
+    let meals = appData['allMeals']; 
     return meals; 
 }
 
+function getMealByName(mealName){
+    return appData.allMeals.find((item)=> item.mealName == mealName); 
+}
 function addMeal(mealName, amount){
+    
     if(mealName && amount){
         let newMealObj ={
             id: appData.lastInsertedMealId++, 
@@ -33,21 +31,21 @@ function addMeal(mealName, amount){
 }
 
 function getMeal(id){
-    let foundObj = appData.allMeals.find((item)=> item.id == id);
-    return foundObj; 
+    return 
+        appData.allMeals
+        .find((item)=> item.id == id);
+     
 }
 
 function updateMeal(id, mealName, amount){
-    let success = false;
-    appData.allMeals.map((mealObj)=>{
-        if(mealObj.id == id){ 
-            success = true; 
-            return {id, mealName, amount}
-        }; 
-        return mealObj; 
-    });  
-    
-    return success; 
+    let obj; 
+    let index = appData.allMeals.findIndex((item)=> item.id == id); 
+    if(index >= 0 ){
+        obj = {id, mealName, amount}
+        appData.allMeals[index] =obj ; 
+    }
+   
+    return obj; 
 }
 
 function removeMeal(id){
@@ -55,11 +53,12 @@ function removeMeal(id){
     return true; 
 }
 
+
 function createTodayMenu(mealOptionArr){
     
     let today=  new Date(); 
 
-    let index = appData.menu.find((item) => item.date == today.toDateString()); 
+    let index = appData.menu.findIndex((item) => item.date == today.toDateString()); 
     if(index >  0 ){
         appData.menu[index] = {
             date: today.toDateString(), 
@@ -110,7 +109,6 @@ module.exports ={
     updateMeal, 
     makeOrder, 
     modifyOrder, 
-    getTodayMenu, 
     createTodayMenu, 
-
+    getMealByName, 
 }
