@@ -51,19 +51,29 @@ app.post('/meals/',  (req, resp)=> {
     
 }); 
 
-app.put('/meals/:mealId', (req, resp)=> {
-    let mealId = req.params.mealId; 
-    console.log(req.body); 
+app.get('/meals/:mealId', (req, resp)=> {
+    let obj = mealManager.getMeal(req.params.mealId); 
+    if(obj){
+        resp.status(200).send(obj); 
+    }else{
+        resp.status(404).send({
+            error: {message: "The meal id does not exist"}, 
+            params: req.params.id, 
+        }); 
+    }
+}); 
 
+app.put('/meals/:mealId', (req, resp)=> {
+    let mealId = req.params.mealId;
     let mealName = req.query.mealName; 
     let amount = req.query.amount; 
-    if(req.body &&  mealName && amount){
-        let newObj = mealManager.updateMeal(mealId, mealName, amount); 
+    if(  mealName && amount){
+        let newObj = mealManager.updateMeal(+mealId, mealName, amount); 
         if(newObj){
             resp.status(201).send(newObj); 
         }else{
-            resp.status(400).send({
-                message: "Invalid mealId",
+            resp.status(404).send({
+                message: "Id was not found",
             }); 
             
         }
@@ -74,37 +84,89 @@ app.put('/meals/:mealId', (req, resp)=> {
 }); 
 app.delete('/meals/:mealId', (req, resp)=> {
     let mealId = req.params.mealId;
-    if(req.body && req.body.mealName  && req.body.amount){
-        if(mealManager.removeMeal(mealId)){
-            resp.sendStatus(201); 
+   if(mealManager.removeMeal(+mealId)){
+            resp.status(200).send({ message: "Successful"}); 
+    }else{
+        resp.status(404).send({error:
+            { message: "The specified id was not found"}
+        }
+    ); 
+    }
+}); 
+
+//Menu functions
+
+app.post('/menu/', (req, resp)=> {
+    if(!req.body.mealsIdArr){
+        resp.status(400).send({
+            error:{message:"No mealsIdArr in the body"}
+        });
+    }else if(mealManager.getNumberOfMeals()){ 
+        let obj = mealManager.createTodayMenu(req.body.mealsIdArr); 
+
+        if(obj){
+            resp.status(201).send(obj);
         }else{
-            resp.send('Failed'); 
-            
+            resp.status(409).send({
+                error:{message:"Meal of today has already been created"}
+            }); 
         }
     }else{
-        resp.sendStatus(400); 
-    } 
+        resp.status(412).send({
+            error:{message:"There are no meals in the system. Create meals first"}
+        }); 
+    }
+    
+
+});
+
+app.put('/menu/', (req, resp)=> {
+    if(!req.query.mealsIdArr){
+        resp.status(400).send({
+            error:{message:"No mealsIdArr in the body"}
+        });
+    }else {
+        let obj = mealManager.updateTodayMenu(req.query.mealsIdArr); 
+
+        if(obj){
+            resp.status(201).send(obj);
+        }else{
+            resp.status(409).send({
+                error:{message:"Meal of today has not yet been created"}
+            });
+        }
+    }
+    
+
+});
+
+app.get('/menu/', (req, resp) => {
+    let obj = mealManager.getTodayMenu(); 
+    if(obj) resp.status(200).send(obj);
+    else{
+        resp.status(404).send({
+            error: {message: "Menu of today has not yet been set"}
+        }); 
+    }
 }); 
 
-app.post('menu/', (req, resp)=> {
+//Order routes
+app.post('/orders/',  (req, resp)=> {
+    
+}); 
+
+app.put('/orders/:orderId',  (req, resp)=> {
 
 }); 
 
-app.get('menu/', (req, resp) => {
-
-}); 
-
-app.post('orders/',  (req, resp)=> {
-
-}); 
-
-app.put('/prders/:orderId',  (req, resp)=> {
-
-}); 
 app.get('/orders', (req, resp)=> {
 
 }); 
 
+app.get('/orders/caterer/:username', (req, resp)=> {
 
+}); 
 
+app.get('/orders/customer/:username', (req, resp)=> {
 
+}); 

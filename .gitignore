@@ -2,4 +2,5 @@
 server/node_modules
 server/.eslintrc
 .vscode
-
+server/.eslintrc.json
+server/.eslintrc.js

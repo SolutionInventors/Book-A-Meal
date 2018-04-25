@@ -1,29 +1,29 @@
 let appData = {
-    allMeals: [], 
-    menu: [], 
-    orders: [], 
+    allMeals: new Map(), 
+    menu: new Map(), 
+    orders: new Map(), 
     lastOrderId: 0, 
     lastInsertedMealId: 0, 
 }; 
 
 
 function getAllMeals(){
-    let meals = appData['allMeals']; 
-    return meals; 
+   return [...appData.allMeals.values()]; 
 }
 
 function getMealByName(mealName){
-    return appData.allMeals.find((item)=> item.mealName == mealName); 
+    return [...appData.allMeals.values()].find((item)=> item.mealName == mealName); 
 }
+
 function addMeal(mealName, amount){
-    
     if(mealName && amount){
+        let id = appData.lastInsertedMealId++; 
         let newMealObj ={
-            id: appData.lastInsertedMealId++, 
+            id, 
             mealName, 
             amount, 
         };  
-        appData.allMeals.push(newMealObj); 
+        appData.allMeals.set(+id, newMealObj);
         return newMealObj; 
     }
     return false; 
@@ -31,77 +31,102 @@ function addMeal(mealName, amount){
 }
 
 function getMeal(id){
-    return 
-        appData.allMeals
-        .find((item)=> item.id == id);
-     
+    return appData.allMeals.get(+id); 
 }
 
 function updateMeal(id, mealName, amount){
-    let obj; 
-    let index = appData.allMeals.findIndex((item)=> item.id == id); 
-    if(index >= 0 ){
-        obj = {id, mealName, amount}
-        appData.allMeals[index] =obj ; 
+    if(appData.allMeals.has(+id) ){
+        let obj = {id, mealName, amount}
+        appData.allMeals.set(+id, obj)  ; 
+        return obj; 
     }
-   
-    return obj; 
 }
 
 function removeMeal(id){
-   appData.allMeals = appData.allMeals.filter((item)=> item.id != id); 
-    return true; 
+   return appData.allMeals.delete(+id); 
 }
 
+function getMeal(id){
+    return appData.allMeals.get(+id)
+}
 
-function createTodayMenu(mealOptionArr){
-    
-    let today=  new Date(); 
-
-    let index = appData.menu.findIndex((item) => item.date == today.toDateString()); 
-    if(index >  0 ){
-        appData.menu[index] = {
-            date: today.toDateString(), 
-            mealOptionArr, 
-        }
-    }else{
-        appData.menu.push({
-            date: today.toDateString(), 
-            mealOptionArr, 
-        })
+function getNumberOfMeals(){
+    return appData.allMeals.size; 
+}
+function createTodayMenu(menuItemById){
+    let todayDateStr=  new Date().toDateString(); 
+    if(!appData.menu.has(todayDateStr)){
+        return setMenuHelper(menuItemById, todayDateStr); 
     }
-    appData.set('menu',menuArr); 
-    return true; 
-}
-function getTodayMeal(){
-    let today = new Date(); 
-    return 
-        appData['menu']
-        .find((item)=> item.date == today.toDateString()); 
 }
 
-function makeOrder(mealsArr){
-    appData.orders.push({
-        date : new Date().toDateString(), 
-        id: appData['lastOrderId']++, 
-        OrderedMeals: mealsArr, 
-    }); 
-    return true; 
+function setMenuHelper(menuItemById, todayDateStr){
+   let menuArr = 
+    menuItemById.map((id)=>appData.allMeals.get(+id) )
+                .filter((obj)=> obj);
+    if(menuArr.length){
+        let obj = {
+            date: todayDateStr, 
+            menu:menuArr, 
+        };
+        appData.menu.set(todayDateStr, obj); 
+        return obj; 
+    }
+}
+function updateTodayMenu(menuItemById, menuItemById){
+    let todayDateStr=  new Date().toDateString();
+    if(appData.allMeals.has(todayDateStr)){
+        return setTodayMenuHelper(menuItemById, new Date().toDateString()); 
+    }
+    
+}
+function getTodayMenu(){ 
+    return appData.menu.get( new Date().toDateString()); 
 }
 
-function modifyOrder(id, newMealArr){
-    let orders = appData.get('orders');
-    if(appData.orders.find((item)=> item.id == id)) {
-        orders.map((item)=> {
-            if(item.id == id){
-                item.OrderedMeals = newMealArr; 
-            }
-            return item; 
-        }); 
-        return true; 
+//functions for orders
+function makeOrder(mealsIdArr, customer){
+    let todayDateStr = new Date().toDateString(); 
+    let mealsArr = mealsIdToMealArr(mealsIdArr);
+    if(mealArr.length){
+        let orderId =appData.lastOrderId++; 
+        let obj = {
+            date : todayDateStr, 
+            orderId, 
+            order: mealsArr,
+            customer,  
+        };
+        appData.orders.set(todayDateStr, obj);
+        return obj; 
+    }
+    
+}
+function mealsIdToMealArr(mealsIdArr){
+    let menu = appData.menu.get(todayStr);
+    return  mealsIdArr.map((id)=>
+                menu.find((menuItem)=> +menuItem.id == +id))
+            .filter((item)=> item); 
+}
+function modifyOrder(id, mealsIdArr){
+    let newMealArr = mealsIdToMealArr(mealsIdArr); 
+    let todayDateStr = new Date().toDateString();
+    let orders = appData.orders.get(todayDateStr);
+    let index = orders.findIndex((item)=> item.orderId == id);
+    if(index >= 0 && newMealArr.length> 0) {
+        orders[index].order = newMealArr; 
+        return orders[index]; 
     } 
-    return false;  
 }   
+
+function getOrders(dateStr=new Date().todayDateStr()){
+    return appData.orders.get(dateStr); 
+}
+function getAllOrders(){
+    return [...appData.orders.values()]; 
+}
+function getOrderByDate(dateStr){
+    return appData.orders.get(dateStr); 
+}
 module.exports ={
     getAllMeals, 
     addMeal, 
@@ -111,4 +136,8 @@ module.exports ={
     modifyOrder, 
     createTodayMenu, 
     getMealByName, 
+    getMeal, 
+    getTodayMenu, 
+    getNumberOfMeals, 
+    updateTodayMenu
 }
