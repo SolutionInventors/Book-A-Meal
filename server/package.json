@@ -2,6 +2,7 @@
   "name": "book-a-meal",
   "version": "",
   "description": "This project is built to help caterers respond to orders made by customers online. \r It is built to solve the problems associated with making orders for a meal.",
+  "main": "app.js",
   "dependencies": {
     "body-parser": "^1.18.2",
     "eslint": "^4.19.1",
@@ -9,7 +10,8 @@
     "jsonwebtoken": "^8.2.1"
   },
   "scripts": {
-    "test": "mocha || true"
+    "test": "nyc mocha  test || true",
+    "coverage": "nyc --reporter=lcov --reporter=text-lcov npm test"
   },
   "repository": {
     "url": "https://github.com/SolutionInventors/Book-A-Meal"
@@ -26,6 +28,8 @@
     "eslint-plugin-import": "^2.11.0",
     "eslint-plugin-jsx-a11y": "^6.0.3",
     "eslint-plugin-react": "^7.7.0",
-    "mocha": "^5.1.1"
+    "istanbul": "^0.4.5",
+    "mocha": "^5.1.1",
+    "nyc": "^11.7.1"
   }
 }

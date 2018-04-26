@@ -1,5 +1,5 @@
 
-const mealManager = require('../../utils/meal-manager'); 
+const mealManager = require('../utils/meal-manager'); 
 const assert = require('chai').assert;
 
 describe('Meal Manager', function(){
@@ -23,7 +23,7 @@ describe('Meal Manager', function(){
     
     describe('Managing meal functions', function(){
         describe('addMeal()', function(){
-            let obj = mealManager.addMeal("Rice", 3000)
+            let obj = mealManager.createMeal("Rice", 3000)
             it("Add meal should return an object", function(){
                 assert.isObject(obj); 
             }); 
