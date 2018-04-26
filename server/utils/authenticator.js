@@ -35,7 +35,7 @@ function createToken(userObj, resp){
 }
 
 
-function changeCustomerPassword(username, newPassword, userType){
+function changePassword(username, newPassword, userType){
     if(userType== 'customer') customer[username].password = newPassword; 
     else if(userType== 'caterer') caterers[username].password = newPassword; 
 }
@@ -84,5 +84,6 @@ function processRequest(req, resp, userType,  callback){
 module.exports = {
     verify, createToken, 
     processRequest, 
-    getUser, exists
+    getUser, exists, 
+    changePassword, 
 }
