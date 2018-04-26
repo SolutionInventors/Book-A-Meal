@@ -1,0 +1,76 @@
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <link href="../css/styles.css" rel="stylesheet" />
+    <link href="../css/make-order.css" rel="stylesheet" />
+    <script src="../js/shared-functions.js"></script>
+    <script src="../js/make-order.js"></script>
+
+</head>
+<body onload="initList(event)">
+    <div class="main">
+        <h1>Order for a Meal!</h1>
+        <div class="left-box second-group">
+            <div>
+                <h3>Previous Order Id</h3>
+               
+                
+            </div>
+
+            <div class=" second-group">
+                <ul id="prev-order-ul" class="available-meals" onclick="handleSelectEvent(event)"></ul>
+                <div>
+                        <span>
+                                <label >Select Previous order id: </label> 
+                                <select name="" id="">
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                </select>
+                            </span>
+                    <em>
+                        Total Amount: <label id="prev-total-amount">NGN 2000.32</label>
+                    </em>
+
+                </div>
+            </div>
+
+
+        <div class="right-box second-group">
+            <div>
+                <h3>Today's Menu Items</h3>
+            </div>
+
+            <div class=" second-group">
+                <ul id="existing-meal-ul" class="available-meals" onclick="handleSelectEvent(event)"></ul>
+                <div>
+                    <em>
+                        Total Amount: <label id="total-amount">NGN 2000.32</label>
+                    </em>
+
+                </div>
+                <form action="#" method="post">
+                    <ul>
+
+                        <li>
+                            <button id="order-button" onmouseover="updateRoute(event)">
+                               Update Order
+                            </button>
+                        </li>
+
+                        <li>
+                            <a href="home.html?user=customer">Go to home</a>
+                        </li>
+                    </ul>
+                </form>
+
+            </div>
+
+
+        </div>
+
+               
+        </div>
+</body>
+</html>
