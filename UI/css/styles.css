@@ -258,7 +258,7 @@ ul li {
 }
 
 
-input[type="date"] {
+input[type="date"], select {
     align-items: center;
     display: inline-flex;
     font-family: monospace;
@@ -269,7 +269,12 @@ input[type="date"] {
     background-color: rgba(153, 163, 206, 0.57);
     border: solid 2px rgba(124, 132, 165, 0.95);
     text-align: center;
-    
+}
+
+
+select{
+    width: 50px;
+    text-align: center;  
 }
 
 .item-selected {
