@@ -9,7 +9,7 @@ let appData = {
 
 
 function getAllMeals(){
-   return Object.values(appData.allMeals); ; 
+   return Object.values(appData.allMeals) ; 
 }
 
 function getMealByName(mealName){
@@ -72,15 +72,17 @@ function setMenuHelper(menuItemById, todayDateStr){
                 .filter((obj)=> obj)
                 .forEach(item => menuObj[item.id] = item);;
     if(Object.values(menuObj).length){
-        menuObj.date = todayDateStr; 
-        appData.menu[todayDateStr] =menuObj ; 
-        return menuObj; 
+        let obj =  {
+            menuObj, 
+            date: todayDateStr}; 
+        appData.menu[todayDateStr] =obj ; 
+        return obj; 
     }
 }
-function updateTodayMenu(menuItemById, menuItemById){
+function updateTodayMenu(menuItemById){
     let todayDateStr=  new Date().toDateString();
     if(appData.menu[todayDateStr]){
-        return setMenuHelper(menuItemById, new Date().toDateString()); 
+        return setMenuHelper(menuItemById, todayDateStr); 
     }  
 }
 function getTodayMenu(){ 
@@ -109,9 +111,8 @@ function mealsIdToMealObj(mealsIdArr){
     let todayStr = new Date().toDateString();
     let todayMenu=   appData.menu[todayStr];
     if(todayMenu){
-        let menuObj ={}; 
-        console.log(todayMenu); 
-        mealsIdArr.map((id)=>todayMenu[id])
+        let menuObj ={};  
+        mealsIdArr.map((id)=>todayMenu.menuObj[id])
                         .filter((item)=> item)
                         .forEach(item => menuObj[item.id] = item);
         return menuObj; 
@@ -121,7 +122,7 @@ function mealsIdToMealObj(mealsIdArr){
 function modifyOrder(orderId, mealsIdArr){
     let order = mealsIdToMealObj(mealsIdArr); 
     let todayDateStr = new Date().toDateString();
-    if(getTodayOrderId(orderId) && Object.values(order).length> 0){
+    if(getTodayOrderById(orderId) && Object.values(order).length> 0){
         let prevOrder = appData.orders[todayDateStr][orderId]; 
         prevOrder.order= order; 
         appData.orders[todayDateStr][orderId] = prevOrder; 
@@ -129,7 +130,7 @@ function modifyOrder(orderId, mealsIdArr){
     }
 }   
 
-function getTodayOrderId(orderId){
+function getTodayOrderById(orderId){
     let obj = appData.orders[new Date().toDateString()]; 
     return obj ? obj[orderId] : undefined; 
 }
@@ -137,12 +138,24 @@ function getOrders(dateStr=new Date().toDateString()){
     let  orders = appData.orders[dateStr]; 
     if(orders) return Object.values(orders); 
 }
-function getAllOrders(){
-    return Object.values(appData.orders); 
+function getAllOrders(userObj){
+    let orders = 
+        Object.values(appData.orders)
+              .map((orderObj)=> Object.values(orderObj)[0]); 
+    if(userObj.userType== 'customer'){
+        return orders.filter((orderObj)=>orderObj.customer.username == userObj.username); 
+    }
+    return orders; 
 }
-function getOrderByDate(dateStr){
-    return appData.orders[dateStr]; 
+function getOrderByDate(userObj, dateStr){
+    let orders = Object.values(appData.orders[dateStr]); 
+    if(userObj.userType== 'customer'){
+        return orders.filter((orderObj)=>orderObj.customer.username == userObj.username); 
+    }
+    return orders; 
 }
+
+
 module.exports ={
     getAllMeals, 
     createMeal, 
@@ -156,8 +169,8 @@ module.exports ={
     getTodayMenu, 
     getNumberOfMeals, 
     updateTodayMenu, 
-    getOrderByDate, 
     getAllOrders, 
     getOrders, 
-    getTodayOrderId
+    getTodayOrderById, 
+    getOrderByDate, 
 }
