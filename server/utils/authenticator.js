@@ -3,7 +3,7 @@ const secretkey = 'U)-=aF^(8%hts$oeL#h3/c*+F"p7';
 const customers = {
     customer: {
         username: 'customer', 
-        password: '12323', 
+        password: 'password', 
         email: 'email@email.com', 
         userType: 'customer', 
     }
@@ -11,7 +11,7 @@ const customers = {
 const caterers = {
     caterer: {
         username: 'caterer', 
-        password: '12323', 
+        password: 'password', 
         email: 'email@email.com', 
         userType: 'caterer', 
     }

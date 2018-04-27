@@ -30,9 +30,7 @@ app.listen(port, 'localhost', (error)=>{
     }
 }); 
 
-app.get('/hello/', (req, resp)=> {
-    resp.status(200).json({message:"message"}); 
-})
+
 app.post('/signup/', (req, resp)=> {
     let {username, password, email, userType}  = req.body; 
 
