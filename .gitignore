@@ -1,4 +1,5 @@
 .vs
+<<<<<<< HEAD
 server/node_modules
 server/.eslintrc
 .vscode
@@ -7,3 +8,6 @@ server/.eslintrc.js
 server/coverage/
 server/.nyc_output/
 Book-A-Meal/
+=======
+server/
+>>>>>>> feature

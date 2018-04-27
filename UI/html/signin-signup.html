@@ -9,10 +9,15 @@
     <link href="../css/signin-signup.css" rel="stylesheet" />
 </head>
 <body>
-    
+        <div class="button-group welcome-div">
+                <a class="secondary" href="../index.html">Back To Welcome Page</a>
+            </div>
+        </div>
         
         <div class="main ">
             
+               
+            <h1>NEW HAVEN DELICACIES</h1>
             <div class="second-group">
                 <div class="forms" onsubmit="verifyInput(event)">
 
@@ -38,7 +43,7 @@
 
                             <li><button type="submit">SIGN IN</button></li>
                             <li><a href="#" onclick="displayForm('reset-password-form')">Reset Password</a></li>
-                            <li><a href="#" onclick="displayForm('signup-form')">Create an Account</a></li>
+                            <li name="signup-li"><a  href="#" onclick="displayForm('signup-form')">Create an Account</a></li>
 
                         </ul>
                     </form>
@@ -50,8 +55,8 @@
                             <li><input type="password" name="password" placeholder="New Password" /></li>
                             <li><input type="password" name="password" placeholder="Confirm New Password" /></li>
                             <li><button type="submit">RESET</button></li>
-                            <li>Create new Account <a href="#" onclick="displayForm('signup-form')"> Here</a></li>
-
+                            <li name="signup-li">Create new Account <a  href="#" onclick="displayForm('signup-form')"> Here</a></li>
+                            <li><a href="#" onclick="displayForm('login-form')">Login</a></li>
                         </ul>
                     </form>
 
