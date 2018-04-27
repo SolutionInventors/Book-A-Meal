@@ -22,4 +22,4 @@ It is built to solve the problems associated with making orders for a meal.
     - View history of previously made orders
 
 ## Badges
-    - [![Coverage Status](https://coveralls.io/repos/github/SolutionInventors/Book-A-Meal/badge.svg?branch=master)](https://coveralls.io/github/SolutionInventors/Book-A-Meal?branch=master)
+    - [![Coverage Status](https://coveralls.io/repos/github/SolutionInventors/Book-A-Meal/badge.svg?branch=develop)](https://coveralls.io/github/SolutionInventors/Book-A-Meal?branch=develop)
