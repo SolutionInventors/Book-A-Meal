@@ -22,7 +22,9 @@ app.listen(3333, 'localhost', (error)=>{
     }
 }); 
 
-
+app.get('/hello/', (req, resp)=> {
+    resp.status(200).send("message"); 
+})
 app.post('/signup/', (req, resp)=> {
     let {username, password, email, userType}  = req.body; 
 
