@@ -115,7 +115,7 @@ h1, h2, h3, h4 {
     border: solid 1px;
     border-radius: 10px;
     width: 80%;
-    min-height: auto;
+    min-height: 60%;
     height: auto;
     padding: 10px;
     padding-bottom:20px; 
@@ -172,7 +172,6 @@ li {
     border: solid 2px   rgb(174, 27, 18); 
     position:relative;
     padding: 2px; 
-    float: right; 
     
 
 }
