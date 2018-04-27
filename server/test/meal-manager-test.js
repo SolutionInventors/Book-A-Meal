@@ -60,6 +60,9 @@ describe('mealManager tests', ()=> {
                         it('getMeal(0) should return an object', ()=> {
                             let obj = mealManager.getMeal(0); 
                             assert.isObject(obj); 
+                        }); 
+                        it('getMeal() should return undefined ', ()=> {
+                            assert.isUndefined(getMeal()); 
                         })
                 }); 
                 describe('getNumberOfMeals() ', ()=> {
@@ -98,7 +101,37 @@ describe('mealManager tests', ()=> {
                     }); 
                 }); 
 
+                describe('Order Functions', ()=>{
+                    let dateStr = new Date().toDateString(); 
+                    it('getOrderByDate(undefined, userObj) returns undefined', ()=> {
+                        assert.isUndefined(mealManager.getOrderByDate(undefined, dateStr)); 
+                    }); 
+                    it('expecting undefined from  getOrderByDate(customer, undefined', ()=> {
+                        assert.isUndefined(mealManager.getOrderByDate(customer, undefined)); 
+                    } )
 
+                    it('expecting object from  getOrderByDate(customer, dateStr)', ()=> {
+                        assert.isObject(mealManager.getOrderByDate(customer, dateStr)); 
+                    } ); 
+                    describe('makeOrder()', ()=> {
+                        it('should return an object', ()=> {
+                            assert.isObject(mealManager.makeOrder([0], customer)); 
+                        })
+
+                         it('should return an object', ()=> {
+                            assert.isObject(mealManager.makeOrder([0], customer));
+                        })
+                        it('makeOrder([]) should return an undefined', ()=> {
+                            assert.isUndefined(mealManager.makeOrder([], customer));
+                        })
+                        it('makeOrder([0], undefined) should return an undefined', ()=> {
+                            assert.isUndefined(mealManager.makeOrder([0], customer));
+                        }); 
+
+                    })
+                    
+                    
+                }); 
             })
         }); 
     
@@ -135,9 +168,7 @@ describe('mealManager tests', ()=> {
         }); 
 
     }); 
-    describe('Order Functions', ()=>{
-       
-    }); 
+   
 
     
     
