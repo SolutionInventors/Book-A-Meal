@@ -1,6 +1,7 @@
 {
   "name": "book-a-meal",
-  "version": "",
+  "author": "Oguejiofor Chidiebere",
+  "version": "1.0.0",
   "description": "This project is built to help caterers respond to orders made by customers online. \r It is built to solve the problems associated with making orders for a meal.",
   "main": "app.js",
   "dependencies": {
@@ -11,6 +12,7 @@
     "jsonwebtoken": "^8.2.1"
   },
   "scripts": {
+    "start":"node app.js", 
     "test": "nyc mocha  test || true",
     "coverage": "nyc --reporter=lcov --reporter=text-lcov npm test"
   },
