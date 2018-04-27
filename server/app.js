@@ -13,9 +13,15 @@ const authenticator = require('./utils/authenticator');
     }
 )); 
 app.use(bodyParser.json()); 
+app.use((req, resp, next)=> {
+    resp.header('Access-Control-Allow-Origin', '*'); 
+    resp.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS'); 
+    resp.header('Access-Control-Allow-Header', 'Origin, X-Requested-With, Content-Type, Accept, Authorization'); 
+    next();
+});
 
 app.listen(3333, 'localhost', (error)=>{
-    if(error){s
+    if(error){
         console.log('Error in setting up server'); 
     }else{
         console.log('Server was set up successfully at port 3333'); 
@@ -23,7 +29,7 @@ app.listen(3333, 'localhost', (error)=>{
 }); 
 
 app.get('/hello/', (req, resp)=> {
-    resp.status(200).send("message"); 
+    resp.status(200).json({message:"message"}); 
 })
 app.post('/signup/', (req, resp)=> {
     let {username, password, email, userType}  = req.body; 

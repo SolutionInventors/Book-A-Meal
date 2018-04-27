@@ -30,12 +30,12 @@ function displayForm(formId) {
 }
 
 function verifyInput(event) {
+    
     let id = event.target.id; 
     if (verifyInputHelper(id)) {
         let elemCollection = event.target.elements;
-        //add verification code here to check password
-        event.target.action = `home.html?user=${currentUser}`;
-        return; 
+       event.target.action = `home.html?user=${currentUser}`;
+       return;  
     }
     event.preventDefault();
     event.stopPropagation();
