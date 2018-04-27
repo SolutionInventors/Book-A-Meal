@@ -7,12 +7,14 @@ const bodyParser = require('body-parser');
 const jwt = require('jsonwebtoken'); 
 
 const authenticator = require('./utils/authenticator'); 
+const port = process.env.PORT || 3333; 
 
  app.use(bodyParser.urlencoded({
      extended:true, 
     }
 )); 
 app.use(bodyParser.json()); 
+
 app.use((req, resp, next)=> {
     resp.header('Access-Control-Allow-Origin', '*'); 
     resp.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS'); 
@@ -20,11 +22,11 @@ app.use((req, resp, next)=> {
     next();
 });
 
-app.listen(3333, 'localhost', (error)=>{
+app.listen(port, 'localhost', (error)=>{
     if(error){
         console.log('Error in setting up server'); 
     }else{
-        console.log('Server was set up successfully at port 3333'); 
+        console.log(`Server was set up successfully at port ${port}`); 
     }
 }); 
 
