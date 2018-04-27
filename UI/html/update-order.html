@@ -42,63 +42,66 @@
 
 
         </div>
-        <div  class="second-group">
-            <h3>Previous Order</h3>
-            
-            <div>
-                    <ul class "prev-order" id ="prev-order-ul">
-                            <li>Rice 3200</li>
-                            <li>Beans 4000</li>
-                            <li>Garri 1000</li>
-                            <li>Nkwobi 800</li>
-                            <li><em>Total:  9000</em></li>
-                    </ul>
-            </div>
-            
-           
+        <div id="details" >
+            <div  class="second-group">
+                <h3>Previous Order</h3>
                 
-            
+                <div>
+                        <ul class "prev-order" id ="prev-order-ul">
+                                <li>Rice 3200</li>
+                                <li>Beans 4000</li>
+                                <li>Garri 1000</li>
+                                <li>Nkwobi 800</li>
+                                <li><em>Total:  9000</em></li>
+                        </ul>
+                </div>
                 
-        </div>
-        <div id="details" class="second-group">
-            <div id="form-box" class="second-group">
-                    <h3>New Order</h3>
-                    <form action="/orders" >
-                        <ul id="existing-meal-ul" class="available-meals" onclick="handleSelectEvent(event)"><li><label for="Rice-checkbox">Rice <span>2000 </span></label>
-                            <div class="checkbox">
-                                
-                                <input id="Rice-checkbox" type="checkbox" name="selectedMeal" value="Rice">
-                                <label for="Rice-checkbox"></label>
-                            </div></li><li><label for="Beans-checkbox">Beans <span>1000 </span></label>
-                            <div class="checkbox">
-                                
-                                <input id="Beans-checkbox" type="checkbox" name="selectedMeal" value="Beans">
-                                <label for="Beans-checkbox"></label>
-                            </div></li><li><label for="Bananas-checkbox">Bananas <span>200 </span></label>
-                            <div class="checkbox">
-                                
-                                <input id="Bananas-checkbox" type="checkbox" name="selectedMeal" value="Bananas">
-                                <label for="Bananas-checkbox"></label>
-                            </div></li><li><label for="Foofoo-checkbox">Foofoo <span>1500 </span></label>
-                            <div class="checkbox">
-                                
-                                <input id="Foofoo-checkbox" type="checkbox" name="selectedMeal" value="Foofoo">
-                                <label for="Foofoo-checkbox"></label>
-                            </div></li></ul>
-                            
-                            <div class="submit-div">
-                                <button type="submit">Update Order</button>
-                            </div>
+               
                     
-                        </form>
+                
+                    
             </div>
+            <div class="second-group">
+                <div id="form-box" class="second-group">
+                        <h3>New Order</h3>
+                        <form action="/orders" >
+                            <ul id="existing-meal-ul" class="available-meals" onclick="handleSelectEvent(event)"><li><label for="Rice-checkbox">Rice <span>2000 </span></label>
+                                <div class="checkbox">
+                                    
+                                    <input id="Rice-checkbox" type="checkbox" name="selectedMeal" value="Rice">
+                                    <label for="Rice-checkbox"></label>
+                                </div></li><li><label for="Beans-checkbox">Beans <span>1000 </span></label>
+                                <div class="checkbox">
+                                    
+                                    <input id="Beans-checkbox" type="checkbox" name="selectedMeal" value="Beans">
+                                    <label for="Beans-checkbox"></label>
+                                </div></li><li><label for="Bananas-checkbox">Bananas <span>200 </span></label>
+                                <div class="checkbox">
+                                    
+                                    <input id="Bananas-checkbox" type="checkbox" name="selectedMeal" value="Bananas">
+                                    <label for="Bananas-checkbox"></label>
+                                </div></li><li><label for="Foofoo-checkbox">Foofoo <span>1500 </span></label>
+                                <div class="checkbox">
+                                    
+                                    <input id="Foofoo-checkbox" type="checkbox" name="selectedMeal" value="Foofoo">
+                                    <label for="Foofoo-checkbox"></label>
+                                </div></li></ul>
+                                
+                                <div class="submit-div">
+                                    <button type="submit">Update Order</button>
+                                </div>
+                        
+                            </form>
+                </div>
+                </div>
+    
+    
+                <div id="no-transaction" hidden="">
+                    No Transactions were made
+                </div>
             </div>
-
-
-            <div id="no-transaction" hidden="">
-                No Transactions were made
-            </div>
-        </div>
+        </div >
+        
         
     </div>
   
