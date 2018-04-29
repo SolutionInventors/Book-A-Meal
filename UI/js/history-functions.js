@@ -65,6 +65,9 @@ function displayHistory(ulId, date = new Date()) {
         let historyItem = document.createElement('li');
         historyItem.innerHTML = `<h3>Details of order made by ${transObj.customer} at ${getTimeHelper(date)}</h3 >`;
         let total = 0;
+        historyItem.style.backgroundImage = 'url()'; 
+
+        ul.className = "meal-list";
         ul.append(historyItem); 
         
         transObj.itemsBought.forEach((item) => {
@@ -100,7 +103,6 @@ function displayHistory(ulId, date = new Date()) {
 function handleDateChange(event) {
     let selectedDate = new Date(event.target.value);
     let itemsInserted = displayHistory('details', selectedDate); 
-    document.getElementById('no-transaction').hidden = itemsInserted;
     document.getElementById('view-details-button').disabled = !itemsInserted;
     document.getElementById('total-orders').textContent = itemsInserted; 
 }

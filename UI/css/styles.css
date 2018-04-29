@@ -156,6 +156,14 @@ li {
 }
 
 
+.meal-list li{
+    background-image: url("../images/chef-hat.png");
+	background-repeat: no-repeat;
+	background-position: 10% center;
+    background-size: 30px 30px;
+    background-clip: padding-box;
+}
+
 
 
 .missing-input {
