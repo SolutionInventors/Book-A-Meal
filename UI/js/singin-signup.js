@@ -11,6 +11,12 @@ window.addEventListener('load', () => {
     for (let input of inputs) {
         input.value = currentUser;
     }
+    if(currentUser== "caterer"){
+        let links = document.querySelectorAll('li[name=signup-li'); 
+        for(let link of links  ){
+            link.hidden="hidden"; 
+        }
+    }
 }); 
 function displayForm(formId) {
     let forms = document.querySelectorAll('form');

@@ -5,7 +5,18 @@
 }
 
   
+.welcome-div {
+    position: relative;
+    left:80%;; 
+     height: 40px; 
+     margin-top: 1%; 
+    padding-left: 10px; 
+   
+ }
 
+ .secondary{
+    background-color: rgba(36, 24, 18, 0.198); 
+}
 
 
 
