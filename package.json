@@ -10,6 +10,7 @@
   "main": "server/app.js",
   "dependencies": {
     "body-parser": "^1.18.2",
+    "coveralls": "^3.0.0",
     "eslint": "^4.19.1",
     "express": "^4.16.3",
     "gulp": "^3.9.1",
@@ -18,7 +19,7 @@
   "scripts": {
     "start": "node server/app.js",
     "test": "nyc mocha  server/test || true",
-    "coverage": "nyc --reporter=lcov --reporter=text-lcov npm test", 
+    "coverage": "nyc --reporter=lcov --reporter=text-lcov npm test",
     "coveralls": "nyc npm test && nyc report --reporter=text-lcov | coveralls"
   },
   "repository": {
