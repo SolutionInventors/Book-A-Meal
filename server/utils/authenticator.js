@@ -1,17 +1,17 @@
 const jwt = require('jsonwebtoken');
 const secretkey = 'U)-=aF^(8%hts$oeL#h3/c*+F"p7';  
 const customers = {
-    chinedu: {
-        username: 'chinedu', 
-        password: '12323', 
+    customer: {
+        username: 'customer', 
+        password: 'password', 
         email: 'email@email.com', 
         userType: 'customer', 
     }
 }; 
 const caterers = {
-    chidiebere: {
-        username: 'chidiebere', 
-        password: '12323', 
+    caterer: {
+        username: 'caterer', 
+        password: 'password', 
         email: 'email@email.com', 
         userType: 'caterer', 
     }
