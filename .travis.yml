@@ -1,7 +1,7 @@
 language: node_js
 node_js:
-	-"stable"
-script: npm run test 
+	-"v9.0.0"
+script: npm run test nyc mocha  server/test || truess
 
 before_script:
 	- composer install --no-interaction
