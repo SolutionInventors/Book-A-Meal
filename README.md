@@ -23,5 +23,5 @@ It is built to solve the problems associated with making orders for a meal.
 
 ## Badges
 
-    - [![Maintainability](https://api.codeclimate.com/v1/badges/eb7f6eeae96b5b03c530/maintainability)](https://codeclimate.com/github/SolutionInventors/Book-A-Meal/maintainability)
+[![Maintainability](https://api.codeclimate.com/v1/badges/eb7f6eeae96b5b03c530/maintainability)](https://codeclimate.com/github/SolutionInventors/Book-A-Meal/maintainability)
    
