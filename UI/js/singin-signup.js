@@ -18,6 +18,14 @@ window.addEventListener('load', () => {
         }
     }
 }); 
+
+function handleClick(event){
+    if(event.target.tagName.toUpperCase() == "A"){
+        let name = event.target.name; 
+        document.body.className =`signinsignup ${name}`; 
+    }
+    
+}
 function displayForm(formId) {
     let forms = document.querySelectorAll('form');
     for (let form of forms) {
