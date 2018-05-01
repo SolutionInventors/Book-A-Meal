@@ -278,26 +278,121 @@ h3{
    display: none; 
 }
 
-.create{
+.input-area{
     padding-left: 30%; 
     width: 40%; 
    
 }
 
-.create textarea{
+.input-area textarea{
     min-width: 100%; 
 }
-.create li{
+.input-area input[type=text]{
+    width:200px; 
+}
+.input-area li{
     text-align: center; 
     list-style-type: none; 
    
 }
-.create li:first-of-type{
+.input-area li:first-of-type{
     text-align: left; 
 }
-.create button{
+.input-area button{
     width: 50%; 
     height: 30px; 
 }
+.welcome-page{
+    background-color: rgb(130, 94, 80);
+    color: rgb(210, 215, 255);
+    font-family: 'Tw Cen MT';
+    background-image: url(../images/background.jpg);
+    background-size: center;
+    background-origin: border-box;
+    background-repeat: no-repeat;
+    background-attachment:fixed; 
+    font-size: 16px; 
+    position:relative; 
+}
 
+.welcome-page .index{
+    width: 90%; 
+    height: 200%; 
+    background-color: white; 
+    position: fixed; 
+    border-left: solid 3px rgba(202, 3, 3, 0.719); 
+    left: 60%; 
+    transform: rotate(25deg); 
 
+}
+
+.welcome-page .title{
+    position: absolute; 
+    top: 30%; 
+    left: 80%; 
+    width:  20%; 
+    height: 100px; 
+    font-size: 300%; 
+    font-family: Rockwell ; 
+    z-index: 4; 
+    color: rgb(227, 31, 35);    
+}
+
+.welcome-page .title em{
+    color: white; 
+    background-color: rgb(227, 31, 35); 
+    text-decoration: none; 
+    font-style: normal; 
+    padding: 7px; 
+
+}
+
+.welcome-page .title strong{
+    font-size: 5.5rem; 
+    font-style: normal; 
+    font-weight: 100; 
+}
+
+.welcome-page .welcome-buttons{
+    position: absolute;
+    top: 64%; 
+    left: 80%; 
+    width:  20%; 
+}
+
+.welcome-page .welcome-buttons label{
+    display: inline-block; 
+    text-align: center; 
+    width:auto;
+    padding: 5px;  
+    font-size: 20px; 
+    height: 23px; 
+    background-color: red; 
+    margin-left: 20%; 
+}
+
+.welcome-page .welcome-buttons button{
+    background-color: black; 
+    color: white; 
+    height: 24px; 
+    font-size: 18px; 
+    border: 0; 
+    border-radius: 4px; 
+    margin-left: 5px; 
+    border: solid 1px;
+    font-size: rockwell; 
+
+}
+
+.welcome-page .welcome-buttons button:hover{
+    background-color: white; 
+    color: black; 
+    height: 26px; 
+    font-size: 18px; 
+    border: 0; 
+    border-radius: 4px; 
+    margin-left: 5px;
+    border: solid 1px black;
+    
+
+}
