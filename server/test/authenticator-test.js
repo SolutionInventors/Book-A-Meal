@@ -77,7 +77,7 @@ describe('Customer management', ()=> {
 describe('Caterer management', ()=> {
         
     let caterer = {
-        username: 'chidiebrer', 
+        username: 'caterer', 
         password: 'password', 
         userType: 'caterer', 
         email: 'email', 

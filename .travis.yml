@@ -1,11 +1,16 @@
 language: node_js
 node_js:
-	-"stable"
-script: npm run test 
+	-"9.0.0"
+script: 
+	- npm  run test 
 
-before_script:
-	- composer install --no-interaction
-env:
-	- NODE_ENV ="development"
-	- NODE_ENV = "production"
+before_install:
+  - npm i -g npm@5.5.1
+after_success: 
+  - npm run coveralls
 
+
+
+cache:
+  directories:
+    - "node_modules
