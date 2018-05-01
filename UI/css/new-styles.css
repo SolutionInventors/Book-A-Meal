@@ -1,0 +1,137 @@
+.shade-background{
+    position: fixed; 
+    background-color: rgba(115, 117, 114, 0.534); 
+    width:100%; 
+    height: 100%;
+    top:0; 
+    left:0;  
+     z-index: -1; 
+
+}
+
+/* .main{
+   
+} */
+
+.register-nav{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    left: 40%;
+    position: absolute; 
+    width:30%; 
+    z-index: 4;
+}
+
+.register-nav li{
+   float: left;
+   padding-left: 6px;      
+    z-index: 4;
+}
+
+.top-nav{
+    position: fixed;
+    top:0;
+    width: 100%; 
+    left: 0; 
+
+    padding: 10px;
+    padding-left: 35%; 
+    z-index: 3;
+    background-color: black;
+
+}
+
+.caterer-page .top-nav{
+    padding-left: 25%; 
+
+}
+
+.top-nav ul li{
+    border-right: solid 1px lavender 1px; 
+}
+.register-nav2{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    left: 40%;
+   
+    width:fit-content; 
+    z-index: 4;
+}
+
+.register-nav2 li{
+    float: left;
+    margin-left: 6px;      
+     z-index: 4;
+     margin-right: 20px;
+     color: red;  
+}
+.register-nav2  a{
+    color:red;
+}
+
+
+
+
+.register-form{
+  position: absolute;
+    top: 1%; 
+   
+    background-color: white; 
+    left: 40%; 
+    width: 20%; 
+    height: 99%;
+    box-shadow: 0 0 100px rgba(90, 107, 16, 0.651) ;
+}
+
+.register-form li{
+    margin-bottom: 10px; 
+    padding: 2px; 
+    list-style: none; 
+
+}
+
+.register-form div{
+    position:absolute; 
+    top:30%; 
+    height:50%; 
+
+}
+.register-form h3{
+    text-align: center; 
+    position: absolute; 
+    top: 20%; 
+    width: 100%; 
+}
+
+.image-div{
+    position: absolute; 
+    left: 10%; 
+    top: 20%; 
+   
+    
+}
+.image-div img{
+    height: 20%; 
+    width:10%; 
+}
+
+
+.register-form div{
+    visibility: hidden;
+}
+
+
+.signup .signup-group, .signin .signin-group,
+.reset .reset-password-group {
+    visibility: visible;
+}
+
+.reset .register-form h3{
+    content: 'RESET PASSWORD'; 
+}
+
+
+
+
