@@ -1,1 +1,10 @@
+.vscode
+.nyc_output
 .vs
+node_modules
+.eslintrc
+.eslintrc.json
+.eslintrc.js
+coverage
+Book-A-Meal
+server/coverage

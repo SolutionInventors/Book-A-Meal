@@ -90,7 +90,7 @@ body {
     background-color: rgb(130, 94, 80);
     color: rgb(210, 215, 255);
     font-family: 'Tw Cen MT';
-    background-image: url(../images/chicken.jpg);
+    background-image: url(../images/background.jpg);
     background-size: cover;
     background-origin: border-box;
     background-repeat: no-repeat;
@@ -115,7 +115,7 @@ h1, h2, h3, h4 {
     border: solid 1px;
     border-radius: 10px;
     width: 80%;
-    min-height: auto;
+    min-height: 60%;
     height: auto;
     padding: 10px;
     padding-bottom:20px; 
@@ -156,6 +156,14 @@ li {
 }
 
 
+.meal-list li{
+    background-image: url("../images/chef-hat.png");
+	background-repeat: no-repeat;
+	background-position: 10% center;
+    background-size: 30px 30px;
+    background-clip: padding-box;
+}
+
 
 
 .missing-input {
@@ -172,7 +180,6 @@ li {
     border: solid 2px   rgb(174, 27, 18); 
     position:relative;
     padding: 2px; 
-    float: right; 
     
 
 }
@@ -258,7 +265,7 @@ ul li {
 }
 
 
-input[type="date"] {
+input[type="date"], select {
     align-items: center;
     display: inline-flex;
     font-family: monospace;
@@ -269,7 +276,12 @@ input[type="date"] {
     background-color: rgba(153, 163, 206, 0.57);
     border: solid 2px rgba(124, 132, 165, 0.95);
     text-align: center;
-    
+}
+
+
+select{
+    width: 50px;
+    text-align: center;  
 }
 
 .item-selected {

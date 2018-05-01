@@ -11,7 +11,21 @@ window.addEventListener('load', () => {
     for (let input of inputs) {
         input.value = currentUser;
     }
+    if(currentUser== "caterer"){
+        let links = document.querySelectorAll('li[name=signup-li'); 
+        for(let link of links  ){
+            link.hidden="hidden"; 
+        }
+    }
 }); 
+
+function handleClick(event){
+    if(event.target.tagName.toUpperCase() == "A"){
+        let name = event.target.name; 
+        document.body.className =`signinsignup ${name}`; 
+    }
+    
+}
 function displayForm(formId) {
     let forms = document.querySelectorAll('form');
     for (let form of forms) {
@@ -24,12 +38,12 @@ function displayForm(formId) {
 }
 
 function verifyInput(event) {
+    
     let id = event.target.id; 
     if (verifyInputHelper(id)) {
         let elemCollection = event.target.elements;
-        //add verification code here to check password
-        event.target.action = `home.html?user=${currentUser}`;
-        return; 
+       event.target.action = `home.html?user=${currentUser}`;
+       return;  
     }
     event.preventDefault();
     event.stopPropagation();
