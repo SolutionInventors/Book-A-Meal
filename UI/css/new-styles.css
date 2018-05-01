@@ -1,34 +1,9 @@
-.shade-background{
-    position: fixed; 
-    background-color: rgba(115, 117, 114, 0.534); 
-    width:100%; 
-    height: 100%;
-    top:0; 
-    left:0;  
-     z-index: -1; 
+/*General styles*/
 
+
+body{
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif; 
 }
-
-/* .main{
-   
-} */
-
-.register-nav{
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    left: 40%;
-    position: absolute; 
-    width:30%; 
-    z-index: 4;
-}
-
-.register-nav li{
-   float: left;
-   padding-left: 2px;      
-    z-index: 4;
-}
-
 .top-nav{
     position: fixed;
     top:0;
@@ -39,22 +14,21 @@
     z-index: 3;
     background-color: rgba(0, 0, 0, 0.733);
     height: auto;
+    padding: 15px; 
 }
 
 
 .top-nav a {
-    border-radius: 5px;
     font-size: 14px;
     min-width: 120px;
     height: auto;
     padding: 10px;
     text-align: center;
     text-decoration: none;
-    border-width: 0;
     font-family: 'Trebuchet MS';
     background-color: rgb(183, 72, 66);
     color: rgb(243, 253, 255);
-    border: solid 0 rgb(204, 0, 0);
+    border: groove 1px wheat;
     margin: 1px 0;
     color: white; 
 }
@@ -63,31 +37,6 @@
     background-color: rgba(110, 48, 45, 0.733);
 }
 
-.manage-meals .top-nav a ,  
-.create-menu .top-nav a, 
-.invite-caterer .top-nav a, 
-.history .top-nav a, 
-{
-    background-color:inherit; 
-    border: solid 0 rgb(204, 0, 0);
-    border-bottom-width: 3px;
-}
-.caterer-page .top-nav{
-    padding-left: 25%; 
-
-}
-
-.top-nav ul li{
-    border-right: solid 1px lavender 1px; 
-}
-
-.relative{
-    position:relative; 
-}
-
-body{
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif; 
-}
 .register-nav2{
     margin: 0;
     padding: 0;
@@ -100,14 +49,68 @@ body{
 
 .register-nav2 li{
     float: left;
-    margin-left: 6px;      
      z-index: 4;
-     margin-right: 2px;
      color: red;  
 }
 
+.shade-background{
+    position: fixed; 
+    background-color: rgba(115, 117, 114, 0.534); 
+    width:100%; 
+    height: 100%;
+    top:0; 
+    left:0;  
+     z-index: -1; 
+
+}
 
 
+/*Caterer page styles*/
+.manage-meals .manage-meals ,  
+.create-menu .create-menu, 
+.invite-caterer .invite-caterer, 
+.history .history 
+{
+    background-color:inherit; 
+    border: solid 0 rgb(204, 0, 0);
+    border-bottom-width: 3px;
+  
+}
+.caterer-page .top-nav{
+    padding-left: 25%; 
+
+}
+
+.caterer-page button{
+    background-color: rgb(243, 42, 80);
+    color: rgb(224, 129, 69); 
+    border: none; 
+    width: auto; 
+}
+.caterer-page button:hover{
+    color: rgb(255, 237, 125);
+    background-color: rgb(224, 129, 69); 
+    border: none; 
+    border-radius: 4px; 
+}
+
+.caterer-page .input-area{
+   display: none; 
+}
+
+.create-menu figcaption button{
+    display: none; 
+}
+.create-menu .create-menu-form{
+    display: inline;
+}
+.top-nav ul li{
+    border-right: solid 1px lavender 1px; 
+}
+
+.relative{
+    position:relative; 
+}
 
 
 .register-form{
@@ -184,6 +187,19 @@ body{
     margin: 15px;
     position: relative;
     }
+.gallery button{
+    background-color: rgba(144, 93, 3, 0.424); 
+    color: white; 
+    border: none; 
+    font-size: 20px; 
+}
+
+.gallery button:hover{
+    background-color: rgba(146, 142, 136, 0.424); 
+    color: black; 
+    border: none; 
+    font-size: 20px; 
+}
 
 .gallery figcaption {
     position: absolute;
@@ -371,7 +387,7 @@ h3{
     margin-left: 20%; 
 }
 
-.welcome-page .welcome-buttons button{
+.welcome-page .welcome-buttons a{
     background-color: black; 
     color: white; 
     height: 24px; 
@@ -381,10 +397,12 @@ h3{
     margin-left: 5px; 
     border: solid 1px;
     font-size: rockwell; 
-
+    text-decoration: none; 
+    display: inline-block;
+    padding: 3px 10px; 
 }
 
-.welcome-page .welcome-buttons button:hover{
+.welcome-page .welcome-buttons a:hover{
     background-color: white; 
     color: black; 
     height: 26px; 
@@ -396,3 +414,131 @@ h3{
     
 
 }
+
+/* signin signup styles */
+.signinsignup{
+    background-color: rgb(130, 94, 80);
+    color: rgb(210, 215, 255);
+    font-family: 'Tw Cen MT';
+    background-image: url(../images/signup-background.jpg);
+    background-size: cover;
+    background-origin: border-box;
+    background-repeat: no-repeat;
+    background-attachment:fixed; 
+    font-size: 16px; 
+    position:relative; 
+    background-blend-mode: darken; 
+   
+    height: auto; 
+}
+
+
+.signinsignup .fixed-column{
+    position: fixed;
+    left: 30%; 
+    top: 0; 
+    width: 39%;
+    height: 100%; 
+    background-color: rgba(255, 255, 255, 0.555);
+}
+.signinsignup .sign-controls{
+    top:20%; 
+    position: absolute;
+}
+.signinsignup ul li{
+    width: 100%;
+    height: 40px; 
+    display: block; 
+    margin-bottom: 10px; 
+   
+}
+
+.signinsignup li:first-of-type{
+    border-bottom: solid 4px red; 
+}
+.signinsignup h3{
+    width: 100px; 
+    font-size: 20px; 
+    color: white; 
+    background-color: inherit rgb(229, 29, 37); /*Label Color*/; 
+    text-align: center;
+    margin-left: 150px; 
+    border-radius: 10px;  
+
+}
+.signinsignup input[type=text], .signinsignup input[type=email],.signinsignup input[type=password]{
+    border: none; 
+    height: 100%; 
+    width: 100%; 
+    padding-left: 40px; 
+    background-color: rgba(247, 229, 229, 0.829); 
+    border-radius: 5px; 
+    color:rgb(197, 76, 28);
+    font-size: 20px; 
+    font-weight: bold;
+    background-image: url("../images/user-logo.png"); 
+    background-position: 10px center ; 
+    background-repeat: no-repeat; 
+    background-size: 20px 20px; 
+}
+
+.signinsignup input[type=password]{
+    border-bottom: none; 
+    background-image: url("../images/password-logo.png"); 
+}
+
+.signinsignup button{
+    color: rgb(240, 216, 191);/*textbox*/
+    background-color: rgba(228, 31, 34, 0.651); 
+    width: 60%;  
+    min-width: 30px; 
+    min-height: 30px; 
+    height: 80%; ; 
+    font-size: 18px; 
+    border: none; 
+
+}
+
+
+.signinsignup button:hover{
+    background-color: rgb(240, 216, 191);/*textbox*/
+    color: rgba(228, 31, 34, 0.651); 
+    box-shadow: 0 0 3px inset;  
+
+}
+.signinsignup a{
+    text-align: center; 
+    color: white; 
+    font-weight: bold; 
+    font-size: 26px; 
+    text-decoration: none;
+
+
+}
+.signinsignup a:hover{
+   text-decoration: underline; 
+   color: rgb(77, 73, 71); 
+     
+
+}
+
+.signinsignup .link{
+    text-align: center;
+    padding-left: 7px;  
+}
+
+.signinsignup .login, .signinsignup .signup, .signinsignup .reset{
+    visibility: hidden;
+}
+
+.login .login, .signup .signup, .reset .reset{
+    visibility: visible;
+}
+:-moz-placeholder{
+    background-color: rgb(123, 109, 103) /*Place holder*/
+}
+
+:-ms-input-placeholder, ::placeholder{
+    background-color: rgb(123, 109, 103) /*Place holder*/
+}
+
