@@ -13,7 +13,7 @@ let resp= {
 describe('Customer management', ()=> {
         
     let customer = {
-        username: 'chidiebrer', 
+        username: 'chidiebere', 
         password: 'password', 
         userType: 'customer', 
         email: 'email', 

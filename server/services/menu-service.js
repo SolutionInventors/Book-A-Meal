@@ -8,16 +8,21 @@ class MenuService{
     }
 
     createTodayMenu( menuObj){
-        if(menuObj) menuObj.date= new Date().toDateString(); 
-        
-        if(menuObj instanceof Menu && menuObj.isValid() ){
-            menuObj.id = uuid.v4(); 
-            this.menu.push(menuObj); 
-            return menuObj; 
-        }
-        return false; 
+        if(menuObj && menuObj instanceof Menu){
+            menuObj.date= new Date(); 
+            if(exists(menuObj)){
+                return false; 
+            }else if(menuObj.isValid() ){
+                menuObj.id = uuid.v4(); 
+                this.menu.push(menuObj); 
+                return menuObj; 
+            }
+        } 
     }
 
+    static exists(menuObj){
+        return !!this.menu.find((obj)=> menuObj.name==obj.name); 
+    }
     getMenu(dateStr = new Date().toDateString()){
         return this.menu.find((item)=> item.date == dateStr); 
     }

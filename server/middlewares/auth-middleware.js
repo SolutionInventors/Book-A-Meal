@@ -1,3 +1,4 @@
+
 function verifyToken(req, resp, next){
     const bearerHeader = req.headers['authorization']; 
 
