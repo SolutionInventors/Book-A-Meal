@@ -1,9 +1,11 @@
-import {default as mealService} from '../services/meals';
-import dummyMeals from '../dumbData/dummyMeals'; 
-import {assert} from 'chai'; 
+const assert =  require("chai").assert; 
+const mealService =require('../services/meals.js') ; 
+const dummyMeals = require("../dumbData/dummyMeals.js")
+
+
 
 dummyMeals();
-let meals= mealService.geAllMeals(); 
+let meals= mealService.getAllMeals(); 
 describe('getAllMeals()', ()=> {
     it('expected to return an array', ()=> {
         assert.isArray(meals); 
@@ -18,7 +20,7 @@ describe('getMealById() ', ()=> {
         assert.isObject( mealService. getMealById(meals[0].id));
     }); 
     it('expecting getMealById(undefined) to return undefined', ()=> {
-        assert.isUndefined(mealsService.getMealById()); 
+        assert.isUndefined(mealService.getMealById()); 
     }); 
 }); 
 
@@ -27,12 +29,12 @@ describe('getMealByName()', ()=> {
         assert.isObject( mealService. getMealById(meals[0].name));
     }); 
     it('expecting getMealByName(undefined) to return undefined', ()=> {
-        assert.isUndefined(mealsService.getMealByName()); 
+        assert.isUndefined(mealService.getMealByName()); 
     }); 
 }); 
 
 describe('createMeal()', ()=> {
-    let meal = mealsService.createMeal('Jollof Rice', 2000, 'image.jpg'); 
+    let meal = mealService.createMeal('Jollof Rice', 2000, 'image.jpg'); 
     
     describe(`createMeal('Jollof Rice', 2000, 'image.jpg)'`, ()=> {
         it('expecting createMeal to return an object', ()=> {
@@ -59,7 +61,7 @@ describe('createMeal()', ()=> {
    
     describe('createMeal(undefined)', ()=> {
         it('should return false', ()=> {
-            assert.isFalse(mealsService.createMeal()); 
+            assert.isFalse(mealService.createMeal()); 
         }); 
     }); 
   
@@ -68,7 +70,7 @@ describe('createMeal()', ()=> {
 
 describe('updateMeal() ',  ()=> {
     describe('updateMeal  with two arguments', ()=> {
-        describe(`update(${meals[0].id}, mealName, amount, image`, ()=> {
+        describe(`update(${meals[0].id}, 'Tomato')`, ()=> {
        
             let mealObj = mealService.update(meals[0].id, "Tomato"); 
     
@@ -90,7 +92,7 @@ describe('updateMeal() ',  ()=> {
         
         describe('updateMeal(-1,"Tomato" ) ', ()=> {
             it('should return false', ()=> {
-                assert.isFalse(mealsService.updateMeal(-1, "Egg"));
+                assert.isFalse(mealService.updateMeal(-1, "Egg"));
             });
         });
     
