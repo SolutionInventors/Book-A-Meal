@@ -8,7 +8,6 @@ class MenuService{
     }
 
     createTodayMenu( menuObj){
-        // let menuArr = getMealsFromArray(mealIdArr);
         if(menuObj) menuObj.date= new Date().toDateString(); 
         
         if(menuObj instanceof Menu && menuObj.isValid() ){
@@ -38,12 +37,13 @@ class MenuService{
         }
         
     }
+    static getMealsFromArray(mealIdArr) {
+        return mealIdArr.map((id) => mealService
+            .getMealById(id))
+            .filter((item) => item);
+    }
 }
 
 module.exports = new MenuService(); 
 
-function getMealsFromArray(mealIdArr) {
-    return mealIdArr.map((id) => mealService
-        .getMealById(id))
-        .filter((item) => item);
-}
+
