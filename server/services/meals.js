@@ -12,9 +12,9 @@ class MealsService{
     getMealById(mealId){
         return this.meals.find((mealObj)=> mealObj.id == mealId);
     }
-    createMeal(mealName, amount, image){
+    createMeal(name, amount, image){
         if(mealName && amount && image){
-            let mealObj = {mealName, amount, image}; 
+            let mealObj = {name, amount, image}; 
             mealObj.id = uuid.v4(); 
             this.meals.push(mealObj); 
             return true; 
@@ -25,8 +25,7 @@ class MealsService{
     getByName(mealName){
         return this.meals.find((mealObj)=> mealObj.mealName == mealName);
     }
-
-
 }
 
-module.exports = MealsService;
+
+export default new MealsService();
