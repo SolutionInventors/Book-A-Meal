@@ -14,8 +14,9 @@ class CatererService{
         }
     }
 
-    getcaterer(catererId){
-        return this.caterers.find((caterer)=> caterer.id == catererId); 
+    getCaterer(username, password){
+        return this.caterers.find((caterer)=> 
+                caterer.username == username && caterer.password ==password); 
     }
 
     getcatererByName(name){

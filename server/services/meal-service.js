@@ -16,11 +16,13 @@ class MealService{
     }
     createMeal(mealObj){
         if(mealObj instanceof Meal && mealObj.isValid()){ 
+            if(exists(mealObj)){
+                return false; 
+            }
             mealObj.id = uuid.v4(); 
             this.meals.push(mealObj); 
-            return true; 
+            return true;
         }
-        return false; 
     }
 
     getByName(mealName){
@@ -40,6 +42,11 @@ class MealService{
             return false; 
         }
 
+    }
+
+    delete(mealId){
+        let index = this.meals.findIndex((obj)=> obj.mealId==mealId); 
+        if(index >= 0 ) return this.meals.splice(index, 1)[0]; 
     }
 }
 

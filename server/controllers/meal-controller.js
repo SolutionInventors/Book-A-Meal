@@ -1,64 +1,126 @@
-const mealManager = require('../utils/meal-manager');
+const mealService = require('../services/meal-service'); 
+const Meal = require('../models/Meal'); 
 
-function create(req, resp){
-    let {mealName, amount} = req.body; 
-    
-    if(mealName  && amount){
-        if(mealManager.getMealByName(mealName)){
-                resp.status(409).send({
-                    error: {message: 'The meal option you want to create already exists'}
+class MealController{
+    constructor(router){
+        this.router = router; 
+        this.registerRoutes(); 
+    }
+
+    registerRoutes(){
+        this.router.get('/meals', this.getAll.bind(this)); 
+        this.router.get('/meals/:id', this.getById.bind(this));
+        this.router.post('/meals/', this.create.bind(this)); 
+        this.router.put('/meals/:id', this.modify.bind(this));
+        this.router.delete('/meals/:id', this.delete.bind(this));
+    }
+
+    getAll(req, resp){
+        let meals = mealService.getAllMeals(); 
+        resp.status(200).json(meals);
+    }
+
+    getById(req, resp){
+        let id = req.params.id;
+         
+        let meal = mealService.getById(id); 
+        if(id){
+            if(meal){
+                resp.status(200).json({
+                    success: true, 
+                    meal, 
                 }); 
-            }else if(obj = mealManager.createMeal(mealName, amount)){
-                resp.status(201).send(obj); 
             }else{
-                resp.status(404).send({
-                    error: {message: 'Meal does not exist'}, 
-                });   
+                resp.status(404).json({
+                    success:false, 
+                    message: 'The inputed id does not exist', 
+                })
+            }
+        }
+
+        resp.status(400).json({
+            success: false, 
+            message:'Missing id', 
+        }); 
+    }
+
+    create(req, resp){
+        let {name, amount, image} = req.body; 
+        if(name&& amount && image){
+            let mealObj = new Meal(name, amount, image); 
+            mealObj =  mealService.createMeal(mealObj); 
+            if(mealObj){
+                resp.status(201).json({
+                    success: true, 
+                    message:'Meal was created successfully', 
+                    createdObj: mealObj,
+                });
+            }else if(mealObj ===false){
+                resp.status(409).json({
+                    success:false, 
+                    message:'The specified meal name already exists', 
+                });
+            }else{
+                resp.status(500).status({
+                    success:false, 
+                    message:'Server failed to process your request', 
+                });
             }
         }else{
-            resp.sendStatus(400); 
-        }
-}
-
-function modify(req, resp){
-    let mealId = req.params.mealId;
-    let mealName = req.query.mealName; 
-    let amount = req.query.amount; 
-    if(  mealName && amount){
-        let newObj = mealManager.updateMeal(+mealId, mealName, amount); 
-        if(newObj){
-            resp.status(201).send(newObj); 
-        }else{
-            resp.status(404).send({
-                message: 'Id was not found',
+            resp.status(400).json({
+                success: false, 
+                message:'Some required data is missing in the body', 
             }); 
-            
         }
-    }else{
-        resp.status(400); 
+    }
+
+    delete(req, resp){
+        let id = req.params.id; 
+        if(id){
+            let deletedObj = mealService.delete(id); 
+            if(deletedObj){
+                resp.status(201).json({
+                    success: true, 
+                    deletedObj, 
+                }); 
+            }else{
+                resp.status(404).json({
+                    success:false, 
+                    message:'There is no meal with the specified id', 
+                });
+            }
+        }else{
+            resp.status(400).json({
+                success: false, 
+                message:'No meal id was specified', 
+            });
+        }
+        
+    }
+
+    modify(req, resp){
+        let id = req.params.id; 
+        if(id){
+            let newMealObj = new Meal(req.mealName, req.amount, req.image); 
+            let createdObj = mealService.update(id, newMealObj); 
+            if(creaatedObj){
+                resp.status(201).json({
+                    success:true, 
+                    createdObj, 
+                });
+            }else{
+                resp.status(404).json({
+                    success:false, 
+                    message:'The id you specified does not exist'
+                })
+            }
+        }else{
+            resp.status(400).json({
+                success:false, 
+                message:'Meal id is missing', 
+            })
+        }
     }
 }
 
-function remove(req, resp){
-    let mealId = req.params.mealId;
-    if(mealManager.removeMeal(+mealId)){
-                resp.status(200).send({ message: `Successful deleted mealId = ${mealId} `}); 
-        }else{
-            resp.status(404).send({error:
-                { message: 'The specified id was not found'}
-            }); 
-    }
-}
-
-function retrieveAll(req, resp){
-    let meals = mealManager.getAllMeals(); 
-    resp.status(401).json(meals); 
-}
-
-module.exports ={
-    create, 
-    modify, 
-    remove, 
-    getMealByName, 
-    getAllMeals
-}
+module.exports = MealController; 
