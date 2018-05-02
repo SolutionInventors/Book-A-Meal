@@ -2,10 +2,6 @@
 const mealManager = require('../utils/meal-manager'); 
 const assert = require('chai').assert;
 
-    
-
-
-
 describe('mealManager tests', ()=> {
     let mealId = mealManager.createMeal("Rice", 3000).id;
     let mealObj = mealManager.createMeal("Pepper Soup", 3000); 
@@ -161,12 +157,6 @@ describe('mealManager tests', ()=> {
                 
     }); 
     }); 
-
     
-   
-
-    
-    
-   
 
 }); 

@@ -8,11 +8,11 @@ class MealController{
     }
 
     registerRoutes(){
-        this.router.get('/meals', this.getAll.bind(this)); 
-        this.router.get('/meals/:id', this.getById.bind(this));
-        this.router.post('/meals/', this.create.bind(this)); 
-        this.router.put('/meals/:id', this.modify.bind(this));
-        this.router.delete('/meals/:id', this.delete.bind(this));
+        this.router.get('/', this.getAll.bind(this)); 
+        this.router.get('/:id', this.getById.bind(this));
+        this.router.post('/', this.create.bind(this)); 
+        this.router.put('/:id', this.modify.bind(this));
+        this.router.delete('/:id', this.delete.bind(this));
     }
 
     getAll(req, resp){
