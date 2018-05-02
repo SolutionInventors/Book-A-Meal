@@ -1,7 +1,8 @@
 
 const uuid = require('node-uuid') ; 
+const Meal = require('../models/Meal')
 
-class MealsService{
+class MealService{
     constructor(){
         this.meals = []; 
     }
@@ -13,9 +14,8 @@ class MealsService{
     getMealById(mealId){
         return this.meals.find((mealObj)=> mealObj.id == mealId);
     }
-    createMeal(name, amount, image){
-        if(name && amount && image){
-            let mealObj = {name, amount, image}; 
+    createMeal(mealObj){
+        if(mealObj instanceof Meal && mealObj.isValid()){ 
             mealObj.id = uuid.v4(); 
             this.meals.push(mealObj); 
             return true; 
@@ -27,21 +27,20 @@ class MealsService{
         return this.meals.find((mealObj)=> mealObj.mealName == mealName);
     }
 
-    update(mealId, mealName, amount, image){
-        let mealIndex = this.meals.findIndex((obj)=> obj.mealId==mealName); 
+    update(mealId,newMealObj){
 
-        if(mealIndex >= 0){
-            let mealObj = this.meals[mealIndex];
-           let newObj = {
-               mealName: mealName? mealName:mealObj.mealName,
-                amount: amount? amount: mealObj.amount,
-                image: image? image: mealObj.image,
-            }; 
-            this.meals[mealIndex] = newObj;
-            return newObj; 
+        if(newMealObj instanceof Meal){
+            let mealIndex = this.meals.findIndex((obj)=> obj.mealId==mealId); 
+
+            if(mealIndex >= 0 && newMealObj.isValid()){
+                newMealObj.id = this.meals[mealIndex].id; 
+                this.meals[mealIndex] = newMealObj;
+                return newObj; 
+            }
+            return false; 
         }
-        return false; 
+
     }
 }
 
-module.exports =  new MealsService();
+module.exports =  new MealService();
