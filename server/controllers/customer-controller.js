@@ -56,4 +56,4 @@ class CustomerController{
    }
 }
 
-module.exports = CatererController; 
+module.exports = CustomerController; 

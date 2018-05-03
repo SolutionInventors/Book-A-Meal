@@ -7,6 +7,7 @@ const orderRouter = require('./routers/order-router');
 
 const express = require('express'); 
 
+const port = process.env.PORT || 4000; 
 
 const app = express(); 
 
@@ -17,3 +18,9 @@ app.use('/menu', menuRouter);
 app.use('/orders', orderRouter); 
 
 
+app.listen(port, (err)=> {
+    if(error) console.log('Error'); 
+    else{
+        console.log(`Successfully set up in port ${port}`);
+    }
+})
