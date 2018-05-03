@@ -91,18 +91,30 @@ body{
 .manage-meals .manage-meals ,  
 .create-menu .create-menu, 
 .invite-caterer .invite-caterer, 
-.history .history 
+.history .history, 
+.create-meal .create-meal 
 {
     background-color:inherit; 
     border: solid 0 rgb(204, 0, 0);
     border-bottom-width: 3px;
   
 }
-.caterer-page .top-nav{
+
+.manage-meals .checkbox{
+    display: none; 
+}
+.top-nav{
     padding-left: 25%; 
 
 }
+.create-menu, .caterer-page {
+    position: relative; 
+    background-color: rgba(15, 15, 15, 0.178); 
+}
+.caterer-page .operations{
 
+    margin-top: 50px; 
+}
 .caterer-page button{
     background-color: rgb(243, 42, 80);
     color: rgb(224, 129, 69); 
@@ -251,9 +263,9 @@ body{
     top: 3%; 
     width: 20px; 
     height: 20px; 
-    background-color: rgba(58, 1, 1, 0.89);
+    background-color: rgb(212, 52, 4);
     border-radius: 2px; 
-    z-index: 1;
+    z-index: 5;
 }
 
 .checkbox input[type=checkbox]{
@@ -278,20 +290,20 @@ body{
 
 .checkbox label:before{
     content: ''; 
-    width: 9px; 
-    height:5px; 
-    border: 3px solid rgb(255, 3, 3); 
+    width: 12px; 
+    height:7px; 
+    border: 3px solid rgb(255, 255, 255); 
     position: absolute; 
     border-top: none; 
     border-right: 0; 
     transform: rotate(-45deg); 
-    top:3px; 
-    left: 3px; 
-    opacity: 1; 
+    top:1px; 
+    left: 1px; 
+    opacity: 0; 
     border-radius: 3px; 
 }
 .checkbox input[type=checkbox]:checked + label:before {
-    opacity: 0; 
+    opacity: 1; 
 }
 
 .checkbox input[type=checkbox]:checked +  .checkbox {
@@ -310,6 +322,7 @@ h3{
 
 .confirm-view{
    display: none; 
+  
 }
 
 .input-area{
@@ -625,28 +638,52 @@ h3{
 .confirm-page .delete button{
     color: rgb(248, 6, 6);
 }
+.confirm-page  .invite button, 
 .confirm-page  .modify button{
     color: rgb(243, 156, 43);
 }
 
+.confirm-page  .confirm-controls{
+    display:  none; 
+}
+
+.invite-caterer .invite, .delete-page .delete, 
+.modify-page .modify, .create-page .create{
+    display:  block; 
+}
+body.invite-caterer{
+    background-image: url(../images/new-chef.jpg); 
+    background-blend-mode: hard-light; 
+}
+.invite-caterer .fixed-column{
+    left: 0; 
+    background-color: rgba(236, 232, 232, 0.883); 
+}
+.confirm-page  .invite button:hover, 
 .confirm-page  .modify button:hover{
     background-color: rgb(243, 156, 43);
+}
+
+.confirm-page .confirm-invite img{
+    border-radius: 20%;
+    
+
 }
 .confirm-page  .delete button:hover{
     background-color: rgb(248, 6, 6);
 }
 
-.confirm-page  .create button{
+.create-menu button, .confirm-page  .create button{
     color: rgb(4, 138, 15);
 }
 
-.confirm-page  .create button:hover{
+.create-menu button:hover, .confirm-page  .create button:hover{
     background-color: rgb(4, 138, 15);
 }
 .confirm-page  .modify input[type = text], 
-.confirm-page  .create input[type = text]{
+.confirm-page  .create input[type = text], 
+.confirm-page   input[type = email]{
    background-color: white; 
-
    width: 80%; 
    position: relative; 
    left: 2%; 
@@ -670,8 +707,16 @@ h3{
     font-family: Rockwell
 }
 
-.confirm-controls button:hover{
+.create-menu button:hover, .confirm-controls button:hover{
     color: white; 
     box-shadow: 2px 2px 8px rgba(146, 3, 3, 0.637);
     border-radius: 5px;     
+}
+
+/*Create Menu button*/
+.create-menu button{
+    position: relative; 
+    left: 40%; 
+    width: 20%; 
+    background-color: inherit; 
 }
