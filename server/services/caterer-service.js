@@ -1,14 +1,14 @@
-const uuid = require('node-uuid'); 
-const Caterer = require('../models/Caterer'); 
+import { v4 } from "node-uuid"; 
+import Caterer from "../models/Caterer"; 
 
 class CatererService{
     constructor(){
         this.caterers = []; 
     }
 
-    registercaterer(caterer){
+    registerCaterer(caterer){
         if(caterer instanceof Caterer){
-            caterer.id = uuid.v4(); 
+            caterer.id = v4(); 
             this.caterers.push(caterer); 
             return caterer; 
         }
@@ -23,4 +23,4 @@ class CatererService{
         return this.caterers.find((caterer)=> caterer.name == name); 
     }
 }
-module.exports = new CatererService();
+export default new CatererService();

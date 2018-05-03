@@ -1,6 +1,6 @@
-const menuService = require('../services/menu'); 
-const Order = require('../models/Order'); 
-const uuid = require('node-uuid') ; 
+import { getMenu } from "../services/menu"; 
+import Order from "../models/Order"; 
+import { v4 } from "node-uuid"; 
 
 class OrderService{
     constructor(){
@@ -9,7 +9,7 @@ class OrderService{
 
     makeOrder(orderObj){
         if(orderObj.isValid()){
-            orderObj.id = uuid.v4(); 
+            orderObj.id = v4(); 
             this.orders.push(orderObj); 
             return orderObj; 
         }
@@ -32,7 +32,7 @@ class OrderService{
     }
 
     static getOrderFromMealIdArr(mealsIdArr, customer){
-        let todayMenu = menuService.getMenu().menu(); 
+        let todayMenu = getMenu().menu(); 
         let order = mealsIdArr.map((id)=> todayMenu.find((mealObj)=> 
                             id==mealObj.id )); 
 
@@ -40,4 +40,4 @@ class OrderService{
     }
 }
 
-module.exports =  new OrderService(); 
+export default new OrderService(); 

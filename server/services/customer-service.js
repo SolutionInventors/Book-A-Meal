@@ -1,4 +1,4 @@
-const uuid = require('node-uuid'); 
+import { v4 } from "node-uuid"; 
 
 
 class CustomerService{
@@ -8,7 +8,7 @@ class CustomerService{
 
     registerCustomer(customer){
         if(customer instanceof Customer && customer.canBeRegistered()){
-            customer.id = uuid.v4(); 
+            customer.id = v4(); 
             this.customers.push(customer); 
             return customer; 
         }
@@ -24,4 +24,4 @@ class CustomerService{
     }
 }
 
-module.exports = new CustomerService();
+export default new CustomerService();

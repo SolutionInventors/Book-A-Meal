@@ -1,8 +1,10 @@
+import mealService from "../services/meal-service";
+import Meal from "../models/Meal";
 
-module.exports =function(){
-    const mealService = require('../services/meals'); 
-
-    for(let i =0; i< 50; i++){
-        mealService.createMeal(`Rice${i}`, 2000+i, 'img.jpg');
+export default function () {
+   
+    for (let i = 0; i < 50; i++) {
+        let meal = new Meal(`Rice${i}`, 2000 + i, 'img.jpg')
+        mealService.createMeal(meal);
     }
 }

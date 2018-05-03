@@ -1,8 +1,8 @@
-const menuService = require('../services/menu-service'); 
-const Menu = require('../models/Menu'); 
+import { getMenu, getMealsFromArray, createTodayMenu, updateTodayMenu } from "../services/menu-service"; 
+import Menu from "../models/Menu"; 
 
 
-class MenuController{
+export default class MenuController{
     constructor(router){
         this.router = router; 
         this.registerRoutes(); 
@@ -15,7 +15,7 @@ class MenuController{
     }
 
     retrieve(req, resp){
-        let menu = menuService.getMenu(); 
+        let menu = getMenu(); 
         if(menu){
            resp.status(200).json({
                success:true, 
@@ -33,10 +33,10 @@ class MenuController{
     create(req, resp){
         let {mealsIdArr}= req; 
         if(mealsIdArr){
-            let meals = menuService.getMealsFromArray(mealIdArr); 
+            let meals = getMealsFromArray(mealIdArr); 
 
             let menuObj = new Menu(new Date(), meals); 
-            menuObj = menuService.createTodayMenu(menuObj); 
+            menuObj = createTodayMenu(menuObj); 
             if(menuObj){
                 resp.status(201).json({
                     success: true, 
@@ -57,7 +57,7 @@ class MenuController{
     }
     retrieveByDate(req, resp){
         let date = new Date(req.date); 
-        let menu = menuService.getMenu(date.toDateString()); 
+        let menu = getMenu(date.toDateString()); 
         if(menu){
             resp.status(200).json({
                 success:true, 
@@ -75,10 +75,10 @@ class MenuController{
     update(req, resp){
         let {mealsIdArr}= req; 
         if(mealsIdArr){
-            let meals = menuService.getMealsFromArray(mealIdArr); 
+            let meals = getMealsFromArray(mealIdArr); 
 
             let menuObj = new Menu(new Date(), meals); 
-            menuObj = menuService.updateTodayMenu(mealsIdArr);    
+            menuObj = updateTodayMenu(mealsIdArr);    
             if(menuObj){
                 resp.status(201).json({
                     success: true, 
@@ -97,6 +97,5 @@ class MenuController{
         });
         
     }
-}
+};
 
-module.exports = MenuController; 

@@ -1,6 +1,6 @@
-const mealService = require('../services/meals'); 
-const uuid = require('node-uuid') ; 
-const Menu = require('../models/Menu'); 
+import { getMealById } from "../services/meal-service"; 
+import { v4 } from "node-uuid"; 
+import Menu from "../models/Menu"; 
 
 class MenuService{
     constructor(){
@@ -13,7 +13,7 @@ class MenuService{
             if(exists(menuObj)){
                 return false; 
             }else if(menuObj.isValid() ){
-                menuObj.id = uuid.v4(); 
+                menuObj.id = v4(); 
                 this.menu.push(menuObj); 
                 return menuObj; 
             }
@@ -35,7 +35,7 @@ class MenuService{
             let newObj = {
                 menu: menuArr, 
                 date: todayStr, 
-                id:uuid.v4()
+                id:v4()
             }
             this.menu[index] = newObj; 
             return newObj; 
@@ -43,12 +43,11 @@ class MenuService{
         
     }
     static getMealsFromArray(mealIdArr) {
-        return mealIdArr.map((id) => mealService
-            .getMealById(id))
+        return mealIdArr.map((id) => getMealById(id))
             .filter((item) => item);
     }
 }
 
-module.exports = new MenuService(); 
+export default new MenuService(); 
 
 

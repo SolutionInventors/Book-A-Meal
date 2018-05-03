@@ -1,7 +1,6 @@
 
-const uuid = require('node-uuid') ; 
-const Meal = require('../models/Meal')
-
+import { v4 } from "node-uuid"; 
+import Meal from "../models/Meal";
 class MealService{
     constructor(){
         this.meals = []; 
@@ -16,23 +15,26 @@ class MealService{
     }
     createMeal(mealObj){
         if(mealObj instanceof Meal && mealObj.isValid()){ 
-            if(exists(mealObj)){
+            if(this.exists(mealObj.name)){
                 return false; 
             }
-            mealObj.id = uuid.v4(); 
+            mealObj.id = v4(); 
             this.meals.push(mealObj); 
-            return true;
+            return mealObj;
         }
     }
 
     getByName(mealName){
-        return this.meals.find((mealObj)=> mealObj.mealName == mealName);
+        return this.meals.find((mealObj)=> mealObj.name == mealName);
     }
 
+    exists(mealName){
+        return !!this.getByName(mealName);
+    }
     update(mealId,newMealObj){
 
         if(newMealObj instanceof Meal){
-            let mealIndex = this.meals.findIndex((obj)=> obj.mealId==mealId); 
+            let mealIndex = this.meals.findIndex((meal)=> meal.id==mealId); 
 
             if(mealIndex >= 0 && newMealObj.isValid()){
                 newMealObj.id = this.meals[mealIndex].id; 
@@ -45,9 +47,9 @@ class MealService{
     }
 
     delete(mealId){
-        let index = this.meals.findIndex((obj)=> obj.mealId==mealId); 
+        let index = this.meals.findIndex((obj)=> obj.id==mealId); 
         if(index >= 0 ) return this.meals.splice(index, 1)[0]; 
     }
 }
 
-module.exports =  new MealService();
+export default new MealService();

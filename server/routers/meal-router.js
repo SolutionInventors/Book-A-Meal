@@ -1,7 +1,8 @@
-const express = require('express'); 
-const MealController = require('../controllers/meal-controller'); 
-const mealRouter = require('express').Router(); 
+import { Router } from 'express'; 
+import MealController from '../controllers/meal-controller'; 
+import dummyMeals from '../dumbData/dummyMeals'; 
+const mealRouter = Router(); 
 
-const controller = new MealController(mealRouter); 
-module.exports = mealRouter; 
-
+new MealController(mealRouter); 
+export default mealRouter; 
+dummyMeals();

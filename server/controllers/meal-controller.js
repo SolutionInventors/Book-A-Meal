@@ -1,8 +1,8 @@
-const mealService = require('../services/meal-service'); 
-const Meal = require('../models/Meal'); 
+import mealService from '../services/meal-service'; 
+import Meal from '../models/Meal'; 
 
-class MealController{
-    constructor(router){
+export default class MealController{
+    constructor (router) {
         this.router = router; 
         this.registerRoutes(); 
     }
@@ -17,12 +17,15 @@ class MealController{
 
     getAll(req, resp){
         let meals = mealService.getAllMeals(); 
-        resp.status(200).json(meals);
+        resp.status(200).json({
+            succes: true, 
+            meals
+        });
     }
 
     getById(req, resp){
         let id = req.params.id;
-         
+        
         let meal = mealService.getById(id); 
         if(id){
             if(meal){
@@ -43,10 +46,12 @@ class MealController{
             message:'Missing id', 
         }); 
     }
+    
 
     create(req, resp){
         let {name, amount, image} = req.body; 
         if(name&& amount && image){
+        
             let mealObj = new Meal(name, amount, image); 
             mealObj =  mealService.createMeal(mealObj); 
             if(mealObj){
@@ -66,6 +71,8 @@ class MealController{
                     message:'Server failed to process your request', 
                 });
             }
+        
+            
         }else{
             resp.status(400).json({
                 success: false, 
@@ -74,6 +81,7 @@ class MealController{
         }
     }
 
+    
     delete(req, resp){
         let id = req.params.id; 
         if(id){
@@ -103,7 +111,7 @@ class MealController{
         if(id){
             let newMealObj = new Meal(req.mealName, req.amount, req.image); 
             let createdObj = mealService.update(id, newMealObj); 
-            if(creaatedObj){
+            if(createdObj){
                 resp.status(201).json({
                     success:true, 
                     createdObj, 
@@ -123,4 +131,3 @@ class MealController{
     }
 }
 
-module.exports = MealController; 

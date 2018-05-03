@@ -1,7 +1,7 @@
-const express = require('express'); 
-const OrderController = require('../controllers/order-controller'); 
-const orderRouter = require('express').Router(); 
+import {Router} from "express"; 
+import OrderController from "../controllers/order-controller"; 
+const orderRouter = Router(); 
 
 const controller = new OrderController(orderRouter); 
-module.exports = orderRouter; 
+export default orderRouter; 
 

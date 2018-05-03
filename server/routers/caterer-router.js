@@ -1,7 +1,7 @@
-const express = require('express'); 
-const CatererController = require('../controllers/customer-controller'); 
-const catererRouter = require('express').Router(); 
+import {Router} from "express"; 
+import CatererController from "../controllers/customer-controller"; 
+const catererRouter = Router(); 
 
-const controller = new CatererController(customerRouter); 
-module.exports = catererRouter; 
+const controller = new CatererController(catererRouter); 
+export default catererRouter; 
 

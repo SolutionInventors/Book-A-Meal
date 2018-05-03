@@ -1,7 +1,7 @@
-const express = require('express'); 
-const CustomerController = require('../controllers/customer-controller'); 
-const customerRouter = require('express').Router(); 
+import express from "express"; 
+import CustomerController from "../controllers/customer-controller"; 
+const customerRouter = express.Router(); 
 
 const controller = new CustomerController(customerRouter); 
-module.exports = customerRouter; 
+export default customerRouter; 
 

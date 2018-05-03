@@ -1,4 +1,4 @@
-const User = require('./User'); 
+import User from "./User"; 
 
 class Caterer extends User{
     constructor(name, email , password){
@@ -6,4 +6,4 @@ class Caterer extends User{
     }
 }
 
-module.exports = Caterer; 
+export default Caterer; 

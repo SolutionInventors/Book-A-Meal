@@ -1,8 +1,7 @@
-const customerService = require('../services/customer-service'); 
-const Customer = require('../models/Customer'); 
+import * as CustomerService from '../services/customer-service'; 
+import Customer from '../models/Customer'; 
 
-
-class CustomerController{
+export default class CustomerController{
     constructor(router){
         this.router = router; 
         this.registerRoutes(); 
@@ -17,7 +16,7 @@ class CustomerController{
         let {username, password} =req.body;
        
         if(username && password){
-            let caterer = customerService.getCustomer(username, password);
+            let caterer = getCustomer(username, password);
             if(caterer){
                 resp.status(200).json({
                     success:true, 
@@ -41,7 +40,7 @@ class CustomerController{
     register(req, resp){
         let {username, password, email} = req.body; 
         let customer = new Customer(username, email, password); 
-        customer = customerService.registerCustomer(customer); 
+        customer = registerCustomer(customer); 
         if(customer){
             resp.status(201).json({
                 success:true, 
@@ -53,7 +52,5 @@ class CustomerController{
                 message:'The specified username or mail exists', 
             });
         }
-   }
+    }
 }
-
-module.exports = CustomerController; 

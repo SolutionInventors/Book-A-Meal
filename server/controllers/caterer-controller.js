@@ -1,6 +1,6 @@
-const catererService = require('../services/caterer-service'); 
+import { getCaterer } from "../services/caterer-service"; 
 
-class CatererController{
+export default class CatererController{
     constructor(router){
         this.router = router; 
         this.registerRoutes(); 
@@ -14,7 +14,7 @@ class CatererController{
     login(req, resp){
         let {username, password} =req.body; 
         if(username && password){
-            let caterer = catererService.getCaterer(username, password);
+            let caterer = getCaterer(username, password);
             if(caterer){
                 resp.status(200).json({
                     success:true, 
@@ -36,4 +36,3 @@ class CatererController{
     }
 }
 
-module.exports = CatererController; 

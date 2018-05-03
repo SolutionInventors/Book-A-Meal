@@ -1,7 +1,7 @@
-const express = require('express'); 
-const MealController = require('../controllers/meal-controller'); 
-const menuRouter =express.Router(); 
+import { Router } from "express"; 
+import MenuController from "../controllers/menu-controller"; 
+const menuRouter =Router(); 
 
-const controller = new MealController(mealRouter); 
-module.exports = menuRouter; 
+const controller = new MenuController(menuRouter); 
+export default menuRouter; 
 
