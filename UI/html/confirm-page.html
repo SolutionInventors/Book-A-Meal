@@ -1,0 +1,61 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Register</title>
+        <link rel="stylesheet" href="../css/new-styles.css">
+        <script src="../js/singin-signup.js"></script>
+    </head>
+    <body class="confirm-page manage-meals"  >
+            <div class="top-nav">
+                    <ul class="register-nav2">
+                            <li><a href="#" class="manage-meals">Manage Meals</a></li>
+                            <li><a href="#" class="create-menu">Create Today Menu</a></li>
+                            <li><a href="#" class="invite-caterer">Invite new Caterer</a></li>
+                            <li><a href="#" class="view-history">View History</a></li>
+                            <li><a href="#"> Sign Out</a></li>
+                    </ul>
+    
+                   
+            </div>  
+    
+        <div class="fixed-column" onclick="handleClick(event)">
+            
+            <div class = " confirm-controls modify" id="confirm-delete" >
+                    <h3>Modify Meal</h3>
+                    <div class= "img-container">  
+                            <img src="../soft images/chicken.jpg" alt="Panama Hat" width="40px">
+                    </div>
+    
+    
+                    <div> 
+                        
+                            <ul>
+                                <li><input type="text" placeholder="User"></li>
+                                <li><input type="text" placeholder="Meal Name"></li>
+                                <li><input type="text" placeholder="Meal Name"></li>
+                                <li><button>UPDATE</button></li>
+                            </ul>
+                           
+                        </div>
+                </div>
+                <div class = " confirm-controls delete" id="confirm-delete" hidden>
+                        <h3>Confirm Delete</h3>
+                        <div class= "img-container">  
+                                <img src="../soft images/chicken.jpg" alt="Panama Hat" width="40px">
+                        </div>
+        
+        
+                        <div> 
+                            
+                                <ul>
+                                    <li><p>Description: Lively meal that shine up your days</p></li>
+                                    <li>Meal Name: Chicken</li>
+                                    <li>Amount :  NGN4000</li>
+                                    <li><button>DELETE</button></li>
+                                </ul>
+                               
+                            </div>
+                    </div>
+        </div>
+    </body>
+</html>
