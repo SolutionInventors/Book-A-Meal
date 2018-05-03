@@ -23,6 +23,7 @@ It is built to solve the problems associated with making orders for a meal.
 
 ## Badges
 
+<<<<<<< HEAD
    [![Maintainability](https://api.codeclimate.com/v1/badges/eb7f6eeae96b5b03c530/maintainability)](https://codeclimate.com/github/SolutionInventors/Book-A-Meal/maintainability)
    
    [![Test Coverage](https://api.codeclimate.com/v1/badges/eb7f6eeae96b5b03c530/test_coverage)] (https://codeclimate.com/github/SolutionInventors/Book-A-Meal/test_coverage)
@@ -30,4 +31,13 @@ It is built to solve the problems associated with making orders for a meal.
  [![Coverage Status](https://coveralls.io/repos/github/SolutionInventors/Book-A-Meal/badge.svg?branch=develop)](https://coveralls.io/github/SolutionInventors/Book-A-Meal?branch=develop)
 
 ## Heroku link
+=======
+    [![Maintainability](https://api.codeclimate.com/v1/badges/eb7f6eeae96b5b03c530/maintainability)](https://codeclimate.com/github/SolutionInventors/Book-A-Meal/maintainability)
+   
+   [![Test Coverage](https://api.codeclimate.com/v1/badges/eb7f6eeae96b5b03c530/test_coverage)](https://codeclimate.com/github/SolutionInventors/Book-A-Meal/test_coverage)
+
+    [![Coverage Status](https://coveralls.io/repos/github/SolutionInventors/Book-A-Meal/badge.svg?branch=develop)](https://coveralls.io/github/SolutionInventors/Book-A-Meal?branch=develop)
+
+# Heroku link
+>>>>>>> a23537b2cd350b76d18fff63d4e0c865130c94d3
 http://young-lake-11230.herokuapp.com
