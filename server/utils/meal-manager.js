@@ -34,10 +34,6 @@ function createMeal(mealName, amount){
     
 }
 
-function getMeal(id){
-    return appData.allMeals[id]; 
-}
-
 function updateMeal(id, mealName, amount){
     if(appData.allMeals[id] ){
         let obj = {id, mealName, amount}

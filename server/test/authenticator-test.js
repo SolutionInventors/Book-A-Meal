@@ -3,7 +3,13 @@
 const authenticator = require('../utils/authenticator'); 
 const assert = require('chai').assert; 
 
-
+let resp= {
+    status(){
+        return {
+            send: ()=>{assert.isTrue(false)}
+        } 
+    }
+}
 describe('Customer management', ()=> {
         
     let customer = {
@@ -71,7 +77,7 @@ describe('Customer management', ()=> {
 describe('Caterer management', ()=> {
         
     let caterer = {
-        username: 'chidiebrer', 
+        username: 'caterer', 
         password: 'password', 
         userType: 'caterer', 
         email: 'email', 
@@ -136,19 +142,36 @@ describe('Caterer management', ()=> {
             let req = {
                 headers: {authorization: `Bearer ${token}`}, 
             }; 
-            let resp= {
-                status(){
-                    return {
-                        send: ()=>{assert.isTrue(false)}
-                    } 
-                }
-            }
+            
             it('Verification of token should pass', ()=> {
                 authenticator.verify(req, resp,()=> assert.isTrue(true) ); 
             }); 
 
+            it('Verification of token should fail', ()=> {
+                authenticator.verify(undefined, resp,()=> assert.isFalse(true) ); 
+            });
             
         } ); 
+
+        describe('processRequest()', ()=> {
+            let req = {token};
+            
+            
+            it('processRequest(undefined) should return undefined', ()=> {
+                assert.isUndefined(authenticator.processRequest()); 
+            }); 
+
+            it('expecting to run callback processRequest' , ()=> {
+                authenticator.processRequest(req, resp, "customer", ()=> {
+                    assert.isTrue(true); 
+                })
+            }); 
+            it('expecting to run callback processRequest' , ()=> {
+                authenticator.processRequest(undefined, resp, "both", ()=> {
+                    assert.isFalse(true); 
+                })
+            })
+        })
 
     });
 }); 

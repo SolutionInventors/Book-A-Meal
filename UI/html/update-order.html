@@ -1,0 +1,110 @@
+<!doctype>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Book A Meal</title>
+    <script src="../js/history-functions.js"></script>
+    <link href="../css/styles.css" rel="stylesheet" />
+    <link href="../css/update-order.css" rel="stylesheet" />
+</head>
+<body>
+     
+    <div class="main">
+        <h1>Transaction Details</h1>
+        <div class="second-group">
+
+            
+                <ul>
+                    <li><h3 id="transaction-heading">Summary of transaction of Jan 2018</h3></li>
+                    
+                    <li>
+                        <ul>
+                            <li> Select Order Id:
+                                    <select name="orderId" id="order-option">
+                                            <option>1</option>
+                                            <option>2</optioni>
+                                            <option>3</option>
+                                    </select></li>
+                            <li>Number of Items: <span id="items-count">30</span></li>
+                            <li>Total Cost: <span id="cost">5000</span></li>
+                            <li>
+                                <span class="button-group">
+                                    <button id="view-details-button" onclick="viewDetails(event,'History')">View Order Details</button>
+                                </span>
+                            </li>
+                            <li><a class="secondary" href="home.html?user=customer">Back to Home </a></li>
+                        </ul>
+                    </li>
+                </ul>
+
+                
+            
+
+
+        </div>
+        <div id="details" >
+            <div  class="second-group">
+                <h3>Previous Order</h3>
+                
+                <div>
+                        <ul class "prev-order meal-list" id ="prev-order-ul">
+                                <li>Rice 3200</li>
+                                <li>Beans 4000</li>
+                                <li>Garri 1000</li>
+                                <li>Nkwobi 800</li>
+                                <li><em>Total:  9000</em></li>
+                        </ul>
+                </div>
+                
+               
+                    
+                
+                    
+            </div>
+            <div class="second-group">
+                <div id="form-box" class="second-group">
+                        <h3>New Order</h3>
+                        <form action="/orders" >
+                            <ul id="existing-meal-ul" class="available-meals " onclick="handleSelectEvent(event)"><li><label for="Rice-checkbox">Rice <span>2000 </span></label>
+                                <div class="checkbox">
+                                    
+                                    <input id="Rice-checkbox" type="checkbox" name="selectedMeal" value="Rice">
+                                    <label for="Rice-checkbox"></label>
+                                </div></li><li><label for="Beans-checkbox">Beans <span>1000 </span></label>
+                                <div class="checkbox">
+                                    
+                                    <input id="Beans-checkbox" type="checkbox" name="selectedMeal" value="Beans">
+                                    <label for="Beans-checkbox"></label>
+                                </div></li><li><label for="Bananas-checkbox">Bananas <span>200 </span></label>
+                                <div class="checkbox">
+                                    
+                                    <input id="Bananas-checkbox" type="checkbox" name="selectedMeal" value="Bananas">
+                                    <label for="Bananas-checkbox"></label>
+                                </div></li><li><label for="Foofoo-checkbox">Foofoo <span>1500 </span></label>
+                                <div class="checkbox">
+                                    
+                                    <input id="Foofoo-checkbox" type="checkbox" name="selectedMeal" value="Foofoo">
+                                    <label for="Foofoo-checkbox"></label>
+                                </div></li></ul>
+                                
+                                <div class="submit-div">
+                                    <button type="submit">Update Order</button>
+                                </div>
+                        
+                            </form>
+                </div>
+                </div>
+    
+    
+                <div id="no-transaction" hidden="">
+                    No Transactions were made
+                </div>
+            </div>
+        </div >
+        
+        
+    </div>
+  
+</body>
+
+</html>
