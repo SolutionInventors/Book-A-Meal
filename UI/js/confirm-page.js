@@ -5,18 +5,18 @@ window.addEventListener('load', ()=> {
 		div.hidden = 'hidden'; 
 	}
 	if(getParameterByName('modify')){
-		document.body.className = 'confirm-page manage-meals modify-page'; 
+		document.body.className = 'caterer confirm-page manage-meals modify-page'; 
 	}else if(getParameterByName('delete')){
-		document.body.className = 'confirm-page manage-meals delete-page'; 
+		document.body.className = 'caterer confirm-page manage-meals delete-page'; 
 	}else if(getParameterByName('create')){
-		document.body.className = 'confirm-page create-meal create-page'; 
+		document.body.className = 'caterer confirm-page create-meal create-page'; 
 	}else if(getParameterByName('buy')){
 		document.body.className = 'customer confirm-page make-order-page order-meals'; 
 	}else if(getParameterByName('modify')){
 		document.className = 'customer confirm-page modify-order-page';
 	}
 	else{
-		document.body.className = 'confirm-page invite-caterer'; 
+		document.body.className = 'caterer confirm-page invite-caterer'; 
 	}
 });
 
