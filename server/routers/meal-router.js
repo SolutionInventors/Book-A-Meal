@@ -4,7 +4,7 @@ import dummyMeals from '../dumbData/dummyMeals';
 
 const mealRouter = Router();
 
-const mealController = new MealController(mealRouter);
+const mealController = new MealController();
 
 mealRouter.get('/', mealController.getAll);
 mealRouter.get('/:id', mealController.getById);

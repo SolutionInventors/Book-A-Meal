@@ -3,10 +3,10 @@ import MenuController from '../controllers/menu-controller';
 
 const menuRouter = Router();
 
-const controller = new MenuController(menuRouter);
+const controller = new MenuController();
 
-menuRouter.get('/menu/', controller.retrieve);
-menuRouter.post('/menu/', controller.create);
-menuRouter.put('/menu/', controller.update);
+menuRouter.get('/', controller.retrieve);
+menuRouter.post('/', controller.create);
+menuRouter.put('/', controller.update);
 export default menuRouter;
 

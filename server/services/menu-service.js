@@ -1,4 +1,4 @@
-import { getMealById } from '../services/meal-service';
+import mealService from '../services/meal-service';
 import { v4 } from 'node-uuid';
 import Menu from '../models/Menu';
 
@@ -9,8 +9,8 @@ class MenuService {
 
   createTodayMenu(menuObj) {
     if (menuObj && menuObj instanceof Menu) {
-      menuObj.date = new Date();
-      if (exists(menuObj)) {
+      menuObj.date = new Date().toDateString();
+      if (this.exists(menuObj)) {
         return false;
       } else if (menuObj.isValid()) {
         menuObj.id = v4();
@@ -18,31 +18,31 @@ class MenuService {
         return menuObj;
       }
     }
+    return undefined;
   }
 
-  static exists(menuObj) {
-    return !!this.menu.find(obj => menuObj.name == obj.name);
+  exists(menuObj) {
+    return !!this.menu.find(obj => menuObj.date == obj.date);
   }
   getMenu(dateStr = new Date().toDateString()) {
     return this.menu.find(item => item.date == dateStr);
   }
 
   updateTodayMenu(mealIdArr) {
-    const menu = getMealsFromArray(mealIdArr);
-    const index = this.menu.findIndex(item => item.dateStr == dateStr);
-    if (index >= 0 && menu) {
-      const dateStr = new Date().toDateString();
-      const newObj = {
-        menu: menuArr,
-        date: todayStr,
-        id: v4(),
-      };
-      this.menu[index] = newObj;
-      return newObj;
+    const menu = this.getMealsFromArray(mealIdArr);
+    const date = new Date();
+    const index = this.menu.findIndex(item => item.dateStr == date.toDateString());
+
+    if (index >= 0 && menu.length >= 0) {
+      const menuObj = new Menu(new Date(), menu);
+
+      this.menu[index] = menuObj;
+      return menuObj;
     }
+    return false;
   }
-  static getMealsFromArray(mealIdArr) {
-    return mealIdArr.map(id => getMealById(id))
+  getMealsFromArray(mealIdArr) {
+    return mealIdArr.map(id => mealService.getById(id))
       .filter(item => item);
   }
 }

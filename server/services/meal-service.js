@@ -11,8 +11,12 @@ class MealService {
     return this.meals;
   }
 
-  getMealById(mealId) {
+  getById(mealId) {
     return this.meals.find(mealObj => mealObj.id == mealId);
+  }
+
+  exists(mealObj) {
+    return this.meals.find(obj => mealObj.name == obj.name || mealObj.id == obj.id);
   }
   createMeal(mealObj) {
     if (mealObj instanceof Meal && mealObj.isValid()) {
@@ -21,18 +25,19 @@ class MealService {
       }
       mealObj.id = v4();
       this.meals.push(mealObj);
-      return true;
+      return mealObj;
     }
     return undefined;
   }
 
   getByName(mealName) {
-    return this.meals.find(mealObj => mealObj.mealName == mealName);
+    return this.meals.find(mealObj => mealObj.name == mealName);
   }
+
 
   update(mealId, newMealObj) {
     if (newMealObj instanceof Meal) {
-      const mealIndex = this.meals.findIndex(obj => obj.mealId == mealId);
+      const mealIndex = this.meals.findIndex(obj => obj.id == mealId);
 
       if (mealIndex >= 0 && newMealObj.isValid()) {
         newMealObj.id = this.meals[mealIndex].id;
@@ -45,7 +50,7 @@ class MealService {
   }
 
   delete(mealId) {
-    const index = this.meals.findIndex(obj => obj.mealId === mealId);
+    const index = this.meals.findIndex(obj => obj.id === mealId);
     if (index >= 0) return this.meals.splice(index, 1)[0];
     return undefined;
   }

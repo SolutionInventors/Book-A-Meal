@@ -67,7 +67,7 @@ export default class MealController {
 
 
   delete(req, resp) {
-    const { params: { id } } = req.params.id;
+    const { params: { id } } = req;
     if (id) {
       const deletedObj = mealService.delete(id);
       if (deletedObj) {
@@ -90,9 +90,10 @@ export default class MealController {
   }
 
   modify(req, resp) {
-    const { params: { id } } = req.params.id;
+    const { name, amount, image } = req.body;
+    const { params: { id } } = req;
     if (id) {
-      const newMealObj = new Meal(req.mealName, req.amount, req.image);
+      const newMealObj = new Meal(name, amount, image);
       const createdObj = mealService.update(id, newMealObj);
       if (createdObj) {
         resp.status(201).json({

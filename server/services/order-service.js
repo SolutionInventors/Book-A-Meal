@@ -17,11 +17,12 @@ class OrderService {
   }
 
   modify(orderId, orderObj) {
-    const index = this.orders.findIndex(item => item.id == orderId);
+    const index = this.orders.findIndex(item => item.id == orderObj.id);
     if (orderId >= 0 && orderObj.isValid()) {
-      orderObj.id = orderId;
       this.orders[index] = orderObj;
+      return orderObj;
     }
+    return undefined;
   }
   getOrdersByDate(date = new Date()) {
     return this.orders.filter(order => order.date == date.toDateString());
@@ -29,6 +30,10 @@ class OrderService {
 
   getAllOrders() {
     return this.orders;
+  }
+
+  getById(id) {
+    return this.orders.find(item => item.id == id);
   }
 
   static getOrderFromMealIdArr(mealsIdArr, customer) {
