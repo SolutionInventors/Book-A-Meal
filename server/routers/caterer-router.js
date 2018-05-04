@@ -1,7 +1,12 @@
-import {Router} from "express"; 
-import CatererController from "../controllers/customer-controller"; 
-const catererRouter = Router(); 
+import { Router } from 'express';
+import CatererController from '../controllers/customer-controller';
 
-const controller = new CatererController(catererRouter); 
-export default catererRouter; 
+const catererRouter = Router();
+
+const catererController = new CatererController();
+
+catererRouter.post('/login', catererController.login);
+catererRouter.post('/signup', catererController.register);
+
+export default catererRouter;
 

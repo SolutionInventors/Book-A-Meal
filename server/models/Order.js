@@ -1,38 +1,39 @@
+import Customer from '../models/Customer';
 
-class Order{
-    constructor(orderArr,customer, date ){
-        this.order = orderArr; 
-        if(customer instanceof Customer) this.customer = customer; 
-        if(date instanceof Date) this.date = date.toDateString(); 
-    }
+class Order {
+  constructor(orderArr, customer, date) {
+    this.order = orderArr;
+    if (customer instanceof Customer) this.customer = customer;
+    if (date instanceof Date) this.date = date.toDateString();
+  }
 
-    get order(){
-        return this.order; 
-    }
+  get order() {
+    return this.order;
+  }
 
-    get customer(){
-        return this.customer; 
-    }
+  get customer() {
+    return this.customer;
+  }
 
-    set date(date){
-        if(date instanceof Date) this.date = date.toDateString(); 
-    }
+  set date(date) {
+    if (date instanceof Date) this.date = date.toDateString();
+  }
 
-    get date(){
-        return this.date;  
-    }
+  get date() {
+    return this.date;
+  }
 
-    set id(id){
-        this.id = id; 
-    }
-    
-    get id(){
-        return this.id; 
-    }
-    isValid(){
-        return this.date == date && Array.isArray(this.order) && 
-                this.order.length> 0 && this.customer; 
-    }
+  set id(id) {
+    this.id = id;
+  }
+
+  get id() {
+    return this.id;
+  }
+  isValid() {
+    return this.date && Array.isArray(this.order) &&
+                this.order.length > 0 && this.customer;
+  }
 }
 
-module.exports = Order; 
+export default Order;
