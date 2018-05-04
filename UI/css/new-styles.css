@@ -50,11 +50,8 @@ body{
     text-align: center;
     text-decoration: none;
     font-family: 'Trebuchet MS';
-    background-color: rgb(183, 72, 66);
     color: rgb(243, 253, 255);
-    border: groove 1px wheat;
     margin: 1px 0;
-    color: white; 
 }
 .top-nav  a:hover {
     color: rgb(241, 233, 232);

@@ -1,0 +1,22 @@
+{
+  "development": {
+    "username": "book_a_meal_client",
+    "password": null,
+    "database": "book_meal_app_db",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  },
+  "test": {
+    "username": "book_a_meal_client",
+    "password": null,
+    "database": "database_test",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  },
+
+  "production": {
+    "use_env_variable": "postgres://cucztwnlxmiewq:64928fe5e2d6ba7b4c1abf4696db195b80d49190df9cb09a62efb6f3913812de@ec2-75-101-142-91.compute-1.amazonaws.com:5432/d2g9u3eul592cs",
+    "dialect": "postgres",
+    "url": "postgres://cucztwnlxmiewq:64928fe5e2d6ba7b4c1abf4696db195b80d49190df9cb09a62efb6f3913812de@ec2-75-101-142-91.compute-1.amazonaws.com:5432/d2g9u3eul592cs"
+  }
+}
