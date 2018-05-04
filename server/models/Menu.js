@@ -1,14 +1,14 @@
 
 class Menu {
-  constructor(date, menu) {
-    this.menu = menu;
+  constructor(date, meals) {
+    this.meals = meals;
     if (date instanceof Date) {
       this.date = date.toDateString();
     }
   }
 
   isValid() {
-    return Array.isArray(this.menu) && this.menu.length > 0 && this.date;
+    return Array.isArray(this.meals) && this.meals.length > 0 && this.date;
   }
 }
 

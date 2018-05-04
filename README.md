@@ -156,11 +156,11 @@ sample request: /meals/a5dfccce-09ae-4e51-b990-74ee00c63946
                 "name": "Rice0",
                 "amount": 2000,
                 "image": "img.jpg",
-                "id": "f514a0f6-76ad-486e-9f8e-8b09e2faba9e"
+                "id": "f4e83016-4f16-4efa-a76d-7ce94fe08f73"
             }
         ],
-        "date": "2018-05-04T09:19:08.114Z",
-        "id": "f3677596-3a3e-48ed-b022-9f054f57b0d1"
+        "date": "Fri May 04 2018",
+        "id": "31a7690d-4bb0-489d-9ec6-475c84c6b1bd"
     }
 }
 
@@ -169,3 +169,93 @@ NB: The function filters any id that does not exist in the request.
 
 NB: This request would also fail if the menu of the day has already been created
 
+
+### get today menu via  GET /menu
+{
+    "success": true,
+    "menu": {
+        "menu": [
+            {
+                "name": "Rice0",
+                "amount": 2000,
+                "image": "img.jpg",
+                "id": "f4e83016-4f16-4efa-a76d-7ce94fe08f73"
+            }
+        ],
+        "date": "Fri May 04 2018",
+        "id": "31a7690d-4bb0-489d-9ec6-475c84c6b1bd"
+    }
+}
+
+### update today menu via  PUT /menu
+
+> sample request body 
+    {
+        mealsIdArr:[
+            fc0b226d-f7ac-4ec9-8385-f54ac3ad7ce2,
+            f4e83016-4f16-4efa-a76d-7ce94fe08f7
+            ]
+    }
+> sample response 
+    {
+        "success": true,
+        "createdObj": {
+            "meals": [
+                {
+                    "name": "Rice3",
+                    "amount": 2003,
+                    "image": "img.jpg",
+                    "id": "fc0b226d-f7ac-4ec9-8385-f54ac3ad7ce2"
+                }
+            ],
+            "date": "Fri May 04 2018"
+        }
+    }
+
+## /orders
+### get all orders via GET /orders
+> sample response 
+        {
+            "success": true,
+            "orders": [
+                {
+                    "meals": [
+                        {
+                            "name": "Rice3",
+                            "amount": 2003,
+                            "image": "img.jpg",
+                            "id": "b5d6e580-85b6-4695-bb13-01e9f83ead00"
+                        }
+                    ],
+                    "date": "Fri May 04 2018",
+                    "id": "614457c0-6fb8-4d9e-b5de-a7f9ab88cfe1"
+                }
+            ]
+        }
+
+### make an order via POST /orders/
+> sample request body 
+        {
+            mealsIdArr:[
+                54ab1c7d-02f4-43ca-8827-b1f263dc1de4,
+                b5d6e580-85b6-4695-bb13-01e9f83ead00
+            ]
+            customerId:4e490aba-3a66-4f34-b07f-0f9e95c070cb
+        }
+
+> sample response
+    {
+        "success": true,
+        "orderObj": {
+            "meals": [
+                {
+                    "name": "Rice3",
+                    "amount": 2003,
+                    "image": "img.jpg",
+                    "id": "b5d6e580-85b6-4695-bb13-01e9f83ead00"
+                }
+            ],
+            "date": "Fri May 04 2018",
+            "id": "614457c0-6fb8-4d9e-b5de-a7f9ab88cfe1"
+        }
+    }

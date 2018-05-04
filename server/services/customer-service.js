@@ -1,17 +1,18 @@
 import { v4 } from 'node-uuid';
-
+import User from '../models/User';
 
 class CustomerService {
   constructor() {
     this.customers = [];
   }
 
-  registerCustomer(customer) {
-    if (customer instanceof Customer && customer.canBeRegistered()) {
+  register(customer) {
+    if (customer instanceof User && customer.canBeRegistered()) {
       customer.id = v4();
       this.customers.push(customer);
       return customer;
     }
+    return undefined;
   }
 
   getCustomer(username, password) {
@@ -21,6 +22,14 @@ class CustomerService {
 
   getCustomerByName(name) {
     return this.customers.find(customer => customer.name == name);
+  }
+
+  getById(customerId) {
+    return this.customers.find(customer => customer.id == customerId);
+  }
+
+  getAll() {
+    return this.customers;
   }
 }
 

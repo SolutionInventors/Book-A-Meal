@@ -31,7 +31,7 @@ class MenuService {
   updateTodayMenu(mealIdArr) {
     const menu = this.getMealsFromArray(mealIdArr);
     const date = new Date();
-    const index = this.menu.findIndex(item => item.dateStr == date.toDateString());
+    const index = this.menu.findIndex(item => item.date == date.toDateString());
 
     if (index >= 0 && menu.length >= 0) {
       const menuObj = new Menu(new Date(), menu);

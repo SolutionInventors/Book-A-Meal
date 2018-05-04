@@ -1,5 +1,5 @@
 import { v4 } from 'node-uuid';
-import Caterer from '../models/Caterer';
+import User from '../models/User';
 
 class CatererService {
   constructor() {
@@ -7,7 +7,7 @@ class CatererService {
   }
 
   registerCaterer(caterer) {
-    if (caterer instanceof Caterer) {
+    if (caterer instanceof User) {
       caterer.id = v4();
       this.caterers.push(caterer);
       return caterer;
