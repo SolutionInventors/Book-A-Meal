@@ -7,6 +7,9 @@ window.addEventListener('load', () => {
 		for(let anchor of anchors){
 			anchor.parentElement.remove();  
 		}
+		document.querySelector('form').action= 'caterer-page.html'; 
+	}else{
+		document.querySelector('form').action= 'today-menu-page.html'; 
 	}
 }); 
 

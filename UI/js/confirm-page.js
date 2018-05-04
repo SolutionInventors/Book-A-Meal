@@ -10,7 +10,12 @@ window.addEventListener('load', ()=> {
 		document.body.className = 'confirm-page manage-meals delete-page'; 
 	}else if(getParameterByName('create')){
 		document.body.className = 'confirm-page create-meal create-page'; 
-	}else{
+	}else if(getParameterByName('buy')){
+		document.body.className = 'customer confirm-page make-order-page order-meals'; 
+	}else if(getParameterByName('modify')){
+		document.className = 'customer confirm-page modify-order-page';
+	}
+	else{
 		document.body.className = 'confirm-page invite-caterer'; 
 	}
 });

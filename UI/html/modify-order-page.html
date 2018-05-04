@@ -3,45 +3,33 @@
     <head>
         <title></title>
         <link rel="stylesheet" href="../css/new-styles.css">
-        <link rel="stylesheet" href="../css/caterer-styles.css">
+        <link rel="stylesheet" href="../css/modify-order-styles.css">
+        <script src="../js/modify-order.js"></script>
     </head>
-   <body class="create-menu">
+   <body class="customer-page modify-order">
       
             <div class="top-nav">
                     <ul class="register-nav2">
-                                <li><a href="caterer-page.html" class="manage-meals">Manage Meals</a></li>
-                            <li><a href="confirm-page.html?create=true" class="create-meal">Create Meal</a></li>
-                          
-                            <li><a href="#" class="create-menu">Create Today Menu</a></li>
-                            <li><a href="confirm-page.html?caterer=true" class="invite-caterer">Invite new Caterer</a></li>
+                            <li><a href="today-menu-page.html" class="order-meals">Today Menu</a></li>
+                            <li><a href="modify-order-page.html?modify-order=true" class="modify-order">Modify Order</a></li>
                             <li><a href="../index.html"> Sign Out</a></li>
                     </ul>
-    
-                   
             </div>  
     
-    
-       
-        
-        <div class="confirm-view">
-           <h3>Confirm Operations?</h3>
-            <ul>
-                <li><span for="">Desciption:</span> Made from the best french fries in history</li>
-                <li><span for="">Amount: 3000</span></li>
-                <li><button class = "danger-btn">DELETE</button></li>
-            </ul>
-        </div>
         <div class="operations">
 
-            <h3>MANAGE MEALS</h3>
+            <h3>ORDER</h3>
                 <div class="gallery">
-                    <form action="confirm-page.html">
+                    <form action="confirm-page.html" onclick="handleClick(event)" onsuubmit ="handleSubmit(event)">
                         
                             <figure>
                                     <label for="checkbox1">
                                         <img src="../soft images/chicken.jpg" alt="Panama Hat">
                                         <figcaption>
                                                 <strong>Nam libero tempore.</strong> Soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus
+                                           <div>
+                                                <button type="button" name="modify-order" value=true>MODIFY ORDER</button>
+                                           </div>
                                            
                                         </figcaption>
                                     </label>
@@ -57,7 +45,8 @@
                                             <img src="../soft images/food.jpg"  alt="Panama Hat">
                                             <figcaption>
                                                     <strong>Nam libero tempore.</strong> Soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus
-                                              
+                                               <div>
+                                                    <button type="button" name="modify-order" value=true>MODIFY ORDER</button>
                                             </figcaption>
                                         </label>
                                         <div class = "checkbox">
@@ -73,35 +62,20 @@
                                                 <img src="../soft images/food2.jpg" alt="Panama Hat">
                                                 <figcaption>
                                                         <strong>Nam libero tempore.</strong> Soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus
+                                                   <div>
+                                                        <button type="button" name="modify-order" value=true>MODIFY ORDER</button>
+                                                   </div>
+                                                   
                                                 </figcaption>
                                             </label>
                                             <div class = "checkbox">
                                                     <input id="checkbox3" type="checkbox" >
                                                     <label for="checkbox3"></label>
                                             </div>
-                                            
-                                            
-                                        </figure>
-                                        <figure>
-                                                <label for="checkbox4">
-                                                    <img src="../soft images/image 1MB.jpg" width="300" height="210" alt="Panama Hat">
-                                                    <figcaption>
-                                                            <strong>Nam libero tempore.</strong> Soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus
-                                                
-                                                    
-                                                    </figcaption>
-                                                </label>
-                                                <div class = "checkbox">
-                                                        <input id="checkbox4" type="checkbox" >
-                                                        <label for="checkbox4"></label>
-                                                </div>
-                                                
-                                                
-                                            </figure>
-                                
-                                    
+                                        </figure> 
+                                        <button type="submit" hidden>UPDATE</button>
                     </form>
-                    <button type=submit>CREATE MENU</button>
+
                         </div>
 
             </div>
