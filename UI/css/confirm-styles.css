@@ -1,0 +1,123 @@
+
+.confirm-page{
+    background-image: url(../images/chesse.jpg); 
+    background-blend-mode: screen; 
+}
+
+.top-nav ul{
+    display: none; 
+}
+
+.caterer .top-nav .caterer-nav, 
+.customer .top-nav .customer-nav{
+    display: block; 
+}
+
+.confirm-controls{
+    position: absolute; 
+    left: 5%;
+    width: 90%;  
+}
+.confirm-controls h3{
+    text-align: center;
+    text-transform: uppercase; 
+    font-family: Rockwell; 
+}
+
+.confirm-controls .img-container{
+    position: relative;
+    display: inline-block; 
+    left: 30%; 
+    
+}
+.confirm-controls img{
+    width: 200px; 
+}
+.confirm-controls p{
+    font-size: 20px;
+}
+.confirm-controls ul{
+    margin: 0; 
+    margin-top:51px; 
+    font-size: 17px; 
+    
+}
+.confirm-controls input{
+    display: block;
+    width: 100%; 
+}
+.confirm-controls ul li{
+    list-style-type: none; 
+    margin-bottom: 10px; 
+
+}
+
+.confirm-controls ul li:last-of-type{
+  text-align: center; 
+}
+
+.confirm-page .delete button, 
+.confirm-page .make-order button{
+    color: rgb(248, 6, 6);
+}
+.confirm-page  .invite button, 
+.confirm-page  .modify button{
+    color: rgb(243, 156, 43);
+}
+
+.confirm-page  .confirm-controls{
+    display:  none; 
+}
+
+.invite-caterer .invite, .delete-page .delete, 
+.modify-page .modify, .create-page .create, 
+.make-order-page .make-order, 
+.modify-order .modify-order{
+    display:  block; 
+}
+body.invite-caterer{
+    background-image: url(../images/new-chef.jpg); 
+    background-blend-mode: hard-light; 
+}
+.invite-caterer .fixed-column{
+    left: 0; 
+    background-color: rgba(236, 232, 232, 0.883); 
+}
+.confirm-page  .invite button:hover, 
+.confirm-page  .modify button:hover{
+    background-color: rgb(243, 156, 43);
+}
+
+.confirm-page .confirm-invite img{
+    border-radius: 20%;
+    
+
+}
+.confirm-page  .delete button:hover, 
+.confirm-page  .make-order button:hover{
+    background-color: rgb(248, 6, 6);
+    color: white; 
+}
+
+.create-menu button, .confirm-page  .create button{
+    color: rgb(4, 138, 15);
+}
+
+.create-menu button:hover, .confirm-page  .create button:hover{
+    background-color: rgb(4, 138, 15);
+    color: white; 
+}
+.confirm-page  .modify input[type = text], 
+.confirm-page  .create input[type = text], 
+.confirm-page   input[type = email]{
+   background-color: white; 
+   width: 80%; 
+   position: relative; 
+   left: 2%; 
+   border: none; 
+   background-image:  none; 
+   font-family: Rockwell; 
+   font-size: 100%; 
+   color:rgb(156, 102, 2); 
+   padding: 4px 4%; 
+}

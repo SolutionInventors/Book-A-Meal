@@ -1,0 +1,84 @@
+<!doctype html5>
+<html>
+    <head>
+        <title></title>
+        <link rel="stylesheet" href="../css/new-styles.css">
+        <link rel="stylesheet" href="../css/modify-order-styles.css">
+        <script src="../js/modify-order.js"></script>
+    </head>
+   <body class="customer-page modify-order">
+      
+            <div class="top-nav">
+                    <ul class="register-nav2">
+                            <li><a href="today-menu-page.html" class="order-meals">Today Menu</a></li>
+                            <li><a href="modify-order-page.html?modify-order=true" class="modify-order">Modify Order</a></li>
+                            <li><a href="../index.html"> Sign Out</a></li>
+                    </ul>
+            </div>  
+    
+        <div class="operations">
+
+            <h3>ORDER</h3>
+                <div class="gallery">
+                    <form action="confirm-page.html" onclick="handleClick(event)" onsuubmit ="handleSubmit(event)">
+                        
+                            <figure>
+                                    <label for="checkbox1">
+                                        <img src="../soft images/chicken.jpg" alt="Panama Hat">
+                                        <figcaption>
+                                                <strong>Nam libero tempore.</strong> Soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus
+                                           <div>
+                                                <button type="button" name="modify-order" value=true>MODIFY ORDER</button>
+                                           </div>
+                                           
+                                        </figcaption>
+                                    </label>
+                                    <div class = "checkbox">
+                                            <input id="checkbox1" type="checkbox" >
+                                            <label for="checkbox1"></label>
+                                    </div>
+                                    
+                                    
+                                </figure>
+                                <figure>
+                                        <label for="checkbox2">
+                                            <img src="../soft images/food.jpg"  alt="Panama Hat">
+                                            <figcaption>
+                                                    <strong>Nam libero tempore.</strong> Soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus
+                                               <div>
+                                                    <button type="button" name="modify-order" value=true>MODIFY ORDER</button>
+                                            </figcaption>
+                                        </label>
+                                        <div class = "checkbox">
+                                                <input id="checkbox2" type="checkbox" >
+                                                <label for="checkbox2"></label>
+                                        </div>
+                                        
+                                        
+                                    </figure>
+                                    
+                                    <figure>
+                                            <label for="checkbox3">
+                                                <img src="../soft images/food2.jpg" alt="Panama Hat">
+                                                <figcaption>
+                                                        <strong>Nam libero tempore.</strong> Soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus
+                                                   <div>
+                                                        <button type="button" name="modify-order" value=true>MODIFY ORDER</button>
+                                                   </div>
+                                                   
+                                                </figcaption>
+                                            </label>
+                                            <div class = "checkbox">
+                                                    <input id="checkbox3" type="checkbox" >
+                                                    <label for="checkbox3"></label>
+                                            </div>
+                                        </figure> 
+                                        <button type="submit" hidden>UPDATE</button>
+                    </form>
+
+                        </div>
+
+            </div>
+
+   </body>
+</html>

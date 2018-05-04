@@ -1,0 +1,122 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Register</title>
+        <link rel="stylesheet" href="../css/new-styles.css">
+        <link rel="stylesheet" href="../css/confirm-styles.css">
+        <script src="../js/shared-functions.js"></script>
+        <script src="../js/confirm-page.js"></script>
+    </head>
+    <body class="customer confirm-page modify-order"  >
+            <div class="top-nav ">
+                    <ul class="caterer-nav register-nav2 ">
+                           
+                                <li><a href="caterer-page.html" class="manage-meals">Manage Meals</a></li>
+                                <li><a href="confirm-page.html?create=true" class="create-meal">Create Meal</a></li>
+                                <li><a href="create-menu.html" class="create-menu">Create Today Menu</a></li>
+                                <li><a href="confirm-page.html?caterer=true" class="invite-caterer">Invite new Caterer</a></li>
+                                <li><a href="../index.html"> Sign Out</a></li>
+                    </ul>
+                    <ul class="customer-nav register-nav2 ">
+                           
+                            <li><a href="today-menu-page.html" class="order-meals">Today Menu</a></li>
+                            <li><a href="modify-order-page.html?modify-order=true" class="modify-order">Modify Order</a></li>
+                            <li><a href="../index.html"> Sign Out</a></li>
+                    </ul>
+    
+                   
+            </div>  
+    
+        <div class="fixed-column" >
+            
+            <div onchange="handleImageChange(event)" class = " confirm-controls modify" id="confirm-modify" >
+                    <h3>Modify Meal</h3>
+                    <div class= "img-container">  
+                            <img src="../soft images/chicken.jpg" alt="Panama Hat" width="40px">
+                    </div>
+    
+    
+                    <div> 
+                            <ul>
+                                <li><input type="text" placeholder="Description"></li>
+                                <li><input type="text" placeholder="New Meal name"></li>
+                                <li><input onchange="handleImageChange(event)" type="file" placeholder="Choose"
+                                    accept=".jpg, .png, .jpeg"></li>
+                                <li><button>UPDATE</button></li>
+                            </ul>
+                           
+                        </div>
+                </div>
+                <div  onchange="handleImageChange(event)" class = " confirm-controls create" id="confirm-create" >
+                                <h3>Create Meal</h3>
+                                <div class= "img-container">  
+                                        <img src="../images/no-food.png" alt="Panama Hat" >
+                                </div>
+                
+                
+                                <div> 
+                                        <ul>
+                                            <li><input type="text" placeholder="Description"></li>
+                                            <li><input type="text" placeholder="New Meal name"></li>
+                                            <li><input  type="file" placeholder="Choose"
+                                                accept=".jpg, .png, .jpeg" ></li>
+                                            <li><button>CREATE</button></li>
+                                        </ul>
+                                       
+                                    </div>
+                            </div>
+                
+                
+                <div class = " confirm-controls delete" id="confirm-delete" >
+                        <h3>Confirm Delete</h3>
+                        <div class= "img-container">  
+                                <img src="../soft images/chicken.jpg" alt="Panama Hat" width="40px">
+                        </div>
+        
+        
+                        <div> 
+                            
+                                <ul>
+                                    <li><p>Description: Lively meal that shine up your days</p></li>
+                                    <li>Meal Name: Chicken</li>
+                                    <li>Amount :  NGN4000</li>
+                                    <li><button>DELETE</button></li>
+                                </ul>
+                               
+                            </div>
+                    </div>
+
+                    <div class = " confirm-controls make-order"  >
+                        <h3>Make Order</h3>
+                        <div class= "img-container">  
+                                <img src="../soft images/chicken.jpg" alt="Panama Hat" width="40px">
+                        </div>
+        
+        
+                        <div> 
+                                <ul>
+                                    <li><p>Description: Lively meal that shine up your days</p></li>
+                                    <li>Meal Name: Chicken</li>
+                                    <li>Amount :  NGN4000</li>
+                                    <li><button>BUY NOW</button></li>
+                                </ul>
+                               
+                            </div>
+                    </div>
+                    <div class = " confirm-controls invite"  >
+                                <h3>Invite Caterer</h3>
+                               
+                
+                                <div> 
+                                        <ul>
+                                            <li><input type="email" placeholder="Caterer email"></li>
+                                            <li><button>INVITE</button></li>
+                                        </ul>
+                                       
+                                    </div>
+                            </div>
+                
+                    
+        </div>
+    </body>
+</html>

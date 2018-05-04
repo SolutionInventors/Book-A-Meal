@@ -1,0 +1,25 @@
+.gallery button{
+    left: 35%; 
+    width: 75%; 
+    color: whitesmoke; 
+    background-color: rgb(116, 89, 0); 
+    border-radius: 2%; 
+    box-shadow:0 0 14px rgba(255, 227, 166, 0.671) inset; 
+    font-family: Rockwell, 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif; 
+    font-size: 17px; 
+
+}
+
+.gallery button:hover{
+    width: 75%; 
+    color: rgb(112, 69, 0) ; 
+    background-color:whitesmoke; 
+    border-radius: 2%; 
+    box-shadow:0 0 4px rgba(199, 106, 0, 0.671) inset; 
+    font-family: Rockwell, 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif; 
+    font-size: 17px; 
+}
+
+.checkbox{
+    display: none; 
+}
