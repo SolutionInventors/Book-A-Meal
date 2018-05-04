@@ -16,12 +16,13 @@
     "eslint": "^4.19.1",
     "express": "^4.16.3",
     "gulp": "^3.9.1",
+    "node-uuid": "^1.4.8",
     "jsonwebtoken": "^8.2.1"
   },
   "scripts": {
     "transpile-es2015": "babel src -d lib",
     "start": "node server/app.js",
-    "test": "nyc mocha  server/test || true",
+    "test": "nyc mocha  server/test/models || true",
     "coverage": "nyc --reporter=lcov --reporter=text-lcov npm test",
     "coveralls": "nyc npm test && nyc report --reporter=text-lcov | coveralls"
   },
@@ -44,7 +45,7 @@
     "faker": "^4.1.0",
     "istanbul": "^0.4.5",
     "mocha": "^5.1.1",
-    "node-uuid": "^1.4.8",
+    
     "nyc": "^11.7.1",
     "supertest": "^3.0.0",
     "uuid": "^3.2.1"
