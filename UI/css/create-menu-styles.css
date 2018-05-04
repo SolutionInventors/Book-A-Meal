@@ -1,0 +1,15 @@
+.create-menu button{
+    position: relative; 
+    left: 40%; 
+    width: 20%; 
+    background-color: inherit; 
+}
+
+.create-menu button, .confirm-page  .create button{
+    color: rgb(4, 138, 15);
+}
+
+.create-menu button:hover, .confirm-page  .create button:hover{
+    background-color: rgb(4, 138, 15);
+    color: white; 
+}
