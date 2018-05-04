@@ -86,6 +86,7 @@ body.invite-caterer{
 .confirm-page  .invite button:hover, 
 .confirm-page  .modify button:hover{
     background-color: rgb(243, 156, 43);
+    color: white; 
 }
 
 .confirm-page .confirm-invite img{
@@ -99,14 +100,6 @@ body.invite-caterer{
     color: white; 
 }
 
-.create-menu button, .confirm-page  .create button{
-    color: rgb(4, 138, 15);
-}
-
-.create-menu button:hover, .confirm-page  .create button:hover{
-    background-color: rgb(4, 138, 15);
-    color: white; 
-}
 .confirm-page  .modify input[type = text], 
 .confirm-page  .create input[type = text], 
 .confirm-page   input[type = email]{
