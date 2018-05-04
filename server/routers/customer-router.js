@@ -4,8 +4,8 @@ import CustomerController from '../controllers/customer-controller';
 const customerRouter = express.Router();
 
 const customerController = new CustomerController(customerRouter);
-customerRouter.use('/signup', customerController.register);
-customerRouter.use('/login', customerController.login);
-
+customerRouter.post('/signup', customerController.register);
+customerRouter.post('/login', customerController.login);
+customerRouter.get('/', customerController.getAll);
 export default customerRouter;
 

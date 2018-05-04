@@ -1,4 +1,4 @@
-import Customer from '../models/Customer';
+import User from '../models/User';
 import customerService from '../services/customer-service';
 
 export default class CustomerController {
@@ -6,11 +6,11 @@ export default class CustomerController {
     const { username, password } = req.body;
 
     if (username && password) {
-      const caterer = customerService.getCustomer(username, password);
-      if (caterer) {
+      const customer = customerService.getCustomer(username, password);
+      if (customer) {
         resp.status(200).json({
           success: true,
-          caterer,
+          customer,
         });
       } else {
         resp.status(404).json({
@@ -28,7 +28,7 @@ export default class CustomerController {
 
   register(req, resp) {
     const { username, password, email } = req.body;
-    let customer = new Customer(username, email, password);
+    let customer = new User(username, email, password);
     customer = customerService.registerCustomer(customer);
     if (customer) {
       resp.status(201).json({
@@ -41,5 +41,13 @@ export default class CustomerController {
         message: 'The specified username or mail exists',
       });
     }
+  }
+
+  getAll(req, resp) {
+    const customers = customerService.getAll();
+    resp.status(200).json({
+      success: true,
+      customers,
+    });
   }
 }

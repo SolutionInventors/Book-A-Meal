@@ -8,19 +8,16 @@ class OrderService {
   }
 
   makeOrder(orderObj) {
-    if (orderObj.isValid()) {
-      orderObj.id = v4();
-      this.orders.push(orderObj);
-      return orderObj;
-    }
-    return false;
+    orderObj.id = v4();
+    this.orders.push(orderObj);
+    return orderObj;
   }
 
-  modify(orderId, orderObj) {
-    const index = this.orders.findIndex(item => item.id == orderObj.id);
-    if (orderId >= 0 && orderObj.isValid()) {
-      this.orders[index] = orderObj;
-      return orderObj;
+  modify(orderId, orderArr) {
+    const index = this.orders.findIndex(item => item.id == orderId);
+    if (orderId >= 0) {
+      this.orders[index].order = orderArr;
+      return this.orders[index];
     }
     return undefined;
   }
@@ -28,19 +25,24 @@ class OrderService {
     return this.orders.filter(order => order.date == date.toDateString());
   }
 
-  getAllOrders() {
-    return this.orders;
+  getAllOrders(date = new Date()) {
+    return this.orders.filter(order => order.date == date.toDateString());
   }
 
   getById(id) {
     return this.orders.find(item => item.id == id);
   }
 
-  static getOrderFromMealIdArr(mealsIdArr, customer) {
-    const todayMenu = menuService.getMenu().menu();
-    const order = mealsIdArr.map(id => todayMenu.find(mealObj =>
-      id === mealObj.id));
+  getOrderFromMenu(mealsIdArr, customer) {
+    const todayMenu = menuService.getMenu().menu;
+    const order =
+      mealsIdArr
+        .map(id =>
+          todayMenu.find(mealObj =>
+            mealObj.id == id))
+        .filter(obj => obj);
 
+    console.log(order);
     return new Order(order, customer, new Date());
   }
 }
