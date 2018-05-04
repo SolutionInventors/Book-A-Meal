@@ -3,17 +3,16 @@ function verifyToken(req, resp, next) {
   const bearerHeader = req.headers.authorization;
 
   if (typeof bearerHeader !== 'undefined') {
-    let token = bearerHeader.split(' ')[1];
+    const token = bearerHeader.split(' ')[1];
     req.token = token;
     next();
-
-  }else {
+  } else {
     resp.status(403).send({
       error: { message: 'Restricted to unauthorized users. Provide authentification and try again.' },
     });
   }
 }
 
-module.exports = {
+export default {
   verifyToken,
 };

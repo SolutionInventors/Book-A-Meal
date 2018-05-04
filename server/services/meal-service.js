@@ -16,38 +16,38 @@ class MealService {
   }
   createMeal(mealObj) {
     if (mealObj instanceof Meal && mealObj.isValid()) {
-      if (this.exists(mealObj.name)) {
+      if (this.exists(mealObj)) {
         return false;
       }
       mealObj.id = v4();
       this.meals.push(mealObj);
-      return mealObj;
+      return true;
     }
+    return undefined;
   }
 
   getByName(mealName) {
-    return this.meals.find(mealObj => mealObj.name == mealName);
+    return this.meals.find(mealObj => mealObj.mealName == mealName);
   }
 
-  exists(mealName) {
-    return !!this.getByName(mealName);
-  }
   update(mealId, newMealObj) {
     if (newMealObj instanceof Meal) {
-      const mealIndex = this.meals.findIndex(meal => meal.id == mealId);
+      const mealIndex = this.meals.findIndex(obj => obj.mealId == mealId);
 
       if (mealIndex >= 0 && newMealObj.isValid()) {
         newMealObj.id = this.meals[mealIndex].id;
         this.meals[mealIndex] = newMealObj;
-        return newObj;
+        return newMealObj;
       }
       return false;
     }
+    return undefined;
   }
 
   delete(mealId) {
-    const index = this.meals.findIndex(obj => obj.id == mealId);
+    const index = this.meals.findIndex(obj => obj.mealId === mealId);
     if (index >= 0) return this.meals.splice(index, 1)[0];
+    return undefined;
   }
 }
 

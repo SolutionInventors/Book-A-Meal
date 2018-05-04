@@ -1,4 +1,4 @@
-import { getMenu } from '../services/menu';
+import menuService from './menu-service';
 import Order from '../models/Order';
 import { v4 } from 'node-uuid';
 
@@ -32,9 +32,9 @@ class OrderService {
   }
 
   static getOrderFromMealIdArr(mealsIdArr, customer) {
-    const todayMenu = getMenu().menu();
+    const todayMenu = menuService.getMenu().menu();
     const order = mealsIdArr.map(id => todayMenu.find(mealObj =>
-      id == mealObj.id));
+      id === mealObj.id));
 
     return new Order(order, customer, new Date());
   }
