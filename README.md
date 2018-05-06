@@ -7,6 +7,12 @@ It is built to solve the problems associated with making orders for a meal.
 ## Project Name
     Book-A-Meal
 
+    [![Maintainability](https://api.codeclimate.com/v1/badges/eb7f6eeae96b5b03c530/maintainability)](https://codeclimate.com/github/SolutionInventors/Book-A-Meal/maintainability)
+   
+   [![Test Coverage](https://api.codeclimate.com/v1/badges/eb7f6eeae96b5b03c530/test_coverage)](https://codeclimate.com/github/SolutionInventors/Book-A-Meal/test_coverage)
+
+    [![Coverage Status](https://coveralls.io/repos/github/SolutionInventors/Book-A-Meal/badge.svg?branch=develop)](https://coveralls.io/github/SolutionInventors/Book-A-Meal?branch=develop)
+
 ## Admin actions
     - Set Meal of the day
     - Invite new admin via mail
@@ -20,14 +26,6 @@ It is built to solve the problems associated with making orders for a meal.
     - Reset password
     - Sign up to the system
     - View history of previously made orders
-
-## Badges
-
-    [![Maintainability](https://api.codeclimate.com/v1/badges/eb7f6eeae96b5b03c530/maintainability)](https://codeclimate.com/github/SolutionInventors/Book-A-Meal/maintainability)
-   
-   [![Test Coverage](https://api.codeclimate.com/v1/badges/eb7f6eeae96b5b03c530/test_coverage)](https://codeclimate.com/github/SolutionInventors/Book-A-Meal/test_coverage)
-
-    [![Coverage Status](https://coveralls.io/repos/github/SolutionInventors/Book-A-Meal/badge.svg?branch=develop)](https://coveralls.io/github/SolutionInventors/Book-A-Meal?branch=develop)
 
 
 ## API END POINTS
@@ -78,6 +76,7 @@ It is built to solve the problems associated with making orders for a meal.
 
 ### Create new meals with POST /meals
 > sample request body 
+
     {
         "name": "Beans", 
         "amount":  2220, 
@@ -85,6 +84,7 @@ It is built to solve the problems associated with making orders for a meal.
     }
 
 > sample response
+
     {
         "success": true,
         "message": "Meal was created successfully",
@@ -97,6 +97,7 @@ It is built to solve the problems associated with making orders for a meal.
     }
 
 > NB: Any data is missing in the request body the API returns a 400
+
     sample response
         {
             "success": false,
@@ -104,10 +105,10 @@ It is built to solve the problems associated with making orders for a meal.
         }
  
  ### Delete meals with DELETE /meals/:id
- > sample request
-   DELETE /meals/c5fc2751-321f-4584-9cf8-c5fbe5cacf24
+ > sample request DELETE /meals/c5fc2751-321f-4584-9cf8-c5fbe5cacf24
 
 > sample response
+
     {
         "success": true,
         "deletedObj": {
@@ -125,6 +126,7 @@ It is built to solve the problems associated with making orders for a meal.
 sample request: /meals/a5dfccce-09ae-4e51-b990-74ee00c63946
 
 > sample response:
+
         {
             "success": true,
             "createdObj": {
@@ -139,6 +141,7 @@ sample request: /meals/a5dfccce-09ae-4e51-b990-74ee00c63946
 ## /menu
 ### create menu of today via request  POST /menu
 > sample request body 
+
     {
         "mealsIdArr": [ 
             f514a0f6-76ad-486e-9f8e-8b09e2faba9e, 
@@ -171,6 +174,7 @@ NB: This request would also fail if the menu of the day has already been created
 
 
 ### get today menu via  GET /menu
+
 {
     "success": true,
     "menu": {
@@ -190,6 +194,7 @@ NB: This request would also fail if the menu of the day has already been created
 ### update today menu via  PUT /menu
 
 > sample request body 
+
     {
         mealsIdArr:[
             fc0b226d-f7ac-4ec9-8385-f54ac3ad7ce2,
@@ -197,6 +202,7 @@ NB: This request would also fail if the menu of the day has already been created
             ]
     }
 > sample response 
+
     {
         "success": true,
         "createdObj": {
@@ -215,6 +221,7 @@ NB: This request would also fail if the menu of the day has already been created
 ## /orders
 ### get all orders via GET /orders
 > sample response 
+
         {
             "success": true,
             "orders": [
@@ -234,7 +241,9 @@ NB: This request would also fail if the menu of the day has already been created
         }
 
 ### make an order via POST /orders/
+
 > sample request body 
+
         {
             mealsIdArr:[
                 54ab1c7d-02f4-43ca-8827-b1f263dc1de4,
@@ -244,6 +253,7 @@ NB: This request would also fail if the menu of the day has already been created
         }
 
 > sample response
+
     {
         "success": true,
         "orderObj": {
@@ -259,3 +269,5 @@ NB: This request would also fail if the menu of the day has already been created
             "id": "614457c0-6fb8-4d9e-b5de-a7f9ab88cfe1"
         }
     }
+
+
