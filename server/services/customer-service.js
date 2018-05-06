@@ -31,6 +31,10 @@ class CustomerService {
   getAll() {
     return this.customers;
   }
+
+  exists(customerId) {
+    return this.customers.findIndex(customer => customer.id == customerId) >= 0;
+  }
 }
 
 export default new CustomerService();

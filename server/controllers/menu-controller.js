@@ -36,25 +36,39 @@ export default class MenuController {
           success: false,
           message: 'The menu of today has already been created',
         });
+      } else {
+        resp.status(422).json({
+          success: false,
+          message: 'There was no valid mealId in your mealsIdArr',
+        });
       }
     }
     resp.status(400).json({
       success: false,
       message: 'Some required fields are missing',
+      missingData: ['mealsIdArr'],
     });
   }
   retrieveByDate(req, resp) {
     const date = new Date(req.date);
     const menu = menuService.getMenu(date.toDateString());
-    if (menu) {
-      resp.status(200).json({
-        success: true,
-        menu,
-      });
+    if (date) {
+      if (menu) {
+        resp.status(200).json({
+          success: true,
+          menu,
+        });
+      } else {
+        resp.status(404).json({
+          success: false,
+          message: 'The specified menu does not exists',
+        });
+      }
     } else {
-      resp.status(404).json({
-        success: false,
-        message: 'The specified menu does not exists',
+      resp.status(400).json({
+        success: true,
+        message: 'You did not specify the date in your request',
+        missingData: ['date'],
       });
     }
   }
@@ -77,11 +91,13 @@ export default class MenuController {
           message: 'The menu of today has not yet been created',
         });
       }
+    } else {
+      resp.status(400).json({
+        success: false,
+        message: 'Some required fields are missing',
+        missingData: ['mealsIdArr'],
+      });
     }
-    resp.status(400).json({
-      success: false,
-      message: 'Some required fields are missing',
-    });
   }
 }
 

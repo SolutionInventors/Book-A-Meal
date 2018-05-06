@@ -19,7 +19,7 @@ class OrderService {
 
   modify(orderId, orderObj) {
     const index = this.orders.findIndex(item => item.id == orderId);
-    if (orderId >= 0) {
+    if (index >= 0) {
       this.orders[index].meals = orderObj.meals;
       return this.orders[index];
     }
@@ -29,8 +29,8 @@ class OrderService {
     return this.orders.filter(order => order.date == date.toDateString());
   }
 
-  getAllOrders(date = new Date()) {
-    return this.orders.filter(order => order.date == date.toDateString());
+  getAllOrdersEverMade() {
+    return this.orders;
   }
 
   getById(id) {
@@ -39,7 +39,7 @@ class OrderService {
 
   getOrderFromMenu(mealsIdArr, customer) {
     const todayMenu = menuService.getMenu().meals;
-    const order =
+    const meals =
       mealsIdArr
         .map(mealId =>
           todayMenu.find(mealObj =>
@@ -47,8 +47,8 @@ class OrderService {
         .filter(obj => obj);
 
 
-    console.log(order);
-    return new Order(order, customer, new Date());
+    console.log(meals);
+    return new Order(meals, customer, new Date());
   }
 }
 

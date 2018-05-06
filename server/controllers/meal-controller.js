@@ -39,33 +39,36 @@ export default class MealController {
     const { name, amount, image } = req.body;
     if (name && amount && image) {
       let mealObj = new Meal(name, amount, image);
-      mealObj = mealService.createMeal(mealObj);
-      if (mealObj) {
-        resp.status(201).json({
-          success: true,
-          message: 'Meal was created successfully',
-          createdObj: mealObj,
-        });
-      } else if (mealObj === false) {
-        resp.status(409).json({
-          success: false,
-          message: 'The specified meal name already exists',
-        });
+      if (mealObj.isValid()) {
+        mealObj = mealService.createMeal(mealObj);
+        if (mealObj) {
+          resp.status(201).json({
+            success: true,
+            message: 'Meal was created successfully',
+            createdObj: mealObj,
+          });
+        } else if (mealObj === false) {
+          resp.status(409).json({
+            success: false,
+            message: 'The specified meal name already exists',
+          });
+        } else {
+          resp.status(500).status({
+            success: false,
+            message: 'Server failed to process your request',
+          });
+        }
       } else {
-        resp.status(500).status({
+        resp.status(422).json({
           success: false,
-          message: 'Server failed to process your request',
+          message: 'Check that name, amount and image are provided in your request',
         });
       }
     } else {
       const missingData = [];
-      if (!name) {
-        missingData.push('name');
-      } else if (!amount) {
-        missingData.push('amount');
-      } else if (!image) {
-        missingData.push('image');
-      }
+      if (!name) missingData.push('name');
+      if (!amount) missingData.push('amount');
+      if (!image) missingData.push('image');
       resp.status(400).json({
         success: false,
         message: 'Some required data is missing in the body',
