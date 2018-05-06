@@ -174,7 +174,6 @@ NB: This request would also fail if the menu of the day has already been created
 
 
 ### get today menu via  GET /menu
-
 {
     "success": true,
     "menu": {
