@@ -58,9 +58,18 @@ export default class MealController {
         });
       }
     } else {
+      const missingData = [];
+      if (!name) {
+        missingData.push('name');
+      } else if (!amount) {
+        missingData.push('amount');
+      } else if (!image) {
+        missingData.push('image');
+      }
       resp.status(400).json({
         success: false,
         message: 'Some required data is missing in the body',
+        missingData,
       });
     }
   }
@@ -85,6 +94,7 @@ export default class MealController {
       resp.status(400).json({
         success: false,
         message: 'No meal id was specified',
+        missingData: ['id'],
       });
     }
   }
@@ -92,24 +102,40 @@ export default class MealController {
   modify(req, resp) {
     const { name, amount, image } = req.body;
     const { params: { id } } = req;
-    if (id) {
-      const newMealObj = new Meal(name, amount, image);
-      const createdObj = mealService.update(id, newMealObj);
-      if (createdObj) {
-        resp.status(201).json({
-          success: true,
-          createdObj,
-        });
+    if (name && amount && image) {
+      if (id) {
+        const newMealObj = new Meal(name, amount, image);
+        const createdObj = mealService.update(id, newMealObj);
+        if (createdObj) {
+          resp.status(201).json({
+            success: true,
+            createdObj,
+          });
+        } else {
+          resp.status(404).json({
+            success: false,
+            message: 'The id you specified does not exist',
+          });
+        }
       } else {
-        resp.status(404).json({
+        resp.status(400).json({
           success: false,
-          message: 'The id you specified does not exist',
+          message: 'Meal id is missing',
         });
       }
     } else {
+      const missingData = [];
+      if (!name) {
+        missingData.push('name');
+      } else if (!amount) {
+        missingData.push('amount');
+      } else if (!image) {
+        missingData.push('image');
+      }
       resp.status(400).json({
-        success: false,
-        message: 'Meal id is missing',
+        success: true,
+        message: 'Some required data are missing',
+        missingData,
       });
     }
   }

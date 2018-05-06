@@ -30,3 +30,10 @@ app.listen(port, (err) => {
     console.log(`Successfully set up in port ${port}`);
   }
 });
+
+app.get('/*', (req, resp) => {
+  resp.status(404).json({
+    success: false,
+    message: 'Specified route is not valid',
+  });
+});
