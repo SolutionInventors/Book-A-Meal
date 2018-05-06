@@ -34,7 +34,8 @@ It is built to solve the problems associated with making orders for a meal.
 #### Retrieve meals with GET /meals
 
 > sample response
-    {
+
+{
     "succes": true,
     "meals": [
         {
@@ -49,13 +50,14 @@ It is built to solve the problems associated with making orders for a meal.
             "image": "img.jpg",
             "id": "c5fc2751-321f-4584-9cf8-c5fbe5cacf24"
         }
-    }
+}
 
 #### Retrieve meal by id with GET /meals/:id
 > sample query
    GET /meals/c5fc2751-321f-4584-9cf8-c5fbe5cacf24
 
 > sample response
+
     {
         "success":true, 
         "meal":{
@@ -99,10 +101,11 @@ It is built to solve the problems associated with making orders for a meal.
 > NB: Any data is missing in the request body the API returns a 400
 
     sample response
-        {
-            "success": false,
-            "message": "Some required data is missing in the body"
-        }
+
+    {
+        "success": false,
+        "message": "Some required data is missing in the body"
+    }
  
  ### Delete meals with DELETE /meals/:id
  > sample request DELETE /meals/c5fc2751-321f-4584-9cf8-c5fbe5cacf24
@@ -174,6 +177,7 @@ NB: This request would also fail if the menu of the day has already been created
 
 
 ### get today menu via  GET /menu
+
 {
     "success": true,
     "menu": {
