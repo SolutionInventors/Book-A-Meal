@@ -3,7 +3,7 @@ class Meal {
   constructor(name, amount, image) {
     this.name = name.trim();
     this.amount = +amount;
-    this.image =  image.trim();
+    this.image = image.trim();
   }
 
   isValid() {
