@@ -1,11 +1,9 @@
-import mealRouter from './routers/meal-router';
-import customerRouter from './routers/customer-router';
-import catererRouter from './routers/caterer-router';
-import menuRouter from './routers/menu-router';
-import orderRouter from './routers/order-router';
+/* eslint no-console: off */
+
 import bodyParser from 'body-parser';
 import express from 'express';
 import dumbUsers from './dumbData/dumbUsers';
+import apiV1 from './routers/api-v1-router';
 
 dumbUsers();
 
@@ -17,12 +15,6 @@ app.use(bodyParser.urlencoded({
 }));
 
 app.use(bodyParser.json());
-app.use('/meals', mealRouter);
-app.use('/customer', customerRouter);
-app.use('/caterer', catererRouter);
-app.use('/menu', menuRouter);
-app.use('/orders', orderRouter);
-
 
 app.listen(port, (err) => {
   if (err) console.log('Error');
@@ -31,6 +23,7 @@ app.listen(port, (err) => {
   }
 });
 
+app.use('/api', apiV1);
 app.get('/*', (req, resp) => {
   resp.status(404).json({
     success: false,

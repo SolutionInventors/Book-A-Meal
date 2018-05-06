@@ -13,10 +13,14 @@
     "babel-preset-node6": "^11.0.0",
     "body-parser": "^1.18.2",
     "coveralls": "^3.0.0",
+    "ejs": "^2.6.1",
     "express": "^4.16.3",
     "gulp": "^3.9.1",
+    "jsonwebtoken": "^8.2.1",
     "node-uuid": "^1.4.8",
-    "jsonwebtoken": "^8.2.1"
+    "pg": "^7.4.2",
+    "pg-hstore": "^2.3.2",
+    "sequelize": "^4.37.6"
   },
   "scripts": {
     "transpile-es2015": "babel src -d lib",
@@ -46,7 +50,6 @@
     "istanbul": "^0.4.5",
     "local": "^0.3.3",
     "mocha": "^5.1.1",
-    
     "nyc": "^11.7.1",
     "supertest": "^3.0.0",
     "uuid": "^3.2.1"

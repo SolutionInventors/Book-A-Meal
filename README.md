@@ -30,8 +30,8 @@ It is built to solve the problems associated with making orders for a meal.
 
 ## API END POINTS
 
-### /meals/
-#### Retrieve meals with GET /meals
+### Meal routes
+#### Retrieve meals with GET api/v1/meals
 
 > sample response
 
@@ -52,9 +52,9 @@ It is built to solve the problems associated with making orders for a meal.
         }
 }
 
-#### Retrieve meal by id with GET /meals/:id
+#### Retrieve meal by id with GET api/v1/meals/:id
 > sample query
-   GET /meals/c5fc2751-321f-4584-9cf8-c5fbe5cacf24
+   GET api/v1/meals/c5fc2751-321f-4584-9cf8-c5fbe5cacf24
 
 > sample response
 
@@ -76,7 +76,7 @@ It is built to solve the problems associated with making orders for a meal.
     }
 
 
-### Create new meals with POST /meals
+### Create new meals with POST api/v1/meals
 > sample request body 
 
     {
@@ -107,7 +107,7 @@ It is built to solve the problems associated with making orders for a meal.
         "message": "Some required data is missing in the body"
     }
  
- ### Delete meals with DELETE /meals/:id
+ ### Delete meals with DELETE api/v1/meals/:id
  > sample request DELETE /meals/c5fc2751-321f-4584-9cf8-c5fbe5cacf24
 
 > sample response
@@ -125,7 +125,7 @@ It is built to solve the problems associated with making orders for a meal.
    NB: meal can only be deleted if the specified ID is found in the system
 
 
-### Update meals with PUT /meals/:id
+### Update meals with PUT api/v1/meals/:id
 sample request: /meals/a5dfccce-09ae-4e51-b990-74ee00c63946
 
 > sample response:
@@ -142,7 +142,7 @@ sample request: /meals/a5dfccce-09ae-4e51-b990-74ee00c63946
 
 
 ## /menu
-### create menu of today via request  POST /menu
+### create menu of today via request  POST api/v1/menu
 > sample request body 
 
     {
@@ -176,7 +176,7 @@ NB: The function filters any id that does not exist in the request.
 NB: This request would also fail if the menu of the day has already been created
 
 
-### get today menu via  GET /menu
+### get today menu via  GET api/v1/menu
 
 {
     "success": true,
@@ -194,7 +194,7 @@ NB: This request would also fail if the menu of the day has already been created
     }
 }
 
-### update today menu via  PUT /menu
+### update today menu via  PUT api/v1/menu
 
 > sample request body 
 
@@ -221,8 +221,8 @@ NB: This request would also fail if the menu of the day has already been created
         }
     }
 
-## /orders
-### get all orders via GET /orders
+## Order routes
+### get all orders via GET api/v1/orders
 > sample response 
 
         {
@@ -243,7 +243,7 @@ NB: This request would also fail if the menu of the day has already been created
             ]
         }
 
-### make an order via POST /orders/
+### make an order via POST api/v1/orders/
 
 > sample request body 
 
@@ -274,3 +274,32 @@ NB: This request would also fail if the menu of the day has already been created
     }
 
 
+### Update an order via PUT api/v1/orders
+> sample request body
+
+{
+    "mealsIdArr" : [
+        "b3b144e6-ccc6-44e2-bb90-47e4dab32f31", 
+        "93c0ec40-8803-4f68-8ce4-8d49f3a9af3a",
+    ],
+    "orderId": "70286b5a-4f0b-4cfe-b312-057febc8b562"
+
+}
+
+>sample request response
+
+{
+    "succcess": true,
+    "createdObj": {
+        "meals": [
+            {
+                "name": "Rice11",
+                "amount": 2011,
+                "image": "img.jpg",
+                "id": "b3b144e6-ccc6-44e2-bb90-47e4dab32f31"
+            }
+        ],
+        "date": "Sun May 06 2018",
+        "id": "70286b5a-4f0b-4cfe-b312-057febc8b562"
+    }
+}
