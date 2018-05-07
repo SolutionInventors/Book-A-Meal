@@ -35,22 +35,22 @@ It is built to solve the problems associated with making orders for a meal.
 
 > sample response
 
-{
-    "succes": true,
-    "meals": [
-        {
-            "name": "Rice0",
-            "amount": 2000,
-            "image": "img.jpg",
-            "id": "1b807c77-d1fe-4e5e-abd0-3017f53de78d"
-        },
-        {
-            "name": "Rice1",
-            "amount": 2001,
-            "image": "img.jpg",
-            "id": "c5fc2751-321f-4584-9cf8-c5fbe5cacf24"
-        }
-}
+    {
+        "succes": true,
+        "meals": [
+            {
+                "name": "Rice0",
+                "amount": 2000,
+                "image": "img.jpg",
+                "id": "1b807c77-d1fe-4e5e-abd0-3017f53de78d"
+            },
+            {
+                "name": "Rice1",
+                "amount": 2001,
+                "image": "img.jpg",
+                "id": "c5fc2751-321f-4584-9cf8-c5fbe5cacf24"
+            }
+    }
 
 #### Retrieve meal by id with GET api/v1/meals/:id
 > sample query
@@ -178,21 +178,21 @@ NB: This request would also fail if the menu of the day has already been created
 
 ### get today menu via  GET api/v1/menu
 
-{
-    "success": true,
-    "menu": {
-        "menu": [
-            {
-                "name": "Rice0",
-                "amount": 2000,
-                "image": "img.jpg",
-                "id": "f4e83016-4f16-4efa-a76d-7ce94fe08f73"
-            }
-        ],
-        "date": "Fri May 04 2018",
-        "id": "31a7690d-4bb0-489d-9ec6-475c84c6b1bd"
+    {
+        "success": true,
+        "menu": {
+            "menu": [
+                {
+                    "name": "Rice0",
+                    "amount": 2000,
+                    "image": "img.jpg",
+                    "id": "f4e83016-4f16-4efa-a76d-7ce94fe08f73"
+                }
+            ],
+            "date": "Fri May 04 2018",
+            "id": "31a7690d-4bb0-489d-9ec6-475c84c6b1bd"
+        }
     }
-}
 
 ### update today menu via  PUT api/v1/menu
 
@@ -277,29 +277,28 @@ NB: This request would also fail if the menu of the day has already been created
 ### Update an order via PUT api/v1/orders
 > sample request body
 
-{
-    "mealsIdArr" : [
-        "b3b144e6-ccc6-44e2-bb90-47e4dab32f31", 
-        "93c0ec40-8803-4f68-8ce4-8d49f3a9af3a",
-    ],
-    "orderId": "70286b5a-4f0b-4cfe-b312-057febc8b562"
-
-}
+    {
+        "mealsIdArr" : [
+            "b3b144e6-ccc6-44e2-bb90-47e4dab32f31", 
+            "93c0ec40-8803-4f68-8ce4-8d49f3a9af3a",
+        ],
+        "orderId": "70286b5a-4f0b-4cfe-b312-057febc8b562"
+    }
 
 >sample request response
 
-{
-    "succcess": true,
-    "createdObj": {
-        "meals": [
-            {
-                "name": "Rice11",
-                "amount": 2011,
-                "image": "img.jpg",
-                "id": "b3b144e6-ccc6-44e2-bb90-47e4dab32f31"
-            }
-        ],
-        "date": "Sun May 06 2018",
-        "id": "70286b5a-4f0b-4cfe-b312-057febc8b562"
+    {
+        "succcess": true,
+        "createdObj": {
+            "meals": [
+                {
+                    "name": "Rice11",
+                    "amount": 2011,
+                    "image": "img.jpg",
+                    "id": "b3b144e6-ccc6-44e2-bb90-47e4dab32f31"
+                }
+            ],
+            "date": "Sun May 06 2018",
+            "id": "70286b5a-4f0b-4cfe-b312-057febc8b562"
+        }
     }
-}
