@@ -1,5 +1,5 @@
 
-class Menu {
+export default class Menu {
   constructor(date, meals) {
     this.meals = meals;
     if (date instanceof Date) {
@@ -12,4 +12,3 @@ class Menu {
   }
 }
 
-export default Menu;

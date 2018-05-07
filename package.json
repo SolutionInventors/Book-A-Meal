@@ -20,7 +20,8 @@
     "node-uuid": "^1.4.8",
     "pg": "^7.4.2",
     "pg-hstore": "^2.3.2",
-    "sequelize": "^4.37.6"
+    "sequelize": "^4.37.6",
+    "sha": "^2.0.1"
   },
   "scripts": {
     "transpile-es2015": "babel src -d lib",
