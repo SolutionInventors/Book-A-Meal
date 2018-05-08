@@ -10,4 +10,5 @@ Book-A-Meal
 server/coverage
 server/middlewares
 server/try.js
-config/
+config
+server/services
