@@ -149,7 +149,7 @@ sample request: /meals/a5dfccce-09ae-4e51-b990-74ee00c63946
         "mealsIdArr": [ 
             f514a0f6-76ad-486e-9f8e-8b09e2faba9e, 
             07b54b12-f2fb-445d-a4f9-d9fa30dd5152
-        }
+        ]
     }
 
 > sample response 

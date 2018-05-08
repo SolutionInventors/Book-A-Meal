@@ -1,7 +1,7 @@
 
 
 export default function (sequelize, DataTypes) {
-  const Caterer = sequelize.define('caterer', {
+  const Caterer = sequelize.define('Caterer', {
     id: {
       allowNull: false,
       primaryKey: true,

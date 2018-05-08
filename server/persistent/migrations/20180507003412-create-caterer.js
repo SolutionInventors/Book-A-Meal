@@ -1,7 +1,7 @@
 /* eslint no-unused-vars:warn */
 
 export function up(queryInterface, Sequelize) {
-  return queryInterface.createTable('caterers', {
+  return queryInterface.createTable('Caterers', {
     id: {
       allowNull: false,
       autoIncrement: true,
