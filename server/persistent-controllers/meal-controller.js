@@ -1,54 +1,32 @@
-import mealService from '../services/meal-service';
+import mealService from '../persistent-services/meal-service';
 import Meal from '../models/Meal';
-import db from '../persistent/models/index';
-
-
-function createHelper(resp, mealObj) {
-  const { name } = mealObj;
-  db.Meal.findOne({ where: { name } })
-    .then((foundObj) => {
-      if (foundObj) {
-        resp.status(409).json({
-          success: false,
-          message: 'The meal name is already in the database',
-        });
-      } else {
-        db.Meal.create(mealObj).then((meal) => {
-          resp.status(201).json({
-            success: true,
-            createdObj: meal,
-          });
-        });
-      }
-    });
-}
 
 export default class MealController {
   getAll(req, resp) {
     const limit = req.body.limit ? req.body.limit : 100;
-    db.Meal.findAll({ limit }).then((meals) => {
-      resp.status(200).json(meals);
-    });
+    mealService.getAll(limit, meals => resp.json({
+      success: true,
+      meals,
+    }));
   }
 
   getById(req, resp) {
     const { params: { id } } = req;
+    const successfunc = (meal) => {
+      resp.status(200).json({
+        success: true,
+        meal,
+      });
+    };
+    const failedCallback = () => {
+      resp.status(404).json({
+        success: false,
+        message: 'The inputed id does not exist',
+      });
+    };
 
     if (id) {
-      db.Meal.findOne({ where: { id } })
-        .then((meal) => {
-          if (meal) {
-            resp.status(200).json({
-              success: true,
-              meal,
-            });
-          } else {
-            resp.status(404).json({
-              success: false,
-              message: 'The inputed id does not exist',
-            });
-          }
-        });
+      mealService.getById(id, successfunc, failedCallback);
     } else {
       resp.status(400).json({
         success: false,
@@ -61,8 +39,23 @@ export default class MealController {
     const { name, amount, image } = req.body;
     if (name && amount && image) {
       const mealObj = new Meal(name, amount, image);
+
+      const existsCallback = () => {
+        resp.status(409).json({
+          success: false,
+          message: 'The meal name is already in the database',
+        });
+      };
+
+      const success = (meal) => {
+        resp.status(201).json({
+          success: true,
+          createdObj: meal,
+        });
+      };
+
       if (mealObj.isValid()) {
-        createHelper(resp, mealObj);
+        mealService.create(mealObj, existsCallback, success);
       } else {
         resp.status(422).json({
           success: false,
@@ -86,25 +79,19 @@ export default class MealController {
   delete(req, resp) {
     const { params: { id } } = req;
     if (id) {
-      const deletedObj = mealService.delete(id);
-
-      db.Meal.destroy({where: { id }})
-        .then((deletedRows) => {
-          if(deletedObj){
-            resp.status()
-          }
-        })
-      if (deletedObj) {
-        resp.status(201).json({
+      const success = (deletedObj) => {
+        resp.status(200).json({
           success: true,
           deletedObj,
         });
-      } else {
+      };
+      const notFound = () => {
         resp.status(404).json({
           success: false,
           message: 'There is no meal with the specified id',
         });
-      }
+      };
+      mealService.delete(id, success, notFound);
     } else {
       resp.status(400).json({
         success: false,
@@ -120,18 +107,21 @@ export default class MealController {
     if (name && amount && image) {
       if (id) {
         const newMealObj = new Meal(name, amount, image);
-        const createdObj = mealService.update(id, newMealObj);
-        if (createdObj) {
+        const success = (createdObj) => {
           resp.status(201).json({
             success: true,
             createdObj,
           });
-        } else {
+        };
+
+        const notFound = () => {
           resp.status(404).json({
             success: false,
             message: 'The id you specified does not exist',
           });
-        }
+        };
+
+        mealService.modify(id, newMealObj, success, notFound);
       } else {
         resp.status(400).json({
           success: false,
@@ -155,3 +145,4 @@ export default class MealController {
     }
   }
 }
+

@@ -1,11 +1,30 @@
 import menuService from '../services/menu-service';
 import Menu from '../models/Menu';
-import db from '../persistent/models/index';
 
 export default class MenuController {
   create(req, resp) {
     const { body: { mealsIdArr } } = req;
-    console.log(mealsIdArr);
+
+    const success = (menuObj) => {
+      resp.status(201).json({
+        success: true,
+        createdObj: menuObj,
+      });
+    };
+
+    const menuExists = () => {
+      resp.status(409).json({
+        success: false,
+        message: 'The menu of today has already been created',
+      });
+    };
+
+    const noValidId = () =>{
+      resp.status(422).json({
+        success: false,
+        message: 'There was no valid mealId in your mealsIdArr',
+      });
+    };
     if (mealsIdArr) {
       const meals = menuService.getMealsFromArray(Array.from(mealsIdArr));
 
