@@ -9,7 +9,13 @@ class MealService {
           alreadyExistCallback();
         } else {
           db.Meal.create(mealObj).then((meal) => {
-            successCallBack(meal);
+            successCallBack({
+              id: meal.id,
+              name: meal.name,
+              amount: meal.amount,
+              image: meal.image,
+              createdAt: meal.createdAt,
+            });
           });
         }
       });
@@ -45,7 +51,9 @@ class MealService {
 
 
   modify(id, newMeal, successCallBack, notFoundCallback) {
-    db.Meal.find({ id })
+    db.Meal.find({
+      where: { id },
+    })
       .then((meal) => {
         if (meal) {
           meal.update(newMeal)
