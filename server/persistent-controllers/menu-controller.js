@@ -1,5 +1,4 @@
-import menuService from '../services/menu-service';
-import Menu from '../models/Menu';
+import menuService from '../persistent-services/menu-service';
 
 export default class MenuController {
   create(req, resp) {
@@ -19,43 +18,29 @@ export default class MenuController {
       });
     };
 
-    const noValidId = () =>{
+    const noValidId = () => {
       resp.status(422).json({
         success: false,
         message: 'There was no valid mealId in your mealsIdArr',
       });
     };
-    if (mealsIdArr) {
-      const meals = menuService.getMealsFromArray(Array.from(mealsIdArr));
 
-      let menuObj = new Menu(new Date(), meals);
-      menuObj = menuService.createTodayMenu(menuObj);
-      if (menuObj) {
-        resp.status(201).json({
-          success: true,
-          createdObj: menuObj,
-        });
-      } else if (menuObj === false) {
-        resp.status(409).json({
-          success: false,
-          message: 'The menu of today has already been created',
-        });
-      } else {
-        resp.status(422).json({
-          success: false,
-          message: 'There was no valid mealId in your mealsIdArr',
-        });
-      }
+
+    if (mealsIdArr) {
+      menuService.createTodayMenu(mealsIdArr, success, noValidId, menuExists);
+    } else {
+      resp.status(400).json({
+        success: false,
+        message: 'Some required fields are missing',
+        missingData: ['mealsIdArr'],
+      });
     }
-    resp.status(400).json({
-      success: false,
-      message: 'Some required fields are missing',
-      missingData: ['mealsIdArr'],
-    });
   }
+
+
   retrieveByDate(req, resp) {
     const date = new Date(req.date);
-    const menu = menuService.getMenu(date.toDateString());
+    const menu = menuService.getMenu(date);
     if (date) {
       if (menu) {
         resp.status(200).json({
@@ -80,21 +65,30 @@ export default class MenuController {
   update(req, resp) {
     const { body: { mealsIdArr } } = req;
     if (mealsIdArr) {
-      const meals = menuService.getMealsFromArray(mealsIdArr);
-
-      let menuObj = new Menu(new Date(), meals);
-      menuObj = menuService.updateTodayMenu(mealsIdArr);
-      if (menuObj) {
+      const success = (menuObj, mealArr) => {
+        const createdObj = {
+          menuId: menuObj.id,
+          meals: mealArr,
+        };
         resp.status(201).json({
           success: true,
-          createdObj: menuObj,
+          createdObj,
         });
-      } else if (menuObj === false) {
+      };
+      const noMenu = () => {
         resp.status(409).json({
           success: false,
           message: 'The menu of today has not yet been created',
         });
-      }
+      };
+      const noValidId = () => {
+        resp.status(404).json({
+          success: false,
+          message: 'There was no valid mealId in your mealIdArr',
+        });
+      };
+
+      menuService.updateTodayMenu(mealsIdArr, success, noMenu, noValidId);
     } else {
       resp.status(400).json({
         success: false,
@@ -102,6 +96,22 @@ export default class MenuController {
         missingData: ['mealsIdArr'],
       });
     }
+  }
+
+  retrieve(req, resp) {
+    const success = (menu) => {
+      resp.status(200).json({
+        success: true,
+        menu,
+      });
+    };
+    const notFound = () => {
+      resp.status(404).json({
+        success: false,
+        message: 'The specified menu of today has not yet been set',
+      });
+    };
+    menuService.getMenu(success, notFound);
   }
 }
 

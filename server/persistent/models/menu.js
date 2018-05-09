@@ -9,7 +9,6 @@ export default function (sequelize, DataTypes) {
       type: DataTypes.UUID,
       defaultValue: DataTypes.UUIDV4,
     },
-    dateCreated: DataTypes.DATE,
   }, {});
   Menu.associate = (models) => {
     Menu.belongsToMany(models.Meal, {
