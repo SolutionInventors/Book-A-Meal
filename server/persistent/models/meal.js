@@ -22,15 +22,19 @@ export default function (sequelize, DataTypes) {
 
   Meal.associate = (models) => {
     Meal.belongsToMany(models.Menu, {
-      through: 'MenuMeal',
       foreignKey: 'mealId',
+      otherKey: 'menuId',
+      through: models.MenuMeal,
       onDelete: 'NONE',
+      as: 'menus',
     });
 
     Meal.belongsToMany(models.Order, {
-      through: 'OrderMeal',
       foreignKey: 'mealId',
+      otherKey: 'orderId',
+      through: models.OrderMeal,
       onDelete: 'NONE',
+      as: 'orders',
     });
   };
   return Meal;

@@ -8,5 +8,6 @@ const controller = new MenuController();
 menuRouter.get('/', controller.retrieve);
 menuRouter.post('/', controller.create);
 menuRouter.put('/', controller.update);
+
 export default menuRouter;
 

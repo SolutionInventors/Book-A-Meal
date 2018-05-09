@@ -4,34 +4,38 @@ class MenuService {
   createTodayMenu(mealsIdArr, successCallBack, noValidId, alreadyCreated) {
     db.Menu.find({ // find menu of today
       where: { createdAt: new Date() },
+      include: [{
+        model: db.Meal,
+        through: {
+          foreignKey: 'mealId',
+          attributes: ['id', 'name'],
+        },
+        as: 'meals',
+      }],
     }).then((menu) => {
       if (menu) alreadyCreated();
 
       else {
-        const whereArr = mealsIdArr.map(id => ({ id }));
-        db.Meal.findAll({
-          where: { $or: whereArr },
-          attributes: ['id', 'name', 'image', 'amount'],
-        }).then((mealArr) => {
-          if (mealArr.length > 0) { // no id in the mealsIdArr was found
-            db.Menu.create({})
-              .then((todayMenu) => {
-                mealArr.forEach((meal) => {
-                  db.MenuMeal.create({
-                    menuId: todayMenu.id,
-                    mealId: meal.id,
-                  });
-                });
-                const menuObj = {
-                  menuId: todayMenu.id,
-                  meals: mealArr,
-                };
-                successCallBack(menuObj);
-              });
-          } else {
-            noValidId();
-          }
-        });
+        // const whereArr = mealsIdArr.map(id => ({ id }));
+        // db.Meal.findAll({
+        //   where: { $or: whereArr },
+        //   attributes: ['id', 'name', 'image', 'amount'],
+        // }).then((mealArr) => {
+        //   if (mealArr.length > 0) { // no id in the mealsIdArr was found
+        //     db.Menu.create({})
+        //       .then((todayMenu) => {
+        //         mealArr.forEach((meal) => {
+        //           db.MenuMeal.create({
+        //             menuId: todayMenu.id,
+        //             mealId: meal.id,
+        //           });
+        //         });
+        //         const menuObj = {
+        //           menuId: todayMenu.id,
+        //           meals: mealArr,
+        //         };
+        successCallBack(menu);
+        // });
       }
       return undefined;
     });

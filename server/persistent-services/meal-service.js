@@ -63,6 +63,14 @@ class MealService {
         }
       });
   }
+
+  getMealFromArrPromise(mealsIdArr) {
+    const whereArr = mealsIdArr.map(id => ({ id }));
+    return db.Meal.findAll({
+      where: { $or: whereArr },
+      attributes: ['id', 'name', 'image', 'amount'],
+    });
+  }
 }
 
 export default new MealService();

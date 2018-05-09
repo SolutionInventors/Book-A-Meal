@@ -4,7 +4,6 @@ export default function (sequelize, DataTypes) {
   const Menu = sequelize.define('Menu', {
     id: {
       allowNull: false,
-      autoIncrement: true,
       primaryKey: true,
       type: DataTypes.UUID,
       defaultValue: DataTypes.UUIDV4,
@@ -12,9 +11,11 @@ export default function (sequelize, DataTypes) {
   }, {});
   Menu.associate = (models) => {
     Menu.belongsToMany(models.Meal, {
-      through: models.MenuMeal,
       foreignkey: 'menuId',
+      otherKey: 'mealId',
+      through: models.MenuMeal,
       onDelete: 'NONE',
+      as: 'meals',
     });
   };
   return Menu;
