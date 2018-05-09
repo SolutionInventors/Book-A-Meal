@@ -1,58 +1,75 @@
-
-import { v4 } from 'node-uuid';
-import Meal from '../models/Meal';
+import db from '../persistent/models/index';
 
 class MealService {
-  constructor() {
-    this.meals = [];
+  create(mealObj, alreadyExistCallback, successCallBack) {
+    const { name } = mealObj;
+    db.Meal.findOne({ where: { name } })
+      .then((foundObj) => {
+        if (foundObj) {
+          alreadyExistCallback();
+        } else {
+          db.Meal.create(mealObj).then((meal) => {
+            successCallBack({
+              id: meal.id,
+              name: meal.name,
+              amount: meal.amount,
+              image: meal.image,
+              createdAt: meal.createdAt,
+            });
+          });
+        }
+      });
   }
 
-  getAllMeals() {
-    return this.meals;
+  getAll(limit, callback) {
+    db.Meal.findAll({ limit }).then((meals) => {
+      callback(meals);
+    });
   }
 
-  getById(mealId) {
-    return this.meals.find(mealObj => mealObj.id == mealId);
+  getById(id, foundCallback, notFoundCallback) {
+    db.Meal.findOne({ where: { id } })
+      .then((meal) => {
+        if (meal) {
+          foundCallback(meal);
+        } else {
+          notFoundCallback();
+        }
+      });
   }
 
-  exists(mealObj) {
-    return this.meals.find(obj => mealObj.name == obj.name || mealObj.id == obj.id);
-  }
-  createMeal(mealObj) {
-    if (mealObj instanceof Meal && mealObj.isValid()) {
-      if (this.exists(mealObj)) {
-        return false;
-      }
-      mealObj.id = v4();
-      this.meals.push(mealObj);
-      return mealObj;
-    }
-    return undefined;
-  }
-
-  getByName(mealName) {
-    return this.meals.find(mealObj => mealObj.name == mealName);
+  delete(id, successCallBack, notFoundCallback) {
+    db.Meal.destroy({ where: { id } })
+      .then((deletedRows) => {
+        if (deletedRows) {
+          successCallBack(deletedRows);
+        } else {
+          notFoundCallback();
+        }
+      });
   }
 
 
-  update(mealId, newMealObj) {
-    if (newMealObj instanceof Meal) {
-      const mealIndex = this.meals.findIndex(obj => obj.id == mealId);
-
-      if (mealIndex >= 0 && newMealObj.isValid()) {
-        newMealObj.id = this.meals[mealIndex].id;
-        this.meals[mealIndex] = newMealObj;
-        return newMealObj;
-      }
-      return false;
-    }
-    return undefined;
+  modify(id, newMeal, successCallBack, notFoundCallback) {
+    db.Meal.find({
+      where: { id },
+    })
+      .then((meal) => {
+        if (meal) {
+          meal.update(newMeal)
+            .then(updatedMeal => successCallBack(updatedMeal));
+        } else {
+          notFoundCallback();
+        }
+      });
   }
 
-  delete(mealId) {
-    const index = this.meals.findIndex(obj => obj.id === mealId);
-    if (index >= 0) return this.meals.splice(index, 1)[0];
-    return undefined;
+  getMealFromArrPromise(mealsIdArr) {
+    const whereArr = mealsIdArr.map(id => ({ id }));
+    return db.Meal.findAll({
+      where: { $or: whereArr },
+      attributes: ['id', 'name', 'image', 'amount'],
+    });
   }
 }
 

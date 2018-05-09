@@ -2,10 +2,8 @@
 
 import bodyParser from 'body-parser';
 import express from 'express';
-import dumbUsers from './dumbData/dumbUsers';
 import apiV1 from './routers/api-v1-router';
 
-dumbUsers();
 
 const port = process.env.PORT || 4000;
 const app = express();

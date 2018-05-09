@@ -1,51 +1,126 @@
-import mealService from '../services/meal-service';
-import { v4 } from 'node-uuid';
-import Menu from '../models/Menu';
+import db from '../persistent/models/index';
 
 class MenuService {
-  constructor() {
-    this.menu = [];
-  }
+  createTodayMenu(mealsIdArr, successCallBack, noValidId, alreadyCreated) {
+    db.Menu.find({ // find menu of today
+      where: { createdAt: new Date() },
+      include: [{
+        model: db.Meal,
+        through: {
+          foreignKey: 'mealId',
+          attributes: ['id', 'name'],
+        },
+        as: 'meals',
+      }],
+    }).then((menu) => {
+      if (menu) alreadyCreated();
 
-  createTodayMenu(menuObj) {
-    if (menuObj && menuObj instanceof Menu) {
-      menuObj.date = new Date().toDateString();
-      if (this.exists(menuObj)) {
-        return false;
-      } else if (menuObj.isValid()) {
-        menuObj.id = v4();
-        this.menu.push(menuObj);
-        return menuObj;
+      else {
+        // const whereArr = mealsIdArr.map(id => ({ id }));
+        // db.Meal.findAll({
+        //   where: { $or: whereArr },
+        //   attributes: ['id', 'name', 'image', 'amount'],
+        // }).then((mealArr) => {
+        //   if (mealArr.length > 0) { // no id in the mealsIdArr was found
+        //     db.Menu.create({})
+        //       .then((todayMenu) => {
+        //         mealArr.forEach((meal) => {
+        //           db.MenuMeal.create({
+        //             menuId: todayMenu.id,
+        //             mealId: meal.id,
+        //           });
+        //         });
+        //         const menuObj = {
+        //           menuId: todayMenu.id,
+        //           meals: mealArr,
+        //         };
+        successCallBack(menu);
+        // });
       }
-    }
-    return undefined;
+      return undefined;
+    });
   }
 
-  exists(menuObj) {
-    return !!this.menu.find(obj => menuObj.date == obj.date);
-  }
-  getMenu(dateStr = new Date().toDateString()) {
-    return this.menu.find(item => item.date == dateStr);
+
+  getMenu(callBack, menuNotSet, date = new Date()) {
+    db.Menu.findOne({
+      where: { createdAt: date },
+    }).then((menu) => {
+      if (menu) {
+        db.MenuMeal.findAll({
+          attributes: ['menuId', 'mealId'],
+          where: { menuId: menu.id },
+        }).then((menuMeals) => {
+          const whereArr = menuMeals.map(obj => ({ id: obj.mealId }));
+          db.Meal.findAll({
+            where: whereArr,
+          }).then((meals) => {
+            const todayMenu = {
+              menuId: menu.id,
+              meals,
+            };
+            callBack(todayMenu);
+          });
+        });
+      } else {
+        menuNotSet();
+      }
+    });
   }
 
-  updateTodayMenu(mealIdArr) {
-    const menu = this.getMealsFromArray(mealIdArr);
-    const date = new Date();
-    const index = this.menu.findIndex(item => item.date == date.toDateString());
 
-    if (index >= 0 && menu.length >= 0) {
-      const menuObj = new Menu(new Date(), menu);
+  updateTodayMenu(mealsIdArr, callBack, noMenuCallback, noValidId) {
+    db.Menu.find({
+      where: { createdAt: new Date() },
+    }).then((menu) => {
+      if (!menu) noMenuCallback();
+      else {
+        const whereArr = mealsIdArr.map(id => ({ id }));
+        db.Meal.findAll({
+          where: { $or: whereArr },
+          attributes: ['id', 'name', 'image', 'amount'],
+        }).then((mealArr) => {
+          if (mealArr.length > 0) {
+            db.MenuMeal.destroy({
+              where: { menuId: menu.id },
+            });
 
-      this.menu[index] = menuObj;
-      return menuObj;
-    }
-    return false;
+            mealArr.forEach((meal) => {
+              db.MenuMeal.create({
+                menuId: menu.id,
+                mealId: meal.id,
+              });
+            });
+            callBack(menu, mealArr);
+          } else {
+            noValidId();
+          }
+        });
+      }
+    });
   }
-  getMealsFromArray(mealIdArr) {
-    return mealIdArr.map(id => mealService.getById(id))
-      .filter(item => item);
+
+  retrieve(callback, noMenuCallback) {
+    db.Menu.findOne({
+      attributes: ['id', 'createdAt'],
+      where: { createdAt: new Date() },
+    }).then((menu) => {
+      if (!menu) noMenuCallback();
+      else {
+        db.MenuMeal.findAll({
+          where: { menuId: menu.id },
+        }).then((menuMeals) => {
+          const whereArr = menuMeals.map(menuMeal => menuMeal.mealId);
+          db.Meal.findAll({
+            where: { mealId: whereArr },
+            attributes: ['id', 'name', 'amount', 'image'],
+          }).then((meals) => {
+            callback(menu, meals);
+          });
+        });
+      }
+    });
   }
 }
-
 export default new MenuService();
 

@@ -1,55 +1,73 @@
-import menuService from './menu-service';
-import Order from '../models/Order';
-import { v4 } from 'node-uuid';
+import db from '../persistent/models/index';
 
 class OrderService {
-  constructor() {
-    this.orders = [];
+  makeOrder(mealsIdArr, customerId, successCallBack, noValidId, noMenu) {
+    db.Menu.findOne({
+      attributes: ['id'],
+      where: { createdAt: new Date() },
+    }).then((todayMenu) => {
+      if (!todayMenu) noMenu();
+      else {
+        const mealsWhere = mealsIdArr.map(id => ({ mealId: id }));
+        db.MenuMeal.findAll({
+          attributes: ['mealId'],
+          where: { menuId: todayMenu.id, $or: mealsWhere },
+        }).then((mealsInMenu) => {
+          if (mealsInMenu.length > 0) {
+            db.Order.create({
+              menuId: todayMenu.id,
+              customerId,
+            }).then((order) => {
+              mealsInMenu.forEach((meal) => {
+                db.OrderMeal.create({
+                  mealId: meal.id,
+                  orderId: order.id,
+                }).then();
+              });
+              db.Meal.findAll({
+                where: { id: mealsInMenu },
+              }).then((meals) => {
+                const orderObj = {
+                  orderId: order.id,
+                  meals,
+                };
+                successCallBack(orderObj);
+              });
+            });
+          } else {
+            noValidId();
+          }
+        });
+      }
+    });
   }
 
-  makeOrder(orderObj) {
-    if (orderObj instanceof Order) {
-      console.log(orderObj.isValid(), '=========');
-      orderObj.id = v4();
-      this.orders.push(orderObj);
-      return orderObj;
-    }
-    return undefined;
+  getOrdersByDate(callback, date = new Date()) {
+    db.Order.findAll({
+      attributes: [['id', 'orderId']],
+      where: { createdAt: date },
+    }).then((orders) => {
+      callback(orders);
+    });
   }
 
-  modify(orderId, orderObj) {
-    const index = this.orders.findIndex(item => item.id == orderId);
-    if (index >= 0) {
-      this.orders[index].meals = orderObj.meals;
-      return this.orders[index];
-    }
-    return undefined;
-  }
-  getOrdersByDate(date = new Date()) {
-    return this.orders.filter(order => order.date == date.toDateString());
-  }
+//   getById(id) {
+//     return this.orders.find(item => item.id == id);
+//   }
 
-  getAllOrdersEverMade() {
-    return this.orders;
-  }
-
-  getById(id) {
-    return this.orders.find(item => item.id == id);
-  }
-
-  getOrderFromMenu(mealsIdArr, customer) {
-    const todayMenu = menuService.getMenu().meals;
-    const meals =
-      mealsIdArr
-        .map(mealId =>
-          todayMenu.find(mealObj =>
-            mealObj.id == mealId))
-        .filter(obj => obj);
+//   getOrderFromMenu(mealsIdArr, customer) {
+//     const todayMenu = menuService.getMenu().meals;
+//     const meals =
+//       mealsIdArr
+//         .map(mealId =>
+//           todayMenu.find(mealObj =>
+//             mealObj.id == mealId))
+//         .filter(obj => obj);
 
 
-    console.log(meals);
-    return new Order(meals, customer, new Date());
-  }
+//     console.log(meals);
+//     return new Order(meals, customer, new Date());
+//   }
 }
 
 export default new OrderService();

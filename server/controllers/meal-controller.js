@@ -1,67 +1,64 @@
 import mealService from '../services/meal-service';
-import Meal from '../models/Meal';
 
 export default class MealController {
   getAll(req, resp) {
-    const meals = mealService.getAllMeals();
-    resp.status(200).json({
-      succes: true,
+    const limit = req.body.limit ? req.body.limit : 100;
+    mealService.getAll(limit, meals => resp.json({
+      success: true,
       meals,
-    });
+    }));
   }
 
   getById(req, resp) {
-    const { params } = req;
+    const { params: { id } } = req;
+    const successfunc = (meal) => {
+      resp.status(200).json({
+        success: true,
+        meal,
+      });
+    };
+    const failedCallback = () => {
+      resp.status(404).json({
+        success: false,
+        message: 'The inputed id does not exist',
+      });
+    };
 
-    const meal = mealService.getById(params.id);
-    if (params.id) {
-      if (meal) {
-        resp.status(200).json({
-          success: true,
-          meal,
-        });
-      } else {
-        resp.status(404).json({
-          success: false,
-          message: 'The inputed id does not exist',
-        });
-      }
+    if (id) {
+      mealService.getById(id, successfunc, failedCallback);
+    } else {
+      resp.status(400).json({
+        success: false,
+        message: 'Missing id',
+      });
     }
-
-    resp.status(400).json({
-      success: false,
-      message: 'Missing id',
-    });
   }
-
 
   create(req, resp) {
     const { name, amount, image } = req.body;
     if (name && amount && image) {
-      let mealObj = new Meal(name, amount, image);
+      const mealObj = { name, amount, image };
+
+      const existsCallback = () => {
+        resp.status(409).json({
+          success: false,
+          message: 'The meal name is already in the database',
+        });
+      };
+
+      const success = (meal) => {
+        resp.status(201).json({
+          success: true,
+          createdObj: meal,
+        });
+      };
+
       if (mealObj.isValid()) {
-        mealObj = mealService.createMeal(mealObj);
-        if (mealObj) {
-          resp.status(201).json({
-            success: true,
-            message: 'Meal was created successfully',
-            createdObj: mealObj,
-          });
-        } else if (mealObj === false) {
-          resp.status(409).json({
-            success: false,
-            message: 'The specified meal name already exists',
-          });
-        } else {
-          resp.status(500).status({
-            success: false,
-            message: 'Server failed to process your request',
-          });
-        }
+        mealService.create(mealObj, existsCallback, success);
       } else {
         resp.status(422).json({
           success: false,
-          message: 'Check that name, amount and image are provided in your request',
+          message: 'The format of the inputed values is invalid. Ensure that amount is a number and name is a valid string',
         });
       }
     } else {
@@ -81,18 +78,19 @@ export default class MealController {
   delete(req, resp) {
     const { params: { id } } = req;
     if (id) {
-      const deletedObj = mealService.delete(id);
-      if (deletedObj) {
-        resp.status(201).json({
+      const success = (deletedObj) => {
+        resp.status(200).json({
           success: true,
           deletedObj,
         });
-      } else {
+      };
+      const notFound = () => {
         resp.status(404).json({
           success: false,
           message: 'There is no meal with the specified id',
         });
-      }
+      };
+      mealService.delete(id, success, notFound);
     } else {
       resp.status(400).json({
         success: false,
@@ -107,19 +105,22 @@ export default class MealController {
     const { params: { id } } = req;
     if (name && amount && image) {
       if (id) {
-        const newMealObj = new Meal(name, amount, image);
-        const createdObj = mealService.update(id, newMealObj);
-        if (createdObj) {
+        const newMealObj = { name, amount, image };
+        const success = (createdObj) => {
           resp.status(201).json({
             success: true,
             createdObj,
           });
-        } else {
+        };
+
+        const notFound = () => {
           resp.status(404).json({
             success: false,
             message: 'The id you specified does not exist',
           });
-        }
+        };
+
+        mealService.modify(id, newMealObj, success, notFound);
       } else {
         resp.status(400).json({
           success: false,
