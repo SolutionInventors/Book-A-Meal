@@ -11,8 +11,7 @@ export default function (sequelize, DataTypes) {
   }, {});
   Menu.associate = (models) => {
     Menu.belongsToMany(models.Meal, {
-      foreignkey: 'menuId',
-      otherKey: 'mealId',
+      foreignkey: 'MenuId',
       through: models.MenuMeal,
       onDelete: 'NONE',
       as: 'meals',

@@ -7,8 +7,7 @@ export default class MenuDefinition {
         type: Sequelize.DATE,
       },
       id: {
-        type: Sequelize.INTEGER,
-        autoIncrement: true,
+        type: Sequelize.UUID,
       },
     };
   }

@@ -5,30 +5,31 @@
 module.exports = {
   up(queryInterface, Sequelize) {
     return queryInterface.createTable('MenuMeals', {
-      menuId: {
+      MealId: {
         type: Sequelize.UUID,
         onDelete: 'CASCADE',
         references: {
-          model: 'Menu',
+          model: 'Meals',
           key: 'id',
         },
       },
-      mealId: {
-        type: Sequelize.UUID,
-        onDelete: 'CASCADE',
-        references: {
-          model: 'Meal',
-          key: 'id',
-        },
         createdAt: {
           allowNull: false,
           type: Sequelize.DATE,
         },
+      MenuId: {
+        type: Sequelize.UUID,
+        onDelete: 'CASCADE',
+        references: {
+          model: 'Menus',
+          key: 'id',
+        },
+      },
+     
         updatedAt: {
           allowNull: false,
           type: Sequelize.DATE,
         },
-      },
     });
   },
   down(queryInterface, Sequelize) { return queryInterface.dropTable('MenuMeals'); },

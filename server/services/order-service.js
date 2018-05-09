@@ -1,43 +1,30 @@
-import db from '../persistent/models/index';
+import db from '../../models/index';
 
 class OrderService {
   makeOrder(mealsIdArr, customerId, successCallBack, noValidId, noMenu) {
     db.Menu.findOne({
-      attributes: ['id'],
       where: { createdAt: new Date() },
+      includes: [{
+        model: db.Meal,
+        through: 'menuId',
+        as: 'meals',
+        where: { id: mealsIdArr },
+      }],
     }).then((todayMenu) => {
-      if (!todayMenu) noMenu();
-      else {
-        const mealsWhere = mealsIdArr.map(id => ({ mealId: id }));
-        db.MenuMeal.findAll({
-          attributes: ['mealId'],
-          where: { menuId: todayMenu.id, $or: mealsWhere },
-        }).then((mealsInMenu) => {
-          if (mealsInMenu.length > 0) {
-            db.Order.create({
-              menuId: todayMenu.id,
-              customerId,
-            }).then((order) => {
-              mealsInMenu.forEach((meal) => {
-                db.OrderMeal.create({
-                  mealId: meal.id,
-                  orderId: order.id,
-                }).then();
-              });
-              db.Meal.findAll({
-                where: { id: mealsInMenu },
-              }).then((meals) => {
-                const orderObj = {
-                  orderId: order.id,
-                  meals,
-                };
-                successCallBack(orderObj);
-              });
-            });
-          } else {
-            noValidId();
-          }
-        });
+      if (todayMenu) {
+        if (todayMenu.meals.length > 0) {
+          db.Order.create({
+            customerId,
+          }).then((order) => {
+            order.addMeals(todayMenu.meals)
+              .then(orderObj => successCallBack(orderObj));
+          });
+        } else {
+          noValidId();
+        }
+        successCallBack(todayMenu);
+      } else {
+        noMenu();
       }
     });
   }

@@ -7,7 +7,7 @@ export default class MenuController {
     const success = (menuObj) => {
       resp.status(201).json({
         success: true,
-        createdObj: menuObj,
+        data: menuObj,
       });
     };
 

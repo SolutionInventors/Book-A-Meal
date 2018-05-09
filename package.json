@@ -24,6 +24,7 @@
     "sha": "^2.0.1"
   },
   "scripts": {
+    "startmon": "nodemon --exec npm start",
     "transpile-es2015": "babel src -d lib",
     "start": " babel-node  server/app.js --presets env",
     "test": "nyc mocha  server/test || true",

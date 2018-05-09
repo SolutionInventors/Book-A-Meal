@@ -1,6 +1,6 @@
 import Sequelize from 'sequelize';
 
-export default class CustomerDefinitions {
+export default class CatererDefinitions {
   attributes() {
     return {
       username: {
@@ -17,8 +17,7 @@ export default class CustomerDefinitions {
         allowNulls: false,
       },
       id: {
-        type: Sequelize.INTEGER,
-        autoIncrement: true,
+        type: Sequelize.UUID,
         primaryKey: true,
         allowNulls: false,
       },

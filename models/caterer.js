@@ -1,5 +1,3 @@
-
-
 export default function (sequelize, DataTypes) {
   const Caterer = sequelize.define('Caterer', {
     id: {

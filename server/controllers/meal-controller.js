@@ -49,14 +49,14 @@ export default class MealController {
       const success = (meal) => {
         resp.status(201).json({
           success: true,
-          createdObj: meal,
+          data: meal,
         });
       };
 
-      if (mealObj.isValid()) {
+      if (!Number.isNaN(amount)) {
         mealService.create(mealObj, existsCallback, success);
       } else {
-        resp.status(422).json({
+        resp.status(+).json({
           success: false,
           message: 'The format of the inputed values is invalid. Ensure that amount is a number and name is a valid string',
         });
@@ -81,7 +81,7 @@ export default class MealController {
       const success = (deletedObj) => {
         resp.status(200).json({
           success: true,
-          deletedObj,
+          data: deletedObj,
         });
       };
       const notFound = () => {
@@ -109,7 +109,7 @@ export default class MealController {
         const success = (createdObj) => {
           resp.status(201).json({
             success: true,
-            createdObj,
+            data: createdObj,
           });
         };
 
@@ -144,4 +144,3 @@ export default class MealController {
     }
   }
 }
-

@@ -16,9 +16,8 @@ export default class MealDefinition {
         type: Sequelize.BLOB,
       },
       id: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.UUID,
         primaryKey: true,
-        autoIncrement: true,
       },
     };
   }

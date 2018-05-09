@@ -1,4 +1,4 @@
-import db from '../persistent/models/index';
+import db from '../../models/index';
 
 class MealService {
   create(mealObj, alreadyExistCallback, successCallBack) {
@@ -62,14 +62,6 @@ class MealService {
           notFoundCallback();
         }
       });
-  }
-
-  getMealFromArrPromise(mealsIdArr) {
-    const whereArr = mealsIdArr.map(id => ({ id }));
-    return db.Meal.findAll({
-      where: { $or: whereArr },
-      attributes: ['id', 'name', 'image', 'amount'],
-    });
   }
 }
 

@@ -1,24 +1,20 @@
-/* eslint no-unused-vars:warn */
+
+/* eslint no-unused-vars: warn */
 /* eslint func-names: off */
 
 module.exports = {
   up(queryInterface, Sequelize) {
-    return queryInterface.createTable('Customers', {
+    return queryInterface.createTable('Orders', {
       id: {
         allowNull: false,
-        autoIncrement: true,
         primaryKey: true,
         type: Sequelize.UUID,
-        defaultValue: Sequelize.UUIDV4,
       },
-      email: {
+      customerId: {
         type: Sequelize.STRING,
-        unique: true,
-        allowNull: false,
       },
-      password: {
-        type: Sequelize.STRING,
-        allowNull: false,
+      date: {
+        type: Sequelize.DATE,
       },
       createdAt: {
         allowNull: false,
@@ -30,5 +26,5 @@ module.exports = {
       },
     });
   },
-  down(queryInterface, Sequelize) { return queryInterface.dropTable('Customers'); },
+  down(queryInterface, Sequelize) { return queryInterface.dropTable('Orders'); },
 };
