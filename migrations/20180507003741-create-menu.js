@@ -21,6 +21,8 @@ module.exports = {
       },
       dateCreated:{
         type: Sequelize.STRING,
+        allowNull: false,
+        unique: true,
       }
     });
   },

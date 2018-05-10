@@ -14,7 +14,7 @@ export default function verifyToken(req, resp, next) {
           message: 'The token you provided is invalid',
         });
       } else {
-        req.user = authData;
+        req.authData = authData;
         console.log(authData, 'authData');
         next();
       }

@@ -2,8 +2,14 @@ import menuService from '../services/menuService';
 
 export default class MenuController {
   create(req, resp) {
-    const { body: { mealsIdArr } } = req;
-
+    const { body: { mealsIdArr }, authData: { user } } = req;
+    if (!user.caterer) {
+      resp.status(401).json({
+        success: false,
+        message: 'Only Caterers are permitted here',
+      });
+      return;
+    }
     const success = (menuObj, meals) => {
       resp.status(201).json({
         success: true,
@@ -44,6 +50,14 @@ export default class MenuController {
 
   update(req, resp) {
     const { body: { mealsIdArr } } = req;
+    const { authData: { user } } = req;
+    if (!user.caterer) {
+      resp.status(401).json({
+        success: false,
+        message: 'Only Caterers are permitted here',
+      });
+      return;
+    }
     if (mealsIdArr) {
       const errorHandler = (() => {
         resp.status(500).json({
@@ -85,6 +99,14 @@ export default class MenuController {
   }
 
   retrieve(req, resp) {
+    const { authData: { user } } = req;
+    if (!user) {
+      resp.status(401).json({
+        success: false,
+        message: 'Only authorized users can get this information',
+      });
+      return;
+    }
     const success = (menu) => {
       resp.status(200).json({
         success: true,

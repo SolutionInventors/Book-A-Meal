@@ -69,6 +69,7 @@ class UserController {
 
   login(req, resp) {
     const callback = (userObj) => {
+      console.log('authCaterer', userObj);
       if (userObj) {
         authenticator.createToken(userObj, (err, token) => {
           if (err) {

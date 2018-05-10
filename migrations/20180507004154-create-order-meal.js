@@ -8,12 +8,13 @@ module.exports = {
         allowNull: false,
         primaryKey: true,
         type: Sequelize.UUID,
+        defaultValue:  Sequelize.UUIDV4,
       },
       orderId: {
-        type: Sequelize.STRING,
+        type: Sequelize.UUID,
       },
       mealId: {
-        type: Sequelize.STRING,
+        type: Sequelize.UUID,
       },
       createdAt: {
         allowNull: false,

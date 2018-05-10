@@ -2,7 +2,8 @@ import mealService from '../services/mealService';
 
 export default class MealController {
   getAll(req, resp) {
-    if (!req.user.caterer) {
+    const { user } = req.authData;
+    if (!user.caterer) {
       resp.status(401).json({
         success: false,
         message: 'Only Caterers are permitted here',
@@ -31,7 +32,8 @@ export default class MealController {
     }, serverErrorCallback);
   }
   getById(req, resp) {
-    if (req.user.userType !== 'caterer') {
+    const { user } = req.authData;
+    if (!user.caterer) {
       resp.status(409).json({
         success: false,
         message: 'Only Caterers are permitted here',
@@ -71,16 +73,24 @@ export default class MealController {
   }
 
   create(req, resp) {
-    if (!req.user.caterer) {
+    const { user } = req.authData;
+    if (!user.caterer) {
       resp.status(409).json({
         success: false,
         message: 'Only Caterers are permitted here',
       });
       return;
     }
-    const { name, amount, image } = req.body;
+    const {
+      name, amount, image, description,
+    } = req.body;
     if (name && amount && image) {
-      const mealObj = { name, amount, image };
+      const mealObj = {
+        name,
+        amount,
+        image,
+        description,
+      };
 
       const errorCallback = (error) => {
         if (error.name === 'SequelizeUniqueConstraintError') {
@@ -125,7 +135,8 @@ export default class MealController {
 
 
   delete(req, resp) {
-    if (!req.user.caterer) {
+    const { user } = req.authData;
+    if (!user.caterer) {
       resp.status(409).json({
         success: false,
         message: 'Only Caterers are permitted here',
@@ -134,11 +145,18 @@ export default class MealController {
     }
     const { params: { id } } = req;
     if (id) {
-      const success = (deletedObj) => {
-        resp.status(200).json({
-          success: true,
-          data: deletedObj,
-        });
+      const success = (deletedItems) => {
+        if (deletedItems > 0) {
+          resp.status(200).json({
+            success: true,
+            message: 'Meal was deleted successfully',
+          });
+        } else {
+          resp.status(404).json({
+            success: false,
+            message: 'The mealId specified was not found',
+          });
+        }
       };
       const notFound = () => {
         resp.status(404).json({
@@ -157,7 +175,8 @@ export default class MealController {
   }
 
   modify(req, resp) {
-    if (!req.user.caterer) {
+    const { user } = req.authData;
+    if (!user.caterer) {
       resp.status(409).json({
         success: false,
         message: 'Only Caterers are permitted here',

@@ -8,6 +8,10 @@ export default function (sequelize, DataTypes) {
       type: DataTypes.UUID,
       defaultValue: DataTypes.UUIDV4,
     },
+    description: {
+      type: DataTypes.STRING,
+      defaultValue: 'No Description'
+    },
     amount: {
       type: DataTypes.DOUBLE,
       allowNull: false,

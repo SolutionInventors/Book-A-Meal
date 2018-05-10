@@ -12,6 +12,7 @@ export default function (sequelize, DataTypes) {
     dateCreated: {
       allowNull:false,
       type: DataTypes.STRING,
+      unique:true,
     },
     createdAt :{
       type: DataTypes.DATE,

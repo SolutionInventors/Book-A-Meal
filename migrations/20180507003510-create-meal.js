@@ -18,6 +18,10 @@ module.exports = {
         type: Sequelize.STRING,
         unique: true,
       },
+      description: {
+        type: Sequelize.STRING,
+        defaultValue: 'No Description'
+      },
       image: {
         type: Sequelize.BLOB,
       },

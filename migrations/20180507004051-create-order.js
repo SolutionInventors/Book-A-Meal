@@ -9,6 +9,7 @@ module.exports = {
         allowNull: false,
         primaryKey: true,
         type: Sequelize.UUID,
+        defaultValue: Sequelize.UUIDV4,
       },
       customerId: {
         type: Sequelize.STRING,

@@ -1,9 +1,9 @@
 import { Router } from 'express';
 import MenuController from '../controllers/menuController';
-// import verifyToken from '../mddlewares/verifyToken';
+import verifyToken from '../mddlewares/verifyToken';
 
 const menuRouter = Router();
-// menuRouter.use(verifyToken);
+menuRouter.use(verifyToken);
 const controller = new MenuController();
 
 menuRouter.get('/', controller.retrieve);

@@ -2,7 +2,16 @@ import orderService from '../services/orderService';
 
 export default class OrderController {
   getTodayOrders(req, resp) {
-    const errorCallback = (() => {
+    const { authData: { user } } = req;
+    if (!user.caterer) {
+      resp.status(401).json({
+        success: false,
+        message: 'Only Caterers are permitted here',
+      });
+      return;
+    }
+    const errorCallback = ((error) => {
+      console.log(error.name);
       resp.status(500).json({
         success: false,
         message: 'An error occured while processing your request',
@@ -26,7 +35,17 @@ export default class OrderController {
   }
 
   makeOrder(req, resp) {
-    const { body: { customerId, mealsIdArr } } = req;
+    const { body: { mealsIdArr } } = req;
+    const { authData: { user } } = req;
+    if (!user.customer) {
+      resp.status(401).json({
+        success: false,
+        message: 'Only customers are permitted here',
+      });
+      return;
+    }
+
+    const customerId = user.customer.id;
 
     if (customerId && mealsIdArr) {
       const success = (order, meals) => {
@@ -77,19 +96,19 @@ export default class OrderController {
   }
 
   modify(req, resp) {
-    const { body: { orderId, mealsIdArr } } = req;
+    const { body: { mealsIdArr }, params: { orderId } } = req;
 
     if (mealsIdArr) {
       const success = (order, meals) => {
         if (meals && order) {
           console.log(meals);
-          const orderObj = {
+          const data = {
             order,
             meals,
           };
           resp.status(201).json({
             success: true,
-            orderObj,
+            data,
           });
         } else if (order === false) {
           resp.status(404).json({
