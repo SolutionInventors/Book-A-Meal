@@ -6,6 +6,7 @@ This project is built to help caterers respond to orders made by customers onlin
 It is built to solve the problems associated with making orders for a meal. 	
 ## Project Name
     Book-A-Meal
+[![Build Status](https://travis-ci.org/SolutionInventors/Book-A-Meal.svg?branch=ft-use-real-data-157387890)](https://travis-ci.org/SolutionInventors/Book-A-Meal)
 
 [![Maintainability](https://api.codeclimate.com/v1/badges/eb7f6eeae96b5b03c530/maintainability)](https://codeclimate.com/github/SolutionInventors/Book-A-Meal/maintainability)
    

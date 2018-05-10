@@ -1,16 +1,15 @@
 language: node_js
 node_js:
-	-"9.0.0"
-script: 
-	- npm run test 
+  - "9"
+install: npm install
+# services:
+# - postgresql
+# env:
+# - NODE_ENV=test
 
-before_install:
-  - npm i -g npm@5.5.1
-after_success: 
-  - npm run coveralls
+# before_script:
+# - psql -c 'create database travis;' -U postgres
+# - dropdb --if-exists travis && createdb travis
+script: npm test
 
-
-
-cache:
-  directories:
-    - "node_modules
+after_success: npm run coverage
