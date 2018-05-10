@@ -4,8 +4,7 @@
         "linebreak-style":"off" ,
         "class-methods-use-this": "off", 
         "no-param-reassign":"warn", 
-       "import/first": "warn", 
-       "eqeqeq":"warn"
+       "import/first": "warn"
     }
     
 }

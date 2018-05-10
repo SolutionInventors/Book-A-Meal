@@ -18,9 +18,10 @@
     "gulp": "^3.9.1",
     "jsonwebtoken": "^8.2.1",
     "node-uuid": "^1.4.8",
-    "pg": "^7.4.2",
+    "pg": "^7.4.3",
     "pg-hstore": "^2.3.2",
-    "sequelize": "^4.37.6",
+    "sequelize": "^4.37.7",
+    "sequelize-cli": "^4.0.0",
     "sha": "^2.0.1"
   },
   "scripts": {
@@ -28,6 +29,8 @@
     "transpile-es2015": "babel src -d lib",
     "start": " babel-node  server/app.js --presets env",
     "test": "nyc mocha  server/test || true",
+    "build": "babel ./ -d build --copy-files -s",
+    "start-prod": "npm run build && node ./build/app.js",
     "coverage": "nyc --reporter=lcov --reporter=text-lcov npm test",
     "coveralls": "nyc npm test && nyc report --reporter=text-lcov | coveralls"
   },
