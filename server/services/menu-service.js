@@ -4,12 +4,13 @@ class MenuService {
   createTodayMenu(mealsIdArr, successCallBack, noValidId, alreadyCreated) {
     database.Meal.findAll({
       where: { id: mealsIdArr },
+      attributes: ['id', 'amount', 'name', 'image'],
     }).then((meals) => {
       if (meals && meals.length > 0) {
         database.Menu.create({ dateCreated: new Date().toDateString() })
           .then(todayMenu =>
             todayMenu.addMeals(meals)
-              .then(menuObj => successCallBack(todayMenu, menuObj)))
+              .then(() => successCallBack(todayMenu, meals)))
           .catch(error => alreadyCreated(error));
       } else {
         noValidId();
@@ -25,8 +26,9 @@ class MenuService {
         model: database.Meal,
         through: {
           foreignKey: 'mealId',
-          attributes: ['id', 'name'],
+          attributes: [],
         },
+        attributes: ['id', 'amount', 'name', 'image'],
         as: 'meals',
       }],
     }).then((menu) => {
@@ -38,39 +40,26 @@ class MenuService {
   }
 
 
-  updateTodayMenu(mealsIdArr, callBack, noMenuCallback, noValidId) {
-    database.Menu.findOne({
-      where: { dateCreated: new Date().toDateString() },
-    }).then((menu) => {
-      if (!menu) noMenuCallback();
-      else {
-        const whereArr = mealsIdArr.map(id => ({ id }));
-        const menuId = menu.id;
-        database.Menu.create({
-          id: menuId,
-        }).then((newMenu) => {
-          menu.addMeals(newMenu);
-        });
-        database.Meal.findAll({
-          where: { $or: whereArr },
-          attributes: ['id', 'name', 'image', 'amount'],
-        }).then((mealArr) => {
-          if (mealArr.length > 0) {
-            database.MenuMeal.destroy({
-              where: { menuId: menu.id },
-            });
-
-            mealArr.forEach((meal) => {
-              database.MenuMeal.create({
-                menuId: menu.id,
-                mealId: meal.id,
+  updateTodayMenu(mealsIdArr, callback, noMenuCallback, noValidId, errorHandler) {
+    database.Meal.findAll({
+      where: { id: mealsIdArr },
+      attributes: ['id', 'amount', 'name', 'image'],
+    }).then((meals) => {
+      if (meals.length > 0) {
+        database.Menu.findOne({
+          where: { dateCreated: new Date().toDateString() },
+        }).then((todayMenu) => {
+          if (todayMenu) {
+            todayMenu.setMeals(meals)
+              .then(() => {
+                callback(todayMenu, meals);
               });
-            });
-            callBack(menu, mealArr);
           } else {
             noValidId();
           }
-        });
+        }).catch(error => errorHandler(error));
+      } else {
+        noValidId();
       }
     });
   }

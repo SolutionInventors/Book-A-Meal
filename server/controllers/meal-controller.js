@@ -9,10 +9,20 @@ export default class MealController {
         message: 'An unknown error occured in the server',
       });
     };
-    mealService.getAll(limit, meals => resp.json({
-      success: true,
-      meals,
-    }), serverErrorCallback);
+    mealService.getAll(limit, (meals) => {
+      if (meals.length > 0) {
+        resp.json({
+          success: true,
+          meals,
+        });
+      } else {
+        resp.status(204).json({
+          success: true,
+          message: 'There are no available meals in the database',
+        });
+      }
+      
+ }, serverErrorCallback);
   }
   getById(req, resp) {
     const { params: { id } } = req;

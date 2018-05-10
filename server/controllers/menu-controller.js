@@ -4,10 +4,14 @@ export default class MenuController {
   create(req, resp) {
     const { body: { mealsIdArr } } = req;
 
-    const success = (menuObj) => {
+    const success = (menuObj, meals) => {
       resp.status(201).json({
         success: true,
-        data: menuObj,
+        data: {
+          menuId: menuObj.id,
+          dateCreated: menuObj.dateCreated,
+          meals,
+        },
       });
     };
 
@@ -41,6 +45,12 @@ export default class MenuController {
   update(req, resp) {
     const { body: { mealsIdArr } } = req;
     if (mealsIdArr) {
+      const errorHandler = (() => {
+        resp.status(500).json({
+          success: false,
+          message: 'Error occured in server',
+        });
+      });
       const success = (menuObj, mealArr) => {
         const createdObj = {
           menuId: menuObj.id,
@@ -64,7 +74,7 @@ export default class MenuController {
         });
       };
 
-      menuService.updateTodayMenu(mealsIdArr, success, noMenu, noValidId);
+      menuService.updateTodayMenu(mealsIdArr, success, noMenu, noValidId, errorHandler);
     } else {
       resp.status(400).json({
         success: false,

@@ -1,11 +1,11 @@
-import db from '../../models/index';
+import database from '../../models/index';
 
 class OrderService {
-  makeOrder(mealsIdArr, customerId, successCallBack, noValidId, noMenu) {
-    db.Menu.findOne({
+  makeOrder(mealsIdArr, customerId, successCallBack, noValidId, noMenu, erroCallback) {
+    database.Menu.findOne({
       where: { dateCreated: new Date().toDateString() },
       includes: [{
-        model: db.Meal,
+        model: database.Meal,
         through: 'menuId',
         as: 'meals',
         where: { id: mealsIdArr },
@@ -13,13 +13,12 @@ class OrderService {
     }).then((todayMenu) => {
       if (todayMenu) {
         todayMenu.getMeals().then((meals) => {
-          console.log(meals);
           if (meals.length > 0) {
-            db.Order.create({
+            database.Order.create({
               customerId,
             }).then((order) => {
-              order.addMeals(todayMenu.meals)
-                .then(orderObj => successCallBack(orderObj));
+              order.addMeals(meals)
+                .then(() => successCallBack(order, meals));
             });
           } else {
             noValidId();
@@ -30,40 +29,54 @@ class OrderService {
       } else {
         noMenu();
       }
-    }).catch(error => noMenu(error));
+    }).catch(error => erroCallback(error));
   }
 
-  getOrdersByDate(callback, date = new Date()) {
-    db.Order.findAll({
+  getOrdersByDate(callback, errorCallback, date = new Date()) {
+    database.Order.findAll({
       attributes: [['id', 'orderId']],
       include: [{
-        model: db.Meal,
+        model: database.Meal,
         through: 'orderId',
         as: 'meals',
       }],
       where: { dateCreated: date.toDateString() },
     }).then((orders) => {
       callback(orders);
-    });
+    }).catch(error => errorCallback(error));
   }
 
-//   getById(id) {
-//     return this.orders.find(item => item.id == id);
-//   }
+  getById(id, callback, errorHandler) {
+    database.Order.findOne({
+      where: { id },
+    }).then(order => callback(order))
+      .catch(error => errorHandler(error));
+  }
 
-//   getOrderFromMenu(mealsIdArr, customer) {
-//     const todayMenu = menuService.getMenu().meals;
-//     const meals =
-//       mealsIdArr
-//         .map(mealId =>
-//           todayMenu.find(mealObj =>
-//             mealObj.id == mealId))
-//         .filter(obj => obj);
-
-
-//     console.log(meals);
-//     return new Order(meals, customer, new Date());
-//   }
+  modify(orderId, mealsIdArr, callback, errorCallback) {
+    database.Meals.findOne({
+      where: { id: mealsIdArr },
+      includes: [{
+        model: database.Menu,
+        through: 'mealId',
+        as: 'menus',
+        where: { dateCreated: new Date().toDateString() },
+        attributes: [],
+      }],
+    })
+      .then((meals) => {
+        if (meals.length > 0) {
+          database.Order.findOne({
+            where: { id: orderId },
+          }).then((order) => {
+            order.setMeals(meals);
+            callback(order, meals);
+          });
+        } else {
+          callback();
+        }
+      }).catch(error => errorCallback(error));
+  }
 }
 
 export default new OrderService();
