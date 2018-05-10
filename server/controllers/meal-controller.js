@@ -3,29 +3,42 @@ import mealService from '../services/meal-service';
 export default class MealController {
   getAll(req, resp) {
     const limit = req.body.limit ? req.body.limit : 100;
+    const serverErrorCallback = () => {
+      resp.status(500).json({
+        success: false,
+        message: 'An unknown error occured in the server',
+      });
+    };
     mealService.getAll(limit, meals => resp.json({
       success: true,
       meals,
-    }));
+    }), serverErrorCallback);
   }
-
   getById(req, resp) {
     const { params: { id } } = req;
     const successfunc = (meal) => {
-      resp.status(200).json({
-        success: true,
-        meal,
-      });
-    };
-    const failedCallback = () => {
-      resp.status(404).json({
-        success: false,
-        message: 'The inputed id does not exist',
-      });
+      if (meal) {
+        resp.status(200).json({
+          success: true,
+          meal,
+        });
+      } else {
+        resp.status(404).json({
+          success: false,
+          message: 'The inputed id does not exist',
+        });
+      }
     };
 
+
     if (id) {
-      mealService.getById(id, successfunc, failedCallback);
+      const serverErrorCallback = () => {
+        resp.status(500).json({
+          success: false,
+          message: 'An unknown error occured in the server',
+        });
+      };
+      mealService.getById(id, successfunc, serverErrorCallback);
     } else {
       resp.status(400).json({
         success: false,
@@ -39,11 +52,18 @@ export default class MealController {
     if (name && amount && image) {
       const mealObj = { name, amount, image };
 
-      const existsCallback = () => {
-        resp.status(409).json({
-          success: false,
-          message: 'The meal name is already in the database',
-        });
+      const errorCallback = (error) => {
+        if (error.name === 'SequelizeUniqueConstraintError') {
+          resp.status(409).json({
+            success: false,
+            message: 'The meal name is already in the database',
+          });
+        } else {
+          resp.status(500).json({
+            success: false,
+            message: 'An unknown error occured while processing your request',
+          });
+        }
       };
 
       const success = (meal) => {
@@ -52,11 +72,10 @@ export default class MealController {
           data: meal,
         });
       };
-
-      if (!Number.isNaN(amount)) {
-        mealService.create(mealObj, existsCallback, success);
+      if (Number.isNaN(+name) && Number.isFinite(+amount)) {
+        mealService.create(mealObj, success, errorCallback);
       } else {
-        resp.status(+).json({
+        resp.status(404).json({
           success: false,
           message: 'The format of the inputed values is invalid. Ensure that amount is a number and name is a valid string',
         });
@@ -106,21 +125,39 @@ export default class MealController {
     if (name && amount && image) {
       if (id) {
         const newMealObj = { name, amount, image };
-        const success = (createdObj) => {
-          resp.status(201).json({
-            success: true,
-            data: createdObj,
-          });
+        const success = (updatedMeal) => {
+          console.log(updatedMeal);
+          if (updatedMeal) {
+            resp.status(201).json({
+              success: true,
+              data: updatedMeal,
+            });
+          } else {
+            resp.status(404).json({
+              success: false,
+              message: 'The id you specified does not exist',
+            });
+          }
         };
-
-        const notFound = () => {
-          resp.status(404).json({
-            success: false,
-            message: 'The id you specified does not exist',
-          });
+        const serverErrorCallback = (err) => {
+          if (err.name == 'SequelizeDatabaseError') {
+            resp.status(500).json({
+              success: false,
+              message: 'The id you specified is not a UUID',
+            });
+          } else if (err.name === 'SequelizeUniqueConstraintError') {
+            resp.status(409).json({
+              success: false,
+              message: 'The meal name is already in the database',
+            });
+          } else {
+            resp.status(500).json({
+              success: false,
+              message: 'An unknown error occured while processing your request',
+            });
+          }
         };
-
-        mealService.modify(id, newMealObj, success, notFound);
+        mealService.modify(id, newMealObj, success, serverErrorCallback);
       } else {
         resp.status(400).json({
           success: false,

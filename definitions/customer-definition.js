@@ -1,6 +1,6 @@
-import Sequelize from 'sequelize';
+const Sequelize = require( 'sequelize');
 
-export default class CustomerDefinitions {
+module.exports = class CustomerDefinitions {
   attributes() {
     return {
       username: {

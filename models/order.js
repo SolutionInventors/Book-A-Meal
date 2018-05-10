@@ -8,10 +8,10 @@ export default function (sequelize, DataTypes) {
       primaryKey: true,
     },
     customerId: DataTypes.STRING,
-    date: DataTypes.DATE,
+    dateCreated: DataTypes.STRING,
   }, {});
   Order.associate = (models) => {
-    Order.hasOne(models.Customer, {
+    Order.belongsTo(models.Customer, {
       foreignKey: 'customerId',
       onDelete: 'CASCADE',
     });
@@ -20,6 +20,7 @@ export default function (sequelize, DataTypes) {
       through: models.OrderMeal,
       foreignKey: 'orderId',
       onDelete: 'NONE',
+      as: 'meals',
     });
   };
   return Order;

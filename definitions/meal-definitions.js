@@ -1,6 +1,6 @@
-import Sequelize from 'sequelize';
+const Sequelize = require( 'sequelize' );
 
-export default class MealDefinition {
+module.exports = class MealDefinition {
   static attributes() {
     return {
       name: {

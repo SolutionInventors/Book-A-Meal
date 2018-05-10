@@ -13,8 +13,8 @@ module.exports = {
       customerId: {
         type: Sequelize.STRING,
       },
-      date: {
-        type: Sequelize.DATE,
+      dateCreated: {
+        type: Sequelize.STRING,
       },
       createdAt: {
         allowNull: false,

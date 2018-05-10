@@ -16,6 +16,7 @@ module.exports = {
       },
       name: {
         type: Sequelize.STRING,
+        unique: true,
       },
       image: {
         type: Sequelize.BLOB,

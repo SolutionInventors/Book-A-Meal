@@ -24,7 +24,9 @@ export default function (sequelize, DataTypes) {
     },
   }, {});
   Customer.associate = (models) => {
-    console.log(models);
+    Customer.hasMany(models.Order, {
+      foreignKey: 'customerId',
+    });
   };
   return Customer;
 }

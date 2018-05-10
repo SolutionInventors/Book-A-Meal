@@ -38,30 +38,6 @@ export default class MenuController {
   }
 
 
-  retrieveByDate(req, resp) {
-    const date = new Date(req.date);
-    const menu = menuService.getMenu(date);
-    if (date) {
-      if (menu) {
-        resp.status(200).json({
-          success: true,
-          menu,
-        });
-      } else {
-        resp.status(404).json({
-          success: false,
-          message: 'The specified menu does not exists',
-        });
-      }
-    } else {
-      resp.status(400).json({
-        success: true,
-        message: 'You did not specify the date in your request',
-        missingData: ['date'],
-      });
-    }
-  }
-
   update(req, resp) {
     const { body: { mealsIdArr } } = req;
     if (mealsIdArr) {

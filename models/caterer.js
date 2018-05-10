@@ -21,8 +21,5 @@ export default function (sequelize, DataTypes) {
       allowNull: false,
     },
   }, {});
-  Caterer.associate = (models) => {
-    console.log(models);
-  };
   return Caterer;
 }

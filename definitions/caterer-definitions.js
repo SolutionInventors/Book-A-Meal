@@ -1,6 +1,6 @@
-import Sequelize from 'sequelize';
+const Sequelize =  require ('sequelize');
 
-export default class CatererDefinitions {
+module.exports = class CatererDefinitions {
   attributes() {
     return {
       username: {

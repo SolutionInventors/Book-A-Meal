@@ -1,37 +1,28 @@
-import db from '../../models/index';
+import database from '../../models/index';
 
 class MenuService {
   createTodayMenu(mealsIdArr, successCallBack, noValidId, alreadyCreated) {
-
-    // db.Menu.findOrCreate( )
-    db.Menu.findOne({
-      where: { createdAt: new Date() },
-    }).then((menu) => {
-      if (menu) alreadyCreated();
-      else {
-        // const whereArr = mealsIdArr.map(id => ({ id }));
-        db.Meal.findAll({
-          where: { id: mealsIdArr },
-        }).then((meals) => {
-          if (!meals) noValidId();
-          else {
-            db.Menu.create({})
-              .then((todayMenu) => {
-                todayMenu.addMeals(meals)
-                  .then(menuObj => successCallBack(menuObj));
-              });
-          }
-        });
+    database.Meal.findAll({
+      where: { id: mealsIdArr },
+    }).then((meals) => {
+      if (meals && meals.length > 0) {
+        database.Menu.create({ dateCreated: new Date().toDateString() })
+          .then(todayMenu =>
+            todayMenu.addMeals(meals)
+              .then(menuObj => successCallBack(todayMenu, menuObj)))
+          .catch(error => alreadyCreated(error));
+      } else {
+        noValidId();
       }
     });
   }
 
 
   getMenu(callBack, menuNotSet, date = new Date()) {
-    db.Menu.findOne({
-      where: { createdAt: date },
+    database.Menu.findOne({
+      where: { dateCreated: date.toDateString() },
       include: [{
-        model: db.Meal,
+        model: database.Meal,
         through: {
           foreignKey: 'mealId',
           attributes: ['id', 'name'],
@@ -48,23 +39,29 @@ class MenuService {
 
 
   updateTodayMenu(mealsIdArr, callBack, noMenuCallback, noValidId) {
-    db.Menu.find({
-      where: { createdAt: new Date() },
+    database.Menu.findOne({
+      where: { dateCreated: new Date().toDateString() },
     }).then((menu) => {
       if (!menu) noMenuCallback();
       else {
         const whereArr = mealsIdArr.map(id => ({ id }));
-        db.Meal.findAll({
+        const menuId = menu.id;
+        database.Menu.create({
+          id: menuId,
+        }).then((newMenu) => {
+          menu.addMeals(newMenu);
+        });
+        database.Meal.findAll({
           where: { $or: whereArr },
           attributes: ['id', 'name', 'image', 'amount'],
         }).then((mealArr) => {
           if (mealArr.length > 0) {
-            db.MenuMeal.destroy({
+            database.MenuMeal.destroy({
               where: { menuId: menu.id },
             });
 
             mealArr.forEach((meal) => {
-              db.MenuMeal.create({
+              database.MenuMeal.create({
                 menuId: menu.id,
                 mealId: meal.id,
               });
@@ -79,17 +76,25 @@ class MenuService {
   }
 
   retrieve(callback, noMenuCallback) {
-    db.Menu.findOne({
+    database.Menu.findOne({
       attributes: ['id', 'createdAt'],
       where: { createdAt: new Date() },
+      include: [{
+        model: database.Meal,
+        through: {
+          foreignKey: 'mealId',
+          attributes: ['id', 'name'],
+        },
+        as: 'meals',
+      }],
     }).then((menu) => {
       if (!menu) noMenuCallback();
       else {
-        db.MenuMeal.findAll({
+        database.MenuMeal.findAll({
           where: { menuId: menu.id },
         }).then((menuMeals) => {
           const whereArr = menuMeals.map(menuMeal => menuMeal.mealId);
-          db.Meal.findAll({
+          database.Meal.findAll({
             where: { mealId: whereArr },
             attributes: ['id', 'name', 'amount', 'image'],
           }).then((meals) => {

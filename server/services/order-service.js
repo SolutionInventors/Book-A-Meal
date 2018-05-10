@@ -3,7 +3,7 @@ import db from '../../models/index';
 class OrderService {
   makeOrder(mealsIdArr, customerId, successCallBack, noValidId, noMenu) {
     db.Menu.findOne({
-      where: { createdAt: new Date() },
+      where: { dateCreated: new Date().toDateString() },
       includes: [{
         model: db.Meal,
         through: 'menuId',
@@ -12,27 +12,36 @@ class OrderService {
       }],
     }).then((todayMenu) => {
       if (todayMenu) {
-        if (todayMenu.meals.length > 0) {
-          db.Order.create({
-            customerId,
-          }).then((order) => {
-            order.addMeals(todayMenu.meals)
-              .then(orderObj => successCallBack(orderObj));
-          });
-        } else {
-          noValidId();
-        }
+        todayMenu.getMeals().then((meals) => {
+          console.log(meals);
+          if (meals.length > 0) {
+            db.Order.create({
+              customerId,
+            }).then((order) => {
+              order.addMeals(todayMenu.meals)
+                .then(orderObj => successCallBack(orderObj));
+            });
+          } else {
+            noValidId();
+          }
+        });
+
         successCallBack(todayMenu);
       } else {
         noMenu();
       }
-    });
+    }).catch(error => noMenu(error));
   }
 
   getOrdersByDate(callback, date = new Date()) {
     db.Order.findAll({
       attributes: [['id', 'orderId']],
-      where: { createdAt: date },
+      include: [{
+        model: db.Meal,
+        through: 'orderId',
+        as: 'meals',
+      }],
+      where: { dateCreated: date.toDateString() },
     }).then((orders) => {
       callback(orders);
     });

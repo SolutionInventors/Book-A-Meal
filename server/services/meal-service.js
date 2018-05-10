@@ -1,67 +1,49 @@
 import db from '../../models/index';
 
 class MealService {
-  create(mealObj, alreadyExistCallback, successCallBack) {
-    const { name } = mealObj;
-    db.Meal.findOne({ where: { name } })
-      .then((foundObj) => {
-        if (foundObj) {
-          alreadyExistCallback();
-        } else {
-          db.Meal.create(mealObj).then((meal) => {
-            successCallBack({
-              id: meal.id,
-              name: meal.name,
-              amount: meal.amount,
-              image: meal.image,
-              createdAt: meal.createdAt,
-            });
-          });
-        }
-      });
+  create(mealObj, successCallBack, onError) {
+    db.Meal.create(mealObj)
+      .then(meal =>
+        successCallBack({
+          id: meal.id,
+          name: meal.name,
+          amount: meal.amount,
+          image: meal.image,
+          createdAt: meal.createdAt,
+        }))
+      .catch(error => onError(error));
   }
 
-  getAll(limit, callback) {
+  getAll(limit, callback, errorCallback) {
     db.Meal.findAll({ limit }).then((meals) => {
       callback(meals);
-    });
+    }).catch(error => errorCallback(error));
   }
 
-  getById(id, foundCallback, notFoundCallback) {
+  getById(id, callback, errorCallback) {
     db.Meal.findOne({ where: { id } })
       .then((meal) => {
-        if (meal) {
-          foundCallback(meal);
-        } else {
-          notFoundCallback();
-        }
-      });
+        callback(meal);
+      })
+      .catch(error => errorCallback(error));
   }
 
-  delete(id, successCallBack, notFoundCallback) {
+  delete(id, callback, errorCallback) {
     db.Meal.destroy({ where: { id } })
-      .then((deletedRows) => {
-        if (deletedRows) {
-          successCallBack(deletedRows);
-        } else {
-          notFoundCallback();
-        }
-      });
+      .then(deletedRows => callback(deletedRows))
+      .catch(error => errorCallback(error));
   }
 
 
-  modify(id, newMeal, successCallBack, notFoundCallback) {
-    db.Meal.find({
+  modify(id, newMeal, successCallBack, errorCallback) {
+    db.Meal.update(newMeal, {
       where: { id },
+      returning: true,
     })
-      .then((meal) => {
-        if (meal) {
-          meal.update(newMeal)
-            .then(updatedMeal => successCallBack(updatedMeal));
-        } else {
-          notFoundCallback();
-        }
-      });
+      .then(([updatedRows, [updatedMeal]]) => {
+        successCallBack(updatedMeal, updatedRows);
+      })
+      .catch(err => errorCallback(err));
   }
 }
 

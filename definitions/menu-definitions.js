@@ -1,10 +1,10 @@
-import Sequelize from 'sequelize';
+const Sequelize  = require( 'sequelize') ;
 
-export default class MenuDefinition {
+module.exports = class MenuDefinition {
   static attributes() {
     return {
-      date: {
-        type: Sequelize.DATE,
+      dateCreated: {
+        type: Sequelize.STRING,
       },
       id: {
         type: Sequelize.UUID,

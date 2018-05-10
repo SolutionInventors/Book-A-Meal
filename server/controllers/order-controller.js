@@ -2,18 +2,20 @@ import orderService from '../services/order-service';
 
 export default class OrderController {
   getTodayOrders(req, resp) {
-    const orders = orderService.getOrdersByDate();
-    if (orders.length > 0) {
-      resp.status(200).json({
-        success: true,
-        orders,
-      });
-    } else {
-      resp.status(204).json({
-        success: true,
-        message: 'No orders have been made today',
-      });
-    }
+    const success = (orders) => {
+      if (orders) {
+        resp.status(200).json({
+          success: true,
+          orders,
+        });
+      } else {
+        resp.status(204).json({
+          success: true,
+          message: 'No orders have been made today',
+        });
+      }
+    };
+    orderService.getOrdersByDate(success);
   }
 
   makeOrder(req, resp) {
