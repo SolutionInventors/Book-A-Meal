@@ -23,7 +23,8 @@ app.use((req, resp, next)=> {
     next();
 });
 
-app.listen(port, 'localhost', (error)=>{
+
+app.listen(port, (error)=>{
     if(error){
         console.log('Error in setting up server'); 
     }else{
